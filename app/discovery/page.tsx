@@ -714,7 +714,7 @@ export default function DiscoveryPage() {
                   }}
                   className="text-green-400 hover:text-green-300 underline cursor-pointer transition-colors"
                 >
-                  "Run the code."
+                  Run the code.
                 </button>
               </p>
             </div>
