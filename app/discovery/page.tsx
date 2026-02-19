@@ -88,8 +88,8 @@ export default function DiscoveryPage() {
 
             <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
               <p className="text-xl font-semibold text-green-400">
-                I found three planets NASA's algorithms missed in Their Own
-                Public Data.
+                I found three planets NASA's algorithms missed in their own
+                public data.
               </p>
               <p className="text-xl font-semibold text-green-400">
                 Or more precisely, planets they saw but disregarded.
@@ -619,7 +619,9 @@ export default function DiscoveryPage() {
 
               <div className="space-y-4 mt-8">
                 <p>
-                  I found three planets NASA missed in Their Own Public Data.
+                  <p>
+                    I found three planets NASA missed in their own public data.
+                  </p>
                 </p>
                 <p>I made drug discovery six times faster.</p>
                 <p>I beat IBM's quantum compiler.</p>
