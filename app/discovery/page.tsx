@@ -700,7 +700,22 @@ export default function DiscoveryPage() {
                 Investors: Licensing and partnership discussions are open.
               </p>
               <p className="text-xl font-semibold text-green-400">
-                Skeptics: Good. So was I. Run the code.
+                Skeptics: Good. So was I.{" "}
+                <button
+                  onClick={() => {
+                    const popup = window.open(
+                      "/evidence#exoplanet-evidence",
+                      "_blank",
+                      "width=1200,height=800,scrollbars=yes,resizable=yes",
+                    );
+                    if (popup) {
+                      popup.focus();
+                    }
+                  }}
+                  className="text-green-400 hover:text-green-300 underline cursor-pointer transition-colors"
+                >
+                  "Run the code."
+                </button>
               </p>
             </div>
           </motion.div>
