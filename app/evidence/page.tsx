@@ -1050,6 +1050,34 @@ export default function EvidencePage() {
               </div>
             </div>
           </motion.div>
+
+          {/* Skeptic Conversion Link */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-8"
+          >
+            <p className="text-slate-400 mb-4">
+              Skeptics: Good. So was I.{" "}
+              <button
+                onClick={() => {
+                  const popup = window.open(
+                    "/evidence#exoplanet-evidence",
+                    "_blank",
+                    "width=1200,height=800,scrollbars=yes,resizable=yes",
+                  );
+                  if (popup) {
+                    popup.focus();
+                  }
+                }}
+                className="text-green-400 hover:text-green-300 underline cursor-pointer transition-colors font-semibold"
+              >
+                "Run the code"
+              </button>
+            </p>
+          </motion.div>
         </div>
       </section>
     </main>
