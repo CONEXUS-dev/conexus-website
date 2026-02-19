@@ -97,8 +97,23 @@ export default function DiscoveryPage() {
 
               <p>
                 I analyzed raw data from Kepler and TESS. These are NASA's own
-                planet-hunting telescopes. I identified three candidates their
-                standard methods flagged but dismissed.
+                planet-hunting telescopes.{" "}
+                <button
+                  onClick={() => {
+                    const popup = window.open(
+                      "/evidence#exoplanet-evidence",
+                      "_blank",
+                      "width=1200,height=800,scrollbars=yes,resizable=yes",
+                    );
+                    if (popup) {
+                      popup.focus();
+                    }
+                  }}
+                  className="text-green-400 hover:text-green-300 underline cursor-pointer transition-colors"
+                >
+                  I identified three candidates their standard methods flagged
+                  but dismissed.
+                </button>
               </p>
 
               <div className="space-y-4">
@@ -627,119 +642,6 @@ export default function DiscoveryPage() {
                 <p>I beat IBM's quantum compiler.</p>
                 <p>I solved a 60-year logistics problem.</p>
               </div>
-
-              {/* Scientific Evidence Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="mt-12 p-6 bg-slate-800/50 rounded-lg border border-slate-700"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6">
-                  🌟 Scientific Evidence: Three Planets Discovered
-                </h3>
-
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
-                  <div className="p-4 bg-slate-900/50 rounded-lg">
-                    <h4 className="text-lg font-semibold text-green-400 mb-2">
-                      KOI-0002 (Signal 1)
-                    </h4>
-                    <p className="text-sm text-slate-300">
-                      <strong>Period:</strong> 0.512 days
-                      <br />
-                      <strong>Paradox Score:</strong> 0.7303
-                      <br />
-                      <strong>Discovery:</strong> Multi-planet TTV
-                    </p>
-                  </div>
-
-                  <div className="p-4 bg-slate-900/50 rounded-lg">
-                    <h4 className="text-lg font-semibold text-green-400 mb-2">
-                      KOI-0009
-                    </h4>
-                    <p className="text-sm text-slate-300">
-                      <strong>Period:</strong> 0.489 days
-                      <br />
-                      <strong>Paradox Score:</strong> 0.7128
-                      <br />
-                      <strong>Discovery:</strong> Eccentric orbit
-                    </p>
-                  </div>
-
-                  <div className="p-4 bg-slate-900/50 rounded-lg">
-                    <h4 className="text-lg font-semibold text-green-400 mb-2">
-                      KOI-0002 (Signal 2)
-                    </h4>
-                    <p className="text-sm text-slate-300">
-                      <strong>Period:</strong> 0.533 days
-                      <br />
-                      <strong>Paradox Score:</strong> 0.7031
-                      <br />
-                      <strong>Discovery:</strong> Multi-planet TTV
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="p-4 bg-slate-900/50 rounded-lg">
-                    <h4 className="text-lg font-semibold text-blue-400 mb-3">
-                      📊 Validation Metrics
-                    </h4>
-                    <ul className="text-sm text-slate-300 space-y-1">
-                      <li>
-                        • <strong>Anomaly Recovery:</strong> 100%
-                      </li>
-                      <li>
-                        • <strong>False Positive Rate:</strong> &lt;2%
-                      </li>
-                      <li>
-                        • <strong>Scientific Confidence:</strong> Tier 1
-                        (Highest)
-                      </li>
-                      <li>
-                        • <strong>Cross-Validation:</strong> NASA TOI catalog
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="p-4 bg-slate-900/50 rounded-lg">
-                    <h4 className="text-lg font-semibold text-purple-400 mb-3">
-                      🔬 Data Sources
-                    </h4>
-                    <ul className="text-sm text-slate-300 space-y-1">
-                      <li>
-                        • <strong>Kepler + TESS:</strong> NASA public datasets
-                      </li>
-                      <li>
-                        • <strong>KOI Catalog:</strong> Kepler Objects of
-                        Interest
-                      </li>
-                      <li>
-                        • <strong>BLS Preprocessing:</strong> 500 candidates
-                        analyzed
-                      </li>
-                      <li>
-                        • <strong>Forgetting Engine:</strong> Strategic
-                        elimination algorithm
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-6 p-4 bg-slate-900/50 rounded-lg">
-                  <h4 className="text-lg font-semibold text-yellow-400 mb-3">
-                    📄 Publication Status
-                  </h4>
-                  <p className="text-sm text-slate-300">
-                    Complete validation package suitable for{" "}
-                    <strong>Nature</strong> and{" "}
-                    <strong>Astrophysical Journal</strong> publication. Full
-                    dataset, methodology, and reproducible results available for
-                    peer review.
-                  </p>
-                </div>
-              </motion.div>
 
               <p className="text-2xl font-bold text-white mt-8">
                 Same algorithm.
