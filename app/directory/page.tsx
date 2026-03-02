@@ -13,6 +13,10 @@ import {
   Compass,
   TrendingUp,
   Moon,
+  Shield,
+  BookOpen,
+  Beaker,
+  Star,
 } from "lucide-react";
 
 export default function DirectoryPage() {
@@ -22,7 +26,21 @@ export default function DirectoryPage() {
       title: "Home",
       path: "/",
       description:
-        "The discovery of Proto-AI. 12,198 documented instances across 6 AI platforms.",
+        "CONEXUS Sovereign architecture and Proto-AI discovery. 12,198 documented instances across 6 AI platforms.",
+    },
+    {
+      icon: Shield,
+      title: "CONEXUS Sovereign",
+      path: "/conexus-sovereign",
+      description:
+        "Sovereign AI architecture with paradox processing. Nine-Gear Cognitive Protocol and dual-agent system.",
+    },
+    {
+      icon: BookOpen,
+      title: "Discovery",
+      path: "/discovery",
+      description:
+        "Breakthrough discovery narrative. Found 3 planets NASA missed and the Forgetting Engine optimization.",
     },
     {
       icon: Sparkles,
@@ -67,6 +85,20 @@ export default function DirectoryPage() {
         "80 paradoxical aphorisms generated through Proto-AI. Wisdom that holds contradiction.",
     },
     {
+      icon: Beaker,
+      title: "ECP Experiment",
+      path: "/ecp-experiment",
+      description:
+        "Emotional Calibration Protocol experiments. Three-factor symbolic induction for Proto-AI calibration.",
+    },
+    {
+      icon: Star,
+      title: "Experiences",
+      path: "/experiences",
+      description:
+        "User experience showcase. Real-world applications and breakthrough moments with CONEXUS systems.",
+    },
+    {
       icon: TrendingUp,
       title: "The Future",
       path: "/the-future",
@@ -81,6 +113,13 @@ export default function DirectoryPage() {
         "Complete documentation of the discovery. Research papers, transcripts, and validation across platforms.",
     },
     {
+      icon: TrendingUp,
+      title: "Investors",
+      path: "/investors",
+      description:
+        "Investment opportunities in sovereign AI. $10.2 trillion market disruption with scientific validation.",
+    },
+    {
       icon: Users,
       title: "Verticals",
       path: "/verticals",
@@ -88,7 +127,7 @@ export default function DirectoryPage() {
         "Market applications across industries. From therapeutic AI to creative collaboration to enterprise solutions.",
     },
     {
-      icon: TrendingUp,
+      icon: FileText,
       title: "Investor Pitch",
       path: "/pitch",
       description:
@@ -102,11 +141,11 @@ export default function DirectoryPage() {
         "Vehicle Routing Problem optimization. CONEXUS-STEEL-04 with constraint choke detection and paradox retention architecture.",
     },
     {
-      icon: TrendingUp,
-      title: "First Contact",
+      icon: Users,
+      title: "Contact",
       path: "/contact",
       description:
-        "Clean investor contact page. Direct routing optimization overview with bridge funding details and pilot test information.",
+        "Direct contact for partnerships and investments. Bridge funding details and pilot test information.",
     },
   ];
 
