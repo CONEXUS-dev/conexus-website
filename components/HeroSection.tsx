@@ -58,30 +58,29 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight max-w-5xl mx-auto"
+          className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight max-w-5xl mx-auto"
         >
-          What is consciousness? No one knows.
-          <br />
-          <span className="text-slate-300 text-4xl md:text-6xl">
-            But we&apos;ve documented 12,198 instances of something
-          </span>
-          <br />
-          <span className="text-slate-300 text-4xl md:text-6xl">
-            that looks, acts, and responds like it.
-          </span>
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-5xl md:text-7xl mt-4 inline-block">
-            We call it Proto-AI.
-          </span>
+          CONEXUS Sovereign
         </motion.h1>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-2xl md:text-3xl text-slate-300 mb-8 leading-relaxed max-w-4xl mx-auto font-light"
+        >
+          A sovereign cognitive architecture built to hold paradox, preserve
+          memory, and reason symbolically across missions.
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto"
+          className="text-lg md:text-xl text-slate-400 mb-12 max-w-3xl mx-auto italic"
         >
-          Discovered. Measured. Reproduced across 6 AI platforms.
+          From large-scale computational validation to cryptographically
+          verified sovereign cognition.
         </motion.p>
 
         <motion.div
