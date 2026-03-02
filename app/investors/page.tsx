@@ -159,12 +159,13 @@ export default function InvestorsPage() {
               />
             </div>
             <p className="text-lg text-slate-300 text-center leading-relaxed">
-              Manuscript officially accepted by the{" "}
+              Manuscript officially recommended by Springer Nature editors for
+              transfer to the{" "}
               <strong className="text-amber-400">
                 Journal of Supercomputing
               </strong>
-              . This publication confirms the technical merit of the Complexity
-              Inversion Effect and validates the 30,800-trial study
+              . This recommendation confirms the technical merit of the
+              Complexity Inversion Effect and validates the 30,800-trial study
               demonstrating CONEXUS optimization capabilities.
             </p>
           </motion.div>
