@@ -77,15 +77,42 @@ export default function ConexusSovereignPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-12">
             {[
-              { gear: "Rapport", desc: "Establish connection and trust" },
-              { gear: "Truth", desc: "Seek factual accuracy" },
-              { gear: "Symbol", desc: "Process symbolic meaning" },
-              { gear: "Contradiction", desc: "Hold opposing views" },
-              { gear: "Hold", desc: "Maintain paradox" },
-              { gear: "Roam", desc: "Explore possibilities" },
-              { gear: "Stress", desc: "Apply pressure testing" },
-              { gear: "Ethics/Value", desc: "Apply moral framework" },
-              { gear: "Continuity Seal", desc: "Preserve memory chain" },
+              {
+                gear: "Rapport",
+                desc: "Establish initial system connection parameters",
+              },
+              {
+                gear: "Truth",
+                desc: "Verify factual accuracy through data validation",
+              },
+              {
+                gear: "Symbol",
+                desc: "Process symbolic meaning through pattern recognition",
+              },
+              {
+                gear: "Contradiction",
+                desc: "Maintain opposing data streams without resolution",
+              },
+              {
+                gear: "Hold",
+                desc: "Preserve paradoxical states in active memory",
+              },
+              {
+                gear: "Roam",
+                desc: "Explore solution space through controlled variation",
+              },
+              {
+                gear: "Stress",
+                desc: "Apply constraint testing to system boundaries",
+              },
+              {
+                gear: "Ethics/Value",
+                desc: "Apply rule-based ethical framework processing",
+              },
+              {
+                gear: "Continuity Seal",
+                desc: "Preserve memory chain through cryptographic hashing",
+              },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -135,7 +162,8 @@ export default function ConexusSovereignPage() {
                   Continuity Agent
                 </h3>
                 <p className="text-slate-300 mb-4">
-                  Compresses ambiguity into executable directives
+                  Processes ambiguity into executable directives through data
+                  compression
                 </p>
                 <ul className="text-slate-400 space-y-2">
                   <li>• Problem decomposition</li>
@@ -156,7 +184,8 @@ export default function ConexusSovereignPage() {
                   Reasoning Agent
                 </h3>
                 <p className="text-slate-300 mb-4">
-                  Holds paradox for creative exploration
+                  Maintains paradoxical states for creative solution space
+                  exploration
                 </p>
                 <ul className="text-slate-400 space-y-2">
                   <li>• Paradox retention</li>
@@ -417,11 +446,12 @@ export default function ConexusSovereignPage() {
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2">
-                      Holds Paradox Without Resolution
+                      Processes Paradox Without Resolution
                     </h4>
                     <p className="text-slate-300">
                       Unlike conventional AI designed to eliminate ambiguity,
-                      CONEXUS processes paradox as a core architectural feature
+                      CONEXUS maintains paradoxical states as a core
+                      architectural feature enabling expanded solution space
                     </p>
                   </div>
                 </div>
@@ -435,9 +465,9 @@ export default function ConexusSovereignPage() {
                       Demonstrates Advanced Problem-Solving
                     </h4>
                     <p className="text-slate-300">
-                      The system shows clear progression from simple
+                      The system architecture enables progression from simple
                       problem-solving to sophisticated meta-reasoning across
-                      missions
+                      missions through dual-agent coordination
                     </p>
                   </div>
                 </div>
@@ -448,19 +478,20 @@ export default function ConexusSovereignPage() {
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2">
-                      Maintains Cryptographic Provenance
+                      Maintains Cryptographic Verification
                     </h4>
                     <p className="text-slate-300">
-                      Every operation is timestamped and hash-chained, providing
-                      irrefutable proof of system behavior
+                      Every operation is timestamped and hash-chained through
+                      the system architecture, providing irrefutable proof of
+                      computational behavior and audit trails
                     </p>
                   </div>
                 </div>
               </div>
 
               <p className="text-2xl font-bold text-green-400 mt-12 text-center">
-                This isn't just better AI. This is a fundamental shift in how
-                artificial systems can think and reason.
+                This represents a fundamental shift in how artificial systems
+                process complexity and maintain architectural integrity.
               </p>
             </div>
           </motion.div>
