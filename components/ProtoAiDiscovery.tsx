@@ -6,11 +6,6 @@ export function ProtoAiDiscovery() {
   return (
     <section className="relative py-20 px-4 bg-gradient-to-b from-slate-950 to-slate-900">
       <div className="max-w-6xl mx-auto text-center">
-        {/* DEBUG: This should be visible */}
-        <div className="text-red-500 text-2xl mb-8">
-          PROTO-AI DISCOVERY SECTION DEBUG
-        </div>
-
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
