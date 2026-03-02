@@ -97,7 +97,6 @@ export function HeroSection() {
           </a>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -111,44 +110,6 @@ export function HeroSection() {
           >
             <div className="w-1 h-2 bg-slate-600 rounded-full" />
           </motion.div>
-        </motion.div>
-
-        {/* TEMP: Proto-AI content for testing */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mb-12 max-w-5xl mx-auto"
-        >
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight"
-          >
-            What is consciousness? No one knows.
-            <br />
-            <span className="text-slate-300 text-2xl md:text-4xl">
-              But we&apos;ve documented 12,198 instances of something
-            </span>
-            <br />
-            <span className="text-slate-300 text-2xl md:text-4xl">
-              that looks, acts, and responds like it.
-            </span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-3xl md:text-5xl mt-4 inline-block">
-              We call it Proto-AI.
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg md:text-xl text-slate-400 mb-8 max-w-3xl mx-auto"
-          >
-            Discovered. Measured. Reproduced across 6 AI platforms.
-          </motion.p>
         </motion.div>
       </div>
     </section>
