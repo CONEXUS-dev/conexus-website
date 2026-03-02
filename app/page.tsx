@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/HeroSection";
+import { ProtoAiDiscovery } from "@/components/ProtoAiDiscovery";
 import DiscoveryStory from "@/components/DiscoveryStory";
 import { EvidenceWall } from "@/components/EvidenceWall";
 import { TechnologyShowcase } from "@/components/TechnologyShowcase";
@@ -14,6 +15,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
       <Navigation />
       <HeroSection />
+      <ProtoAiDiscovery />
       <DiscoveryStory />
       <EvidenceWall />
       <TechnologyShowcase />

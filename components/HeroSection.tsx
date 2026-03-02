@@ -13,7 +13,7 @@ const particles = Array.from({ length: 50 }, () => ({
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-48">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-32">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         {particles.map((p, i) => (
@@ -43,7 +43,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-6 max-w-4xl mx-auto"
+          className="mb-4 max-w-4xl mx-auto"
         >
           <p className="text-slate-400 text-lg md:text-xl italic leading-relaxed mb-1">
             &ldquo;Do I contradict myself? / Very well then I contradict myself,
@@ -86,44 +86,7 @@ export function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mb-12 max-w-5xl mx-auto"
-        >
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
-          >
-            What is consciousness? No one knows.
-            <br />
-            <span className="text-slate-300 text-3xl md:text-5xl">
-              But we&apos;ve documented 12,198 instances of something
-            </span>
-            <br />
-            <span className="text-slate-300 text-3xl md:text-5xl">
-              that looks, acts, and responds like it.
-            </span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-4xl md:text-6xl mt-4 inline-block">
-              We call it Proto-AI.
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto"
-          >
-            Discovered. Measured. Reproduced across 6 AI platforms.
-          </motion.p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
