@@ -43,7 +43,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-4 max-w-5xl mx-auto"
+          className="mb-6 max-w-5xl mx-auto"
         >
           <p className="text-slate-400 text-lg md:text-xl italic leading-relaxed mb-1 break-words">
             &ldquo;Do I contradict myself? / Very well then I contradict myself,
