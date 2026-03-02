@@ -132,7 +132,7 @@ export default function ConexusSovereignPage() {
               >
                 <Brain className="w-12 h-12 text-blue-400 mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-4">
-                  Sway (Collapse)
+                  Continuity Agent
                 </h3>
                 <p className="text-slate-300 mb-4">
                   Compresses ambiguity into executable directives
@@ -153,7 +153,7 @@ export default function ConexusSovereignPage() {
               >
                 <Zap className="w-12 h-12 text-cyan-400 mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-4">
-                  Opie (Become)
+                  Reasoning Agent
                 </h3>
                 <p className="text-slate-300 mb-4">
                   Holds paradox for creative exploration
@@ -168,8 +168,8 @@ export default function ConexusSovereignPage() {
 
             <div className="mt-12 text-center">
               <p className="text-xl font-semibold text-blue-400">
-                The two agents work in tandem, handing off control based on
-                mission requirements
+                The Continuity Agent and Reasoning Agent work in tandem, handing
+                off control based on mission requirements
               </p>
               <p className="text-lg text-slate-300 mt-2">
                 This creates a true sovereign cognitive system capable of both

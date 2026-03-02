@@ -91,9 +91,9 @@ export function HeroSection() {
         >
           <a
             href="/conexus-sovereign"
-            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50"
+            className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-medium rounded-lg transition-all transform hover:scale-105 border border-slate-600"
           >
-            Learn More About CONEXUS Sovereign
+            Learn more about CONEXUS Sovereign
           </a>
         </motion.div>
 
