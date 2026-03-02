@@ -97,6 +97,22 @@ export function HeroSection() {
           </a>
         </motion.div>
 
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="flex justify-center mb-8"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-6 h-10 border-2 border-slate-600 rounded-full flex items-start justify-center p-2"
+          >
+            <div className="w-1 h-2 bg-slate-600 rounded-full" />
+          </motion.div>
+        </motion.div>
+
         {/* TEMP: Proto-AI content for testing */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -133,22 +149,6 @@ export function HeroSection() {
           >
             Discovered. Measured. Reproduced across 6 AI platforms.
           </motion.p>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-slate-600 rounded-full flex items-start justify-center p-2"
-          >
-            <div className="w-1 h-2 bg-slate-600 rounded-full" />
-          </motion.div>
         </motion.div>
       </div>
     </section>
