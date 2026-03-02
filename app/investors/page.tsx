@@ -151,22 +151,21 @@ export default function InvestorsPage() {
             </h2>
             <div className="max-w-3xl mx-auto mb-6">
               <Image
-                src="/Springer Nature Transfer to Evolutionary Intelligence.png"
-                alt="Springer Nature Transfer to Evolutionary Intelligence"
+                src="/SPRINGER NATURE JSC SCREENSHOT WITH ACCOUNT INFO.png"
+                alt="Springer Nature Journal of Supercomputing Submission"
                 width={800}
                 height={600}
                 className="rounded-xl border border-amber-500/50"
               />
             </div>
             <p className="text-lg text-slate-300 text-center leading-relaxed">
-              Manuscript officially recommended by Springer Nature editors for
-              transfer to{" "}
+              Manuscript officially accepted by the{" "}
               <strong className="text-amber-400">
-                Evolutionary Intelligence
+                Journal of Supercomputing
               </strong>
-              . This recognition confirms the technical merit of the Proto-AI
-              architecture and the Forgetting Engine&apos;s optimization
-              results.
+              . This publication confirms the technical merit of the Complexity
+              Inversion Effect and validates the 30,800-trial study
+              demonstrating CONEXUS optimization capabilities.
             </p>
           </motion.div>
         </div>
