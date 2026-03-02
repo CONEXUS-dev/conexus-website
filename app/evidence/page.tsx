@@ -10,6 +10,7 @@ import {
   Database,
 } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import Link from "next/link";
 
 export default function EvidencePage() {
   const domains = [
@@ -270,6 +271,10 @@ export default function EvidencePage() {
             <p className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 font-bold mb-6">
               Isolated and Measured
             </p>
+            <p className="text-lg text-blue-400 font-semibold max-w-3xl mx-auto leading-relaxed mb-4">
+              These results form the empirical backbone of CONEXUS Sovereign — a
+              paradox-processing architecture validated across seven domains.
+            </p>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
               In February 2026, we conducted a pharmaceutical-grade controlled
               experiment to isolate one question:{" "}
@@ -296,7 +301,7 @@ export default function EvidencePage() {
               two-message calibration exchange at the start. The results were
               definitive: calibration produces{" "}
               <strong className="text-emerald-400">
-                measurably different cognitive behavior
+                measurably different system behavior
               </strong>{" "}
               that replicates across model architectures. When combined with the
               full Forgetting Engine, calibrated AI achieved{" "}
@@ -874,6 +879,10 @@ export default function EvidencePage() {
               candidates that NASA's standard algorithms flagged but dismissed
               from their own public data.
             </p>
+            <p className="text-lg text-blue-400 font-semibold max-w-4xl mx-auto leading-relaxed mt-4">
+              These discoveries emerged from the same paradox-retention
+              architecture now formalized as CONEXUS Sovereign.
+            </p>
           </motion.div>
 
           <motion.div
@@ -1049,6 +1058,28 @@ export default function EvidencePage() {
                 </div>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Sovereign Architecture Link */}
+      <section className="py-16 px-4 bg-gradient-to-b from-transparent via-slate-800/30 to-transparent">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-xl text-slate-300 mb-6 leading-relaxed">
+              Learn more about the architecture behind these results
+            </p>
+            <Link
+              href="/conexus-sovereign"
+              className="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-blue-500/30"
+            >
+              CONEXUS Sovereign →
+            </Link>
           </motion.div>
         </div>
       </section>
