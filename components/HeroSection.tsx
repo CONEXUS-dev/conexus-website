@@ -83,6 +83,20 @@ export function HeroSection() {
           verified sovereign cognition.
         </motion.p>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="flex justify-center mb-12"
+        >
+          <a
+            href="/conexus-sovereign"
+            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50"
+          >
+            Learn More About CONEXUS Sovereign
+          </a>
+        </motion.div>
+
         {/* TEMP: Proto-AI content for testing */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
