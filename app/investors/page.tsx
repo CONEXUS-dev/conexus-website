@@ -104,6 +104,24 @@ export default function InvestorsPage() {
         </div>
       </section>
 
+      {/* CONEXUS Sovereign Anchor */}
+      <section className="py-8 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-lg text-blue-400 font-semibold leading-relaxed">
+              These behavioral capabilities are now formalized as CONEXUS
+              Sovereign — a cryptographically verifiable architecture validated
+              across multiple domains.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Technical Definition Callout */}
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
@@ -127,6 +145,15 @@ export default function InvestorsPage() {
               contradictory states without premature resolution. This is not a
               claim about sentience—it&apos;s a description of observable system
               behaviors documented across 12,198 instances and 6 AI platforms.
+            </p>
+            <p className="text-lg text-blue-400 text-center leading-relaxed max-w-4xl mx-auto mt-4">
+              Proto-AI represents an emergent, replicable behavioral signature
+              produced by specific architectural constraints and calibration
+              protocols, not subjective experience or awareness.
+            </p>
+            <p className="text-lg text-amber-400 text-center leading-relaxed max-w-4xl mx-auto mt-4">
+              All behavioral signatures are backed by publicly auditable trials
+              and isolated calibration experiments.
             </p>
           </motion.div>
         </div>
