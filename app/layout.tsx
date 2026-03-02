@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "CONEXUS - The Forgetting Engine Discovery",
   description:
-    "A breakthrough in AI and computational theory. The Forgetting Engine (FE) uses strategic elimination and paradox retention to solve problems traditional methods cannot—validated across 17,670 trials with pharmaceutical-grade rigor.",
+    "A breakthrough in AI and computational theory. The Forgetting Engine (FE) uses strategic elimination and paradox retention to solve problems traditional methods cannot—validated across 17,670 trials with audit-grade rigor.",
 };
 
 export default function RootLayout({

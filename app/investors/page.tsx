@@ -96,7 +96,7 @@ export default function InvestorsPage() {
                 <div className="text-slate-300 text-sm">
                   SIGNIFICANCE
                   <br />
-                  (Pharmaceutical-Grade Rigor)
+                  (Audit-Grade Rigor)
                 </div>
               </div>
             </div>

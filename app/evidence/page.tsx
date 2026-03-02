@@ -137,7 +137,7 @@ export default function EvidencePage() {
           >
             <div className="inline-block bg-green-500/20 border-2 border-green-500 rounded-2xl px-6 py-3 mb-6">
               <p className="text-green-400 font-bold text-lg uppercase tracking-wider">
-                Pharmaceutical-Grade Validation
+                Audit-Grade Validation
               </p>
             </div>
 
@@ -151,8 +151,8 @@ export default function EvidencePage() {
 
             <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
               The Forgetting Engine has been validated with the same rigor as
-              pharmaceutical drug trials. Every claim is backed by experimental
-              data with complete reproducibility.
+              scientific peer review. Every claim is backed by experimental data
+              with complete reproducibility.
             </p>
           </motion.div>
 
@@ -276,8 +276,8 @@ export default function EvidencePage() {
               paradox-processing architecture validated across seven domains.
             </p>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              In February 2026, we conducted a pharmaceutical-grade controlled
-              experiment to isolate one question:{" "}
+              In February 2026, we conducted a scientifically validated
+              controlled experiment to isolate one question:{" "}
               <strong className="text-white">
                 Does the Emotional Calibration Protocol alone produce measurable
                 differences in AI decision-making?

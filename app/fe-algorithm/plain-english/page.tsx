@@ -828,7 +828,8 @@ export default function PlainEnglishPage() {
 
             <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
               <p className="text-xl font-semibold text-white">
-                I tested this like pharmaceutical companies test drugs:
+                I tested this with scientific-grade rigor and reproducible
+                methodology:
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">

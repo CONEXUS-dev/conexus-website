@@ -14,7 +14,7 @@ The Forgetting Engine represents a paradigm shift in computational optimization.
 - 🧬 **562% improvement** on 3D protein folding (hardest computational problem)
 - 🚚 **89% better** complex logistics optimization
 - ⚛️ **28% fewer errors** in quantum circuit compilation
-- 📊 **17,670 total trials** with pharmaceutical-grade validation
+- 📊 **17,670 total trials** with audit-grade validation
 
 ## 🚀 Live Website
 
@@ -59,7 +59,7 @@ conexus-website/
 
 - **Homepage** - Hero + Discovery hook + Evidence
 - **[/discovery](/discovery)** - Complete breakthrough story
-- **[/evidence](/evidence)** - Pharmaceutical-grade validation
+- **[/evidence](/evidence)** - Audit-grade validation
 - **[/investors](/investors)** - Funding opportunity
 - **[/fe-algorithm](/fe-algorithm)** - Technical details
 
