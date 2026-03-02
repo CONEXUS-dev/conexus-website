@@ -742,6 +742,10 @@ export default function EvidencePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12 text-center"
           >
+            <p className="text-blue-400 font-semibold text-center mb-4 max-w-3xl mx-auto">
+              This experiment isolates the calibration mechanism responsible for
+              the Complexity Inversion effect observed across all domains.
+            </p>
             <a
               href="/ecp-experiment"
               className="inline-block px-10 py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-emerald-500/30 text-lg"
