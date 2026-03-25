@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
 export function FounderSection() {
@@ -78,6 +78,13 @@ export function FounderSection() {
                 className="p-3 bg-slate-700/50 hover:bg-slate-600/50 rounded-full transition-colors"
               >
                 <Github className="w-5 h-5 text-slate-300" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/derek-angell-conexus/"
+                target="_blank"
+                className="p-3 bg-slate-700/50 hover:bg-slate-600/50 rounded-full transition-colors"
+              >
+                <Linkedin className="w-5 h-5 text-slate-300" />
               </Link>
               <Link
                 href="/contact"
