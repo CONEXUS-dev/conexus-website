@@ -154,7 +154,7 @@ export default function ObserverDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-x-hidden">
       {/* Header */}
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 py-6">
@@ -183,12 +183,14 @@ export default function ObserverDashboard() {
 
             {/* Integrity Hash */}
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 mb-8">
-              <div className="flex items-center gap-3">
-                <Shield className="w-5 h-5 text-green-400" />
-                <span className="text-slate-300 text-sm">
-                  Sealed Integrity Hash:
-                </span>
-                <code className="text-green-400 text-xs font-mono bg-slate-900 px-2 py-1 rounded">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-green-400 shrink-0" />
+                  <span className="text-slate-300 text-sm">
+                    Sealed Integrity Hash:
+                  </span>
+                </div>
+                <code className="text-green-400 text-xs font-mono bg-slate-900 px-2 py-1 rounded break-all">
                   {SEALED_HASH}
                 </code>
               </div>
@@ -277,7 +279,7 @@ export default function ObserverDashboard() {
                     />
                     <YAxis
                       dataKey="stability"
-                      domain={[0.5, 1.0]}
+                      domain={["auto", "auto"]}
                       stroke="#94a3b8"
                       label={{
                         value: "Stability",
