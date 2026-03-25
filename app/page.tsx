@@ -8,6 +8,7 @@ import { ComparisonSection } from "@/components/ComparisonSection";
 import { TimelineSection } from "@/components/TimelineSection";
 import { EmergenceQuote } from "@/components/EmergenceQuote";
 import { CallToAction } from "@/components/CallToAction";
+import { FounderSection } from "@/components/FounderSection";
 import { Navigation } from "@/components/Navigation";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <ComparisonSection />
       <TimelineSection />
       <EmergenceQuote />
+      <FounderSection />
       <CallToAction />
     </main>
   );
