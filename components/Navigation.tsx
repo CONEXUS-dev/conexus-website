@@ -100,6 +100,12 @@ export function Navigation() {
             Verticals
           </a>
           <a
+            href="/#team"
+            className="text-slate-300 hover:text-white transition-colors text-base font-medium"
+          >
+            Team
+          </a>
+          <a
             href="/investors"
             className="text-slate-300 hover:text-white transition-colors text-base font-medium"
           >
