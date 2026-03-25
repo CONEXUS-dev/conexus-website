@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export function FounderSection() {
@@ -35,8 +36,15 @@ export function FounderSection() {
           className="max-w-3xl mx-auto"
         >
           <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 md:p-12 text-center">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center text-3xl font-bold text-white">
-              DA
+            <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/20">
+              <Image
+                src="/derek-angell.jpg"
+                alt="Derek Angell"
+                width={128}
+                height={128}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
 
             <h3 className="text-3xl font-bold text-white mb-2">Derek Angell</h3>

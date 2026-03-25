@@ -17,6 +17,7 @@ export function Navigation() {
     { href: "/experiences", label: "Experiences" },
     { href: "/dream-mirror", label: "Dream Mirror" },
     { href: "/verticals", label: "Verticals" },
+    { href: "/#team", label: "Team" },
     { href: "/investors", label: "Investors" },
     { href: "/directory", label: "Directory" },
     { href: "/contact", label: "Contact" },
