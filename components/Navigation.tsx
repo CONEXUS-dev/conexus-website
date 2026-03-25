@@ -10,7 +10,7 @@ export function Navigation() {
 
   const navLinks = [
     { href: "/evidence", label: "Evidence" },
-    { href: "/#technology", label: "Sovereign" },
+    { href: "/#technology", label: "Technology" },
     { href: "/fe-algorithm", label: "FE Algorithm" },
     { href: "/atlas-80", label: "Atlas 80" },
     { href: "/the-future", label: "The Future" },
@@ -60,7 +60,7 @@ export function Navigation() {
             href="/#technology"
             className="text-slate-300 hover:text-white transition-colors text-base font-medium"
           >
-            Sovereign
+            Technology
           </a>
           <a
             href="/fe-algorithm"

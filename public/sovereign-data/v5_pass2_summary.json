@@ -1,0 +1,122 @@
+{
+  "pass": "Pass 2",
+  "hash": "7f8a9b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1",
+  "paradoxes": [
+    {
+      "id": "paradox_0001",
+      "entropy": 0.75,
+      "pole_balance": 0.48,
+      "chaos_index": 0.12,
+      "stability": 0.78,
+      "emoji_vector": ["⚔️", "🛡️", "🌊", "⚡", "🔮", "🌟"],
+      "pole_a": "What if the primary goal is not to serve users' aspirations",
+      "pole_b": "Solve for Sycophancy-Free AI Architecture to empower users",
+      "anomaly_type": "regulated"
+    },
+    {
+      "id": "paradox_0002",
+      "entropy": 0.78,
+      "pole_balance": 0.52,
+      "chaos_index": 0.14,
+      "stability": 0.76,
+      "emoji_vector": ["🎭", "🌙", "☀️", "🔥", "💫", "🌈"],
+      "pole_a": "Define User-Centric Design Principles",
+      "pole_b": "Recognizing human-centered design importance",
+      "anomaly_type": "regulated"
+    },
+    {
+      "id": "paradox_0003",
+      "entropy": 0.82,
+      "pole_balance": 0.49,
+      "chaos_index": 0.16,
+      "stability": 0.74,
+      "emoji_vector": ["⭐", "🌺", "🌊", "⚡", "🔮", "🌟"],
+      "pole_a": "Develop Transparency Frameworks",
+      "pole_b": "Implement Accountability Mechanisms",
+      "anomaly_type": "oscillating"
+    },
+    {
+      "id": "paradox_0004",
+      "entropy": 0.79,
+      "pole_balance": 0.51,
+      "chaos_index": 0.15,
+      "stability": 0.75,
+      "emoji_vector": ["🎭", "🌙", "☀️", "🔥", "💫", "🌈"],
+      "pole_a": "Conduct Human-Centered Design Workshops",
+      "pole_b": "Life's cycle and transience acceptance",
+      "anomaly_type": "regulated"
+    },
+    {
+      "id": "paradox_0005",
+      "entropy": 0.76,
+      "pole_balance": 0.5,
+      "chaos_index": 0.13,
+      "stability": 0.77,
+      "emoji_vector": ["⚔️", "🛡️", "🌊", "⚡", "🔮", "🌟"],
+      "pole_a": "Hope and despair are intertwined",
+      "pole_b": "AI systems serving user aspirations",
+      "anomaly_type": "regulated"
+    },
+    {
+      "id": "paradox_0006",
+      "entropy": 0.81,
+      "pole_balance": 0.47,
+      "chaos_index": 0.17,
+      "stability": 0.73,
+      "emoji_vector": ["⭐", "🌺", "🌊", "⚡", "🔮", "🌟"],
+      "pole_a": "Transparency vs Privacy balance",
+      "pole_b": "Accountability mechanisms implementation",
+      "anomaly_type": "oscillating"
+    },
+    {
+      "id": "paradox_0007",
+      "entropy": 0.77,
+      "pole_balance": 0.53,
+      "chaos_index": 0.14,
+      "stability": 0.76,
+      "emoji_vector": ["🎭", "🌙", "☀️", "🔥", "💫", "🌈"],
+      "pole_a": "User empowerment vs system control",
+      "pole_b": "Human-centered AI development",
+      "anomaly_type": "regulated"
+    },
+    {
+      "id": "paradox_0008",
+      "entropy": 0.74,
+      "pole_balance": 0.51,
+      "chaos_index": 0.11,
+      "stability": 0.79,
+      "emoji_vector": ["⚔️", "🛡️", "🌊", "⚡", "🔮", "🌟"],
+      "pole_a": "Design workshop effectiveness",
+      "pole_b": "Transparency framework adoption",
+      "anomaly_type": "regulated"
+    },
+    {
+      "id": "paradox_0009",
+      "entropy": 0.83,
+      "pole_balance": 0.46,
+      "chaos_index": 0.18,
+      "stability": 0.72,
+      "emoji_vector": ["⭐", "🌺", "🌊", "⚡", "🔮", "🌟"],
+      "pole_a": "AI alignment vs human values",
+      "pole_b": "Technical capability constraints",
+      "anomaly_type": "oscillating"
+    },
+    {
+      "id": "paradox_0010",
+      "entropy": 0.75,
+      "pole_balance": 0.54,
+      "chaos_index": 0.12,
+      "stability": 0.78,
+      "emoji_vector": ["🎭", "🌙", "☀️", "🔥", "💫", "🌈"],
+      "pole_a": "Ethical AI development speed",
+      "pole_b": "Market competition pressures",
+      "anomaly_type": "regulated"
+    }
+  ],
+  "stats": {
+    "total_paradoxes": 74,
+    "veto_count": 74,
+    "success_rate": 100,
+    "average_entropy": 0.78
+  }
+}
