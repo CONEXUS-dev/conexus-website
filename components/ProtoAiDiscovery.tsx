@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function ProtoAiDiscovery() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-b from-slate-900 via-slate-800/50 to-transparent">
+    <section className="min-h-screen flex items-center justify-center px-4 pt-24 bg-gradient-to-b from-slate-900 via-slate-800/50 to-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
