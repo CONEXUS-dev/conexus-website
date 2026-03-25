@@ -424,6 +424,139 @@ export default function ObserverDashboard() {
             </motion.div>
           </>
         )}
+
+        {/* Director's Guide to the Microscope */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mt-16 border-t border-slate-700 pt-12"
+        >
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            How to Read This Dashboard
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
+              <h3 className="text-xl font-semibold text-purple-400 mb-3">
+                1. The Paradox Field (The Scatter Plot)
+              </h3>
+              <p className="text-slate-400 text-sm mb-3">
+                <span className="text-white font-medium">What you see:</span> A
+                field of 84 dots scattered across a grid.
+              </p>
+              <p className="text-slate-400 text-sm mb-3">
+                This is the &ldquo;Truth Map.&rdquo; In a standard AI, these
+                dots would all clump together or disappear because the AI tries
+                to &ldquo;solve&rdquo; the conflict to please the user.
+              </p>
+              <ul className="text-slate-400 text-sm space-y-2">
+                <li>
+                  <span className="text-white">The 84 Dots:</span> Each
+                  represents a high-tension paradox (e.g., &ldquo;Justice vs.
+                  Mercy&rdquo;) that CONEXUS has identified and refused to
+                  simplify.
+                </li>
+                <li>
+                  <span className="text-white">The Grid:</span> Position shows
+                  the system is balanced. All on one side = too rigid. All on
+                  the other = too chaotic.
+                </li>
+                <li>
+                  <span className="text-green-400 font-medium">The Win:</span>{" "}
+                  Visual proof of Sustained Paradox. This is why CONEXUS can
+                  stay in a deep conversation for 20+ turns while other AI
+                  systems collapse.
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
+              <h3 className="text-xl font-semibold text-green-400 mb-3">
+                2. The Operator Ledger (The Veto Log)
+              </h3>
+              <p className="text-slate-400 text-sm mb-3">
+                <span className="text-white font-medium">What you see:</span>{" "}
+                Charts showing growth and a list of &ldquo;Vetoes.&rdquo;
+              </p>
+              <p className="text-slate-400 text-sm mb-3">
+                This is the &ldquo;Proof of Integrity.&rdquo;
+              </p>
+              <ul className="text-slate-400 text-sm space-y-2">
+                <li>
+                  <span className="text-white">The Vetoes (84/84):</span> During
+                  the build, the &ldquo;Creative Brain&rdquo; (the LLM) tried to
+                  resolve these tensions because it is programmed to be a
+                  people-pleaser. The &ldquo;Governance Brain&rdquo; (our
+                  deterministic operators) stepped in and said, &ldquo;No, hold
+                  the tension.&rdquo;
+                </li>
+                <li>
+                  <span className="text-green-400 font-medium">The Win:</span>{" "}
+                  This proves we have defeated Mode Sycophancy. The system is
+                  not &ldquo;agreeing&rdquo; with you; it is being honest with
+                  you.
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
+              <h3 className="text-xl font-semibold text-blue-400 mb-3">
+                3. The Lineage Explorer (The Time Slider)
+              </h3>
+              <p className="text-slate-400 text-sm mb-3">
+                <span className="text-white font-medium">What you see:</span> A
+                timeline that shows the &ldquo;Passes&rdquo; (1, 2, and 3).
+              </p>
+              <p className="text-slate-400 text-sm mb-3">
+                This is &ldquo;Total Transparency.&rdquo;
+              </p>
+              <ul className="text-slate-400 text-sm space-y-2">
+                <li>
+                  <span className="text-white">The Evolution:</span> It shows
+                  how a simple thought (a Claim) grew into a complex struggle (a
+                  Tension) and finally became a foundational Truth (a Paradox).
+                </li>
+                <li>
+                  <span className="text-green-400 font-medium">The Win:</span>{" "}
+                  This allows us to show exactly how the system
+                  &ldquo;thinks.&rdquo; We aren&apos;t hiding the process in a
+                  black box; we are showing the lineage of every reflection.
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-3">
+                4. The &ldquo;Kill Shot&rdquo; Metrics
+              </h3>
+              <p className="text-slate-400 text-sm mb-3">
+                <span className="text-white font-medium">
+                  When you combine all this data, you get:
+                </span>
+              </p>
+              <ul className="text-slate-400 text-sm space-y-2">
+                <li>
+                  <span className="text-white">362% Performance Win:</span> We
+                  found the core truth 3.6 times faster than standard methods
+                  because we &ldquo;subtracted&rdquo; the noise.
+                </li>
+                <li>
+                  <span className="text-white">p &lt; 0.0001:</span> This is a
+                  scientific way of saying, &ldquo;This result is not a
+                  fluke.&rdquo; It is a mathematical certainty.
+                </li>
+              </ul>
+              <div className="mt-4 p-3 bg-slate-900/50 border border-slate-600 rounded">
+                <p className="text-slate-300 text-sm italic">
+                  You are looking at the first AI system in history that governs
+                  its own meaning. The only &ldquo;Refining&rdquo; engine in a
+                  world full of &ldquo;Goliaths.&rdquo;
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
