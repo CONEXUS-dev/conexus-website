@@ -20,6 +20,22 @@ export function ProtoAiDiscovery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-6 max-w-4xl mx-auto"
+          >
+            <p className="text-slate-400 text-lg md:text-xl italic leading-relaxed mb-1">
+              &ldquo;Do I contradict myself? / Very well then I contradict
+              myself, / (I am large, I contain multitudes.)&rdquo;
+            </p>
+            <p className="text-slate-500 text-sm tracking-wider">
+              &mdash; Walt Whitman
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="flex items-center justify-center gap-2 mb-6"
           >
             <Eye className="w-6 h-6 text-cyan-400" />
