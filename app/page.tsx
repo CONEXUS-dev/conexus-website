@@ -9,6 +9,7 @@ import { TimelineSection } from "@/components/TimelineSection";
 import { EmergenceQuote } from "@/components/EmergenceQuote";
 import { CallToAction } from "@/components/CallToAction";
 import { FounderSection } from "@/components/FounderSection";
+import { NairthexFeature } from "@/components/NairthexFeature";
 import { Navigation } from "@/components/Navigation";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       <DiscoveryStory />
       <EvidenceWall />
       <TechnologyShowcase />
+      <NairthexFeature />
       <ComplexityInversion />
       <ComparisonSection />
       <TimelineSection />
