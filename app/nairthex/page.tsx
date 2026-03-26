@@ -76,16 +76,19 @@ export default function NairthexPage() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-900/30 border border-amber-700/50 rounded-full text-amber-400 text-sm font-medium mb-6">
             <BookOpen className="w-4 h-4" />
-            Live Product — Deployed on Render
+            CONEXUS Vertical — Safe Church AI
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             NAiRTHEX
           </h1>
-          <p className="text-2xl text-slate-300 mb-2">by CONEXUS</p>
+          <p className="text-2xl text-slate-300 mb-2">
+            Safe Church AI by CONEXUS
+          </p>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-8 italic">
-            A ritual space, not an app. A contemplative AI companion that
-            listens, mirrors, and holds space — powered by Sovereign governance.
+            A Safe Church AI vertical — a contemplative companion built for
+            faith communities. It listens, mirrors, and holds space for deeper
+            reflection, powered by Sovereign governance.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -129,17 +132,18 @@ export default function NairthexPage() {
               </p>
               <p>
                 <strong className="text-white">NAiRTHEX by CONEXUS</strong> is a
-                digital narthex — a contemplative AI companion designed for
-                reflection, not answers. It doesn&apos;t tell you what to think. It
-                holds space for you to think more deeply.
+                Safe Church AI vertical — a digital narthex designed for faith
+                communities who need a contemplative companion that prioritizes
+                reflection over answers. It doesn&apos;t tell you what to think.
+                It holds space for you to think more deeply.
               </p>
               <p>
                 Unlike conventional chatbots that optimize for user satisfaction
                 and quick resolution, The Narthex is built on CONEXUS Sovereign
                 governance — the same architecture that holds 84 paradoxes
-                without collapsing them. It mirrors this capacity in conversation:
-                sitting with tension, honoring complexity, and refusing to
-                simplify what should remain whole.
+                without collapsing them. It mirrors this capacity in
+                conversation: sitting with tension, honoring complexity, and
+                refusing to simplify what should remain whole.
               </p>
             </div>
           </div>
