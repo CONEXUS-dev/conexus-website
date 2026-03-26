@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
   ScatterChart,
   Scatter,
+  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -60,17 +61,26 @@ export default function ObserverDashboard() {
         }
 
         if (data && data.paradoxes) {
-          const processedParadoxes = data.paradoxes.map((p: any) => ({
-            id: p.id,
-            entropy: p.entropy || 0.8,
-            pole_balance: p.pole_balance || 0.5,
-            chaos_index: p.chaos_index || 0.1,
-            stability: p.stability || 0.5,
-            emoji_vector: p.emoji_vector || [],
-            pole_a: p.pole_a || "Unknown",
-            pole_b: p.pole_b || "Unknown",
-            anomaly_type: p.anomaly_type || "regulated",
-          }));
+          // Deterministic jitter using paradox index to spread overlapping dots
+          const seededRandom = (seed: number) => {
+            const x = Math.sin(seed * 9301 + 49297) * 233280;
+            return x - Math.floor(x);
+          };
+
+          const processedParadoxes = data.paradoxes.map(
+            (p: any, i: number) => ({
+              id: p.id,
+              entropy: (p.entropy || 0.8) + (seededRandom(i) - 0.5) * 0.02,
+              pole_balance: p.pole_balance || 0.5,
+              chaos_index: p.chaos_index || 0.1,
+              stability:
+                (p.stability || 0.5) + (seededRandom(i + 100) - 0.5) * 0.006,
+              emoji_vector: p.emoji_vector || [],
+              pole_a: p.pole_a || "Unknown",
+              pole_b: p.pole_b || "Unknown",
+              anomaly_type: p.anomaly_type || "regulated",
+            }),
+          );
 
           setParadoxes(processedParadoxes);
         }
@@ -253,17 +263,20 @@ export default function ObserverDashboard() {
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <Activity className="w-6 h-6 text-purple-400" />
                 Paradox Field
+                <span className="ml-auto text-sm font-normal text-purple-400 bg-purple-900/30 border border-purple-700/50 px-3 py-1 rounded-full">
+                  {paradoxes.length} paradoxes
+                </span>
               </h2>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 md:p-6">
                 <div className="mb-4">
-                  <p className="text-slate-300 mb-2">
+                  <p className="text-slate-300 mb-2 text-sm md:text-base">
                     Entropy (X) vs Stability (Y)
                   </p>
-                  <p className="text-slate-500 text-sm">
-                    Click any dot to view paradox details
+                  <p className="text-slate-500 text-xs md:text-sm">
+                    Tap or click any dot to view paradox details
                   </p>
                 </div>
-                <ResponsiveContainer width="100%" height={400}>
+                <ResponsiveContainer width="100%" height={500}>
                   <ScatterChart>
                     <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
                     <XAxis
@@ -294,7 +307,20 @@ export default function ObserverDashboard() {
                       fill="#8b5cf6"
                       onClick={(data) => setSelectedParadox(data)}
                       className="cursor-pointer"
-                    />
+                    >
+                      {paradoxes.map((_, index) => (
+                        <Cell
+                          key={index}
+                          fill={
+                            paradoxes[index]?.anomaly_type === "drifting"
+                              ? "#f59e0b"
+                              : paradoxes[index]?.anomaly_type === "oscillating"
+                                ? "#06b6d4"
+                                : "#8b5cf6"
+                          }
+                        />
+                      ))}
+                    </Scatter>
                   </ScatterChart>
                 </ResponsiveContainer>
               </div>
