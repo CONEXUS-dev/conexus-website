@@ -471,7 +471,8 @@ export default function ObserverDashboard() {
               </h3>
               <p className="text-slate-400 text-sm mb-3">
                 <span className="text-white font-medium">What you see:</span> A
-                field of 84 dots scattered across a grid.
+                field of color-coded dots scattered across a grid. The badge in
+                the header shows how many paradoxes exist in the current pass.
               </p>
               <p className="text-slate-400 text-sm mb-3">
                 This is the &ldquo;Truth Map.&rdquo; In a standard AI, these
@@ -480,21 +481,32 @@ export default function ObserverDashboard() {
               </p>
               <ul className="text-slate-400 text-sm space-y-2">
                 <li>
-                  <span className="text-white">The 84 Dots:</span> Each
-                  represents a high-tension paradox (e.g., &ldquo;Justice vs.
-                  Mercy&rdquo;) that CONEXUS has identified and refused to
-                  simplify.
+                  <span className="text-white">The Dots:</span> Each represents
+                  a high-tension paradox (e.g., &ldquo;Justice vs. Mercy&rdquo;)
+                  that CONEXUS has identified and refused to simplify. Switch
+                  passes to watch them grow: 64 &rarr; 74 &rarr; 84.
                 </li>
                 <li>
-                  <span className="text-white">The Grid:</span> Position shows
-                  the system is balanced. All on one side = too rigid. All on
-                  the other = too chaotic.
+                  <span className="text-white">The Colors:</span>{" "}
+                  <span className="text-purple-400">Purple</span> = regulated
+                  (stable), <span className="text-amber-400">Amber</span> =
+                  drifting (paradoxes 0001&ndash;0004),{" "}
+                  <span className="text-cyan-400">Cyan</span> = oscillating
+                  (paradoxes 0005&ndash;0008). These are real health
+                  classifications from the governance engine.
+                </li>
+                <li>
+                  <span className="text-white">The Grid:</span> X-axis is
+                  Entropy (information density), Y-axis is Stability (how
+                  settled the paradox is). Spread = healthy. Clustered = too
+                  rigid or too chaotic.
                 </li>
                 <li>
                   <span className="text-green-400 font-medium">The Win:</span>{" "}
-                  Visual proof of Sustained Paradox. This is why CONEXUS can
-                  stay in a deep conversation for 20+ turns while other AI
-                  systems collapse.
+                  Visual proof of Sustained Paradox. Tap any dot to see its
+                  poles, emoji vector, and metrics. This is why CONEXUS can stay
+                  in a deep conversation for 20+ turns while other AI systems
+                  collapse.
                 </li>
               </ul>
             </div>
@@ -534,16 +546,24 @@ export default function ObserverDashboard() {
               </h3>
               <p className="text-slate-400 text-sm mb-3">
                 <span className="text-white font-medium">What you see:</span> A
-                timeline that shows the &ldquo;Passes&rdquo; (1, 2, and 3).
+                timeline that shows the &ldquo;Passes&rdquo; (1, 2, 3, and
+                Final). Click each to watch the paradox field grow.
               </p>
               <p className="text-slate-400 text-sm mb-3">
                 This is &ldquo;Total Transparency.&rdquo;
               </p>
               <ul className="text-slate-400 text-sm space-y-2">
                 <li>
-                  <span className="text-white">The Evolution:</span> It shows
-                  how a simple thought (a Claim) grew into a complex struggle (a
-                  Tension) and finally became a foundational Truth (a Paradox).
+                  <span className="text-white">The Evolution:</span> Pass 1
+                  starts with 64 paradoxes. Pass 2 grows to 74. Pass 3 and Final
+                  reach 84. Each pass shows how a simple thought (a Claim) grew
+                  into a complex struggle (a Tension) and finally became a
+                  foundational Truth (a Paradox).
+                </li>
+                <li>
+                  <span className="text-white">The Hash:</span> Each pass has a
+                  unique cryptographic hash. This proves the data hasn&apos;t
+                  been tampered with after the run completed.
                 </li>
                 <li>
                   <span className="text-green-400 font-medium">The Win:</span>{" "}
