@@ -17,6 +17,7 @@ export function Navigation() {
     { href: "/experiences", label: "Experiences" },
     { href: "/dream-mirror", label: "Dream Mirror" },
     { href: "/verticals", label: "Verticals" },
+    { href: "/nairthex", label: "NAiRTHEX" },
     { href: "/#team", label: "Team" },
     { href: "/investors", label: "Investors" },
     { href: "/directory", label: "Directory" },
@@ -98,6 +99,12 @@ export function Navigation() {
             className="text-slate-300 hover:text-white transition-colors text-base font-medium"
           >
             Verticals
+          </a>
+          <a
+            href="/nairthex"
+            className="text-slate-300 hover:text-white transition-colors text-base font-medium"
+          >
+            NAiRTHEX
           </a>
           <a
             href="/#team"
