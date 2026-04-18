@@ -86,10 +86,19 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto"
+          className="text-xl md:text-2xl text-slate-400 mb-4 max-w-3xl mx-auto"
         >
           The world is drowning in crude data because it lacks a Method to make
           it safe. We built the refinery. We do not accumulate. We eliminate.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-lg md:text-xl text-green-400 font-semibold mb-12 max-w-3xl mx-auto tracking-wide"
+        >
+          We do not Celebrate. We Validate.
         </motion.p>
 
         <motion.div
