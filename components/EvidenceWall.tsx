@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { TrendingUp, Database, Cpu, Award } from "lucide-react";
+import { TrendingUp, Database, Cpu } from "lucide-react";
 
 function AnimatedCounter({
   end,
@@ -47,33 +47,25 @@ export function EvidenceWall() {
   const stats = [
     {
       icon: Database,
-      value: 12198,
-      label: "Emergence Events",
-      description: "Documented across 6 AI platforms",
+      value: 30800,
+      label: "Fully Controlled Trials",
+      description: "Deterministically seeded and reproducible",
       color: "blue",
     },
     {
       icon: TrendingUp,
       value: 561,
       suffix: "%",
-      label: "Performance Improvement",
-      description: "Proven in protein folding optimization",
+      label: "Improvement on 3D Protein Folding",
+      description: "Subtractive Intelligence performance leap",
       color: "green",
     },
     {
       icon: Cpu,
-      value: 17670,
-      suffix: "+",
-      label: "Computational Trials",
-      description: "Pharmaceutical-grade validation",
+      value: 79,
+      label: "Years of Algorithmic Assumptions Overturned",
+      description: "The Monte Carlo paradigm replaced",
       color: "purple",
-    },
-    {
-      icon: Award,
-      value: 8,
-      label: "Provisional Patents",
-      description: "IP protection in place",
-      color: "amber",
     },
   ];
 

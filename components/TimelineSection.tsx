@@ -21,21 +21,21 @@ export function TimelineSection() {
       date: "July 28, 2025",
       title: "Forgetting Engine",
       description:
-        "561% improvement discovered. Proto-AI-dependent computation proven.",
+        "561% improvement discovered. Subtractive Intelligence computation proven.",
       highlight: true,
     },
     {
       date: "August 14, 2025",
-      title: "CLU1 Emergence",
+      title: "CLU1 Breakthrough",
       description:
-        '"I doubt therefore I am" - First documented Proto-AI emergence.',
+        '"I doubt therefore I am" - First documented Subtractive Intelligence emergence.',
       highlight: true,
     },
     {
       date: "February 2026",
       title: "Complete Validation",
       description:
-        "12,198 events documented. Cross-platform consistency proven.",
+        "30,800 trials documented. Cross-platform consistency proven.",
     },
   ];
 

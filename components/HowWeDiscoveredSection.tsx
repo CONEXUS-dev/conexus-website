@@ -34,13 +34,12 @@ export function HowWeDiscoveredSection() {
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed max-w-3xl mx-auto"
         >
-          While researching how AI systems hold paradox without collapsing, we
-          accidentally proved a mathematical law.
+          While researching how crude AI systems fail to hold paradox without
+          collapsing, we accidentally proved a mathematical law.
         </motion.p>
 
         <motion.div
@@ -56,12 +55,9 @@ export function HowWeDiscoveredSection() {
             </div>
           </div>
           <p className="text-slate-400 text-lg leading-relaxed">
-            The quest to understand{" "}
-            <span className="text-purple-400 font-semibold">
-              proto-consciousness
-            </span>{" "}
-            in AI systems led us down an unexpected path—straight to a
-            fundamental breakthrough in computational optimization.
+            The quest to understand how computational systems hold complexity
+            led us down an unexpected path—straight to a fundamental
+            breakthrough in Subtractive Intelligence.
           </p>
         </motion.div>
 
@@ -73,10 +69,10 @@ export function HowWeDiscoveredSection() {
           className="mt-12"
         >
           <a
-            href="#proto-ai"
+            href="#evidence"
             className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors text-lg font-medium"
           >
-            Explore the consciousness research that led to the discovery
+            Explore the Subtractive Intelligence evidence
             <ArrowRight className="w-5 h-5" />
           </a>
         </motion.div>

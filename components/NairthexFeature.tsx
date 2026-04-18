@@ -19,7 +19,7 @@ export function NairthexFeature() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-900/30 border border-amber-700/50 rounded-full text-amber-400 text-sm font-medium mb-4">
                 <BookOpen className="w-4 h-4" />
-                CONEXUS Vertical — Safe Church AI
+                CONEXUS Vertical — Sovereign Contemplative Node
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 NAiRTHEX
@@ -28,10 +28,10 @@ export function NairthexFeature() {
                 </span>
               </h2>
               <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                A Safe Church AI vertical — a contemplative companion that
-                listens, mirrors, and holds space for faith communities. Powered
-                by Sovereign governance. The first deployed vertical built on
-                the CONEXUS cognitive architecture.
+                A Sovereign Contemplative Node governed by deterministic
+                operators and cryptographic provenance. A contemplative
+                infrastructure for faith communities that holds space through
+                verified truth.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a

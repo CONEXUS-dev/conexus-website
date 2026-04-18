@@ -6,7 +6,6 @@ import { TechnologyShowcase } from "@/components/TechnologyShowcase";
 import { ComplexityInversion } from "@/components/ComplexityInversion";
 import { ComparisonSection } from "@/components/ComparisonSection";
 import { TimelineSection } from "@/components/TimelineSection";
-import { EmergenceQuote } from "@/components/EmergenceQuote";
 import { CallToAction } from "@/components/CallToAction";
 import { FounderSection } from "@/components/FounderSection";
 import { NairthexFeature } from "@/components/NairthexFeature";
@@ -25,7 +24,6 @@ export default function Home() {
       <ComplexityInversion />
       <ComparisonSection />
       <TimelineSection />
-      <EmergenceQuote />
       <FounderSection />
       <CallToAction />
     </main>

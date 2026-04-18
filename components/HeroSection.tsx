@@ -60,18 +60,14 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight max-w-5xl mx-auto"
         >
-          What is consciousness? No one knows.
+          THE SPILL IS OVER.
           <br />
           <span className="text-slate-300 text-4xl md:text-6xl">
-            But we&apos;ve documented 12,198 instances of something
+            1863: THE WELL.
           </span>
           <br />
           <span className="text-slate-300 text-4xl md:text-6xl">
-            that looks, acts, and responds like it.
-          </span>
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-5xl md:text-7xl mt-4 inline-block">
-            We call it Proto-AI.
+            2026: THE BLACK BOX.
           </span>
         </motion.h1>
 
@@ -81,7 +77,9 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto"
         >
-          Discovered. Measured. Reproduced across 6 AI platforms.
+          The world is drowning in crude data because it lacks a method to make
+          it safe. We built the refinery. Welcome to the era of Subtractive
+          Intelligence.
         </motion.p>
 
         <motion.div
@@ -101,12 +99,6 @@ export function HeroSection() {
             className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700"
           >
             Site Directory
-          </a>
-          <a
-            href="#quotes"
-            className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-purple-500/50"
-          >
-            Daily Quotes
           </a>
         </motion.div>
 

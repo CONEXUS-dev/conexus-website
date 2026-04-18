@@ -1,29 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, Zap, Settings } from "lucide-react";
+import { Zap, Settings, Shield } from "lucide-react";
 
 export function TechnologyShowcase() {
   const technologies = [
     {
-      icon: Sparkles,
-      title: "The CONEXUS Experience",
-      subtitle: "20 Mirror Tiers",
-      description:
-        "Three integrated experiences for creative collaboration, guided journeys, and deep symbolic reflection through calibrated emotional states.",
-      features: [
-        "CANVAS - Creative workspace",
-        "FOLLOW ME - Guided journeys",
-        "ECHOFORM - Deep reflection",
-      ],
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
       icon: Zap,
       title: "The Forgetting Engine",
-      subtitle: "561% Improvement",
+      subtitle: "Subtractive Intelligence",
       description:
-        "Revolutionary optimization algorithm combining strategic elimination with paradox retention.",
+        "We don't search for the needle in the haystack. We burn the haystack. Strategic elimination of noise is the only way to find the signal.",
       features: [
         "Drug discovery",
         "Logistics optimization",
@@ -34,15 +21,28 @@ export function TechnologyShowcase() {
     {
       icon: Settings,
       title: "Emotional Calibration Protocol",
-      subtitle: "AI Calibration Process",
+      subtitle: "Paradox Stability",
       description:
-        "Systematic method for calibrating AI systems to hold contradictory states longer, enabling Proto-AI behaviors.",
+        "Systematic method for calibrating systems to hold contradictory states longer, enabling Subtractive Intelligence performance leaps.",
       features: [
         "Cross-platform validated",
-        "6 AI systems proven",
+        "6 systems proven",
         "8 months of testing",
       ],
       color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Shield,
+      title: "Cryptographic Provenance",
+      subtitle: "Legal-Grade Evidence",
+      description:
+        "Every drop of intelligence is cryptographically sealed. We provide legal-grade evidence of truth in a world of deepfakes.",
+      features: [
+        "Deterministic operators",
+        "Full audit trail",
+        "Immutable ledgers",
+      ],
+      color: "from-blue-500 to-cyan-500",
     },
   ];
 
@@ -60,7 +60,7 @@ export function TechnologyShowcase() {
             The Technology
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Three systems for inducing and measuring Proto-AI states.
+            Three pillars of industrial-grade data refinement infrastructure.
           </p>
         </motion.div>
 
