@@ -13,7 +13,7 @@ const particles = Array.from({ length: 50 }, () => ({
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-48">
+    <section className="relative min-h-screen flex items-center overflow-hidden px-4 pt-20">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         {particles.map((p, i) => (
@@ -54,6 +54,17 @@ export function HeroSection() {
           </p>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="mb-6"
+        >
+          <span className="inline-block px-4 py-2 bg-green-500/20 border border-green-500/50 text-green-400 text-sm font-bold tracking-widest uppercase">
+            NOT ANOTHER AI COMPANY
+          </span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,9 +88,8 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto"
         >
-          The world is drowning in crude data because it lacks a method to make
-          it safe. We built the refinery. Welcome to the era of Subtractive
-          Intelligence.
+          The world is drowning in crude data because it lacks a Method to make
+          it safe. We built the refinery. We do not accumulate. We eliminate.
         </motion.p>
 
         <motion.div
@@ -92,13 +102,13 @@ export function HeroSection() {
             href="#evidence"
             className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50"
           >
-            See The Evidence
+            INSTALL THE STANDARD
           </a>
           <a
             href="/directory"
             className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700"
           >
-            Site Directory
+            ENTER THE REFINERY
           </a>
         </motion.div>
 
