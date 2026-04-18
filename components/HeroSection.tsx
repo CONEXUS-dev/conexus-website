@@ -61,7 +61,7 @@ export function HeroSection() {
           className="mb-6"
         >
           <span className="inline-block px-4 py-2 bg-green-500/20 border border-green-500/50 text-green-400 text-sm font-bold tracking-widest uppercase">
-            NOT ANOTHER AI COMPANY
+            NOT ANOTHER AI COMPANY. The Solution.
           </span>
         </motion.div>
 
