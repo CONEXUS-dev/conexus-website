@@ -36,6 +36,10 @@ export default function DiscoveryStory() {
             className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
             Found 3 Planets NASA Missed
+            <br />
+            <span className="text-2xl md:text-4xl text-green-400">
+              in Their Own Public Data
+            </span>
           </motion.h2>
 
           <motion.p
@@ -55,8 +59,10 @@ export default function DiscoveryStory() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-lg text-slate-300 mb-12 max-w-3xl mx-auto"
           >
-            A new approach to solving impossible problems. By forgetting wrong answers instead of searching for right ones, 
-            I discovered planets NASA's algorithms overlooked and solved a 79-year-old computational challenge.
+            A new approach to solving impossible problems. By forgetting wrong
+            answers instead of searching for right ones, I discovered planets
+            NASA's algorithms overlooked and solved a 79-year-old computational
+            challenge.
           </motion.p>
 
           <motion.div
