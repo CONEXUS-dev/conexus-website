@@ -385,16 +385,6 @@ export function RefineryNarrative() {
             <br />
             It is true again now.
           </p>
-
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-5xl md:text-7xl font-bold text-green-400 text-center mt-16"
-          >
-            THE SPILL IS OVER.
-          </motion.h2>
         </motion.div>
       </div>
     </section>
