@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 
 export function RefineryNarrative() {
   return (
-    <section className="relative min-h-screen py-20 px-4 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-      <div className="relative z-10 max-w-4xl mx-auto">
+    <section className="py-20 px-4 bg-gradient-to-b from-green-950/20 to-transparent">
+      <div className="max-w-6xl mx-auto">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -22,7 +23,8 @@ export function RefineryNarrative() {
         {/* Image 1: OIL/AI/REFINER OVERVIEW */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mb-16"
         >
@@ -39,9 +41,10 @@ export function RefineryNarrative() {
         {/* Section 1: Pennsylvania 1859 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-16"
+          className="mb-16 max-w-4xl mx-auto"
         >
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
             You know what oil is.
@@ -59,8 +62,8 @@ export function RefineryNarrative() {
             It was a mess.
             <br />
             A rush.
-            <br />
-            A black flood people knew was valuable long before they knew how to live with it.
+            <br />A black flood people knew was valuable long before they knew
+            how to live with it.
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -76,7 +79,8 @@ export function RefineryNarrative() {
             <br />
             Everyone wanted in.
             <br />
-            The future had arrived in liquid form, and it was volatile, filthy, and barely understood.
+            The future had arrived in liquid form, and it was volatile, filthy,
+            and barely understood.
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -90,7 +94,8 @@ export function RefineryNarrative() {
             <br />
             Storage burned.
             <br />
-            Promise turned into danger faster than they could build the guardrails.
+            Promise turned into danger faster than they could build the
+            guardrails.
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
@@ -117,7 +122,9 @@ export function RefineryNarrative() {
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
             The boom knew it was valuable.
             <br />
-            <span className="text-green-400 font-bold">He knew it had to be refined.</span>
+            <span className="text-green-400 font-bold">
+              He knew it had to be refined.
+            </span>
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
@@ -132,7 +139,8 @@ export function RefineryNarrative() {
         {/* Divider */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="w-full h-px bg-slate-700 mb-16"
         />
@@ -140,9 +148,10 @@ export function RefineryNarrative() {
         {/* THE PIVOT */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16"
+          className="mb-16 max-w-4xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
             THE PIVOT
@@ -156,7 +165,8 @@ export function RefineryNarrative() {
               className="w-full h-auto rounded-lg shadow-2xl"
             />
             <p className="text-slate-500 text-sm text-center mt-2 italic">
-              THE SCALE - 1 Trillion Billions / 850 Million Years / $4 Trillion / 1,000x Growth
+              THE SCALE - 1 Trillion Billions / 850 Million Years / $4 Trillion
+              / 1,000x Growth
             </p>
           </div>
 
@@ -188,13 +198,16 @@ export function RefineryNarrative() {
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            <span className="text-red-400 font-bold">Mythology is a terrible way to introduce a technology.</span>
+            <span className="text-red-400 font-bold">
+              Mythology is a terrible way to introduce a technology.
+            </span>
           </p>
 
           <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
             Because while the world is busy reacting to a word,
             <br />
-            The thing underneath it has become the most powerful raw material in human history.
+            The thing underneath it has become the most powerful raw material in
+            human history.
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
@@ -216,7 +229,9 @@ export function RefineryNarrative() {
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            <span className="text-green-400 font-bold">That is the new crude.</span>
+            <span className="text-green-400 font-bold">
+              That is the new crude.
+            </span>
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
@@ -244,7 +259,9 @@ export function RefineryNarrative() {
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            <span className="text-red-400 font-bold">They are handing you crude and telling you it's finished.</span>
+            <span className="text-red-400 font-bold">
+              They are handing you crude and telling you it's finished.
+            </span>
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
@@ -255,7 +272,8 @@ export function RefineryNarrative() {
         {/* Divider */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="w-full h-px bg-slate-700 mb-16"
         />
@@ -263,9 +281,10 @@ export function RefineryNarrative() {
         {/* THE VERDICT */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mb-16"
+          className="mb-16 max-w-4xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
             THE VERDICT
@@ -284,7 +303,8 @@ export function RefineryNarrative() {
           </div>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            That is where <span className="text-green-400 font-bold">CONEXUS</span> begins.
+            That is where{" "}
+            <span className="text-green-400 font-bold">CONEXUS</span> begins.
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
@@ -320,7 +340,9 @@ export function RefineryNarrative() {
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
             The world does not need another well.
             <br />
-            <span className="text-green-400 font-bold">It needs a refinery.</span>
+            <span className="text-green-400 font-bold">
+              It needs a refinery.
+            </span>
           </p>
 
           <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
@@ -332,7 +354,9 @@ export function RefineryNarrative() {
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            <span className="text-red-400 font-bold">Raw power is not the breakthrough.</span>
+            <span className="text-red-400 font-bold">
+              Raw power is not the breakthrough.
+            </span>
             <br />
             <span className="text-red-400 font-bold">It never was.</span>
           </p>
@@ -355,7 +379,8 @@ export function RefineryNarrative() {
 
           <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-5xl md:text-7xl font-bold text-green-400 text-center mt-16"
           >
