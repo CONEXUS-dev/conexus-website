@@ -13,7 +13,7 @@ const particles = Array.from({ length: 50 }, () => ({
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden px-4 pt-24">
+    <section className="relative min-h-screen flex items-center overflow-hidden px-4 pt-32">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         {particles.map((p, i) => (
