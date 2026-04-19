@@ -69,33 +69,16 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight max-w-5xl mx-auto"
+          className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight max-w-5xl mx-auto"
         >
-          THE SPILL IS OVER.
-          <br />
-          <span className="text-slate-300 text-4xl md:text-6xl">
-            1863: THE WELL.
-          </span>
-          <br />
-          <span className="text-slate-300 text-4xl md:text-6xl">
-            2026: THE BLACK BOX.
-          </span>
+          The world is drowning in crude data because it lacks a Method to make
+          it safe. We built the refinery. We do not accumulate. We eliminate.
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-slate-400 mb-4 max-w-3xl mx-auto"
-        >
-          The world is drowning in crude data because it lacks a Method to make
-          it safe. We built the refinery. We do not accumulate. We eliminate.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
           className="text-lg md:text-xl text-green-400 font-semibold mb-12 max-w-3xl mx-auto tracking-wide"
         >
           We do not Celebrate. We Validate.
@@ -108,7 +91,7 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
         >
           <a
-            href="#evidence"
+            href="/refinery"
             className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50"
           >
             INSTALL THE STANDARD
