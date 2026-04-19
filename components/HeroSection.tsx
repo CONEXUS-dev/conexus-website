@@ -91,12 +91,6 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
         >
           <a
-            href="/refinery"
-            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-blue-500/50"
-          >
-            INSTALL THE STANDARD
-          </a>
-          <a
             href="/directory"
             className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700"
           >
