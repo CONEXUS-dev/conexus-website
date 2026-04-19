@@ -86,10 +86,6 @@ export function RefineryNarrative() {
             and barely understood.
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            1863.
-          </h2>
-
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             For more than a decade, people built towns around a tragedy.
             <br />
@@ -101,6 +97,10 @@ export function RefineryNarrative() {
             guardrails.
           </p>
 
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            1863.
+          </h2>
+
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             Then came the turn.
             <br />
@@ -110,9 +110,9 @@ export function RefineryNarrative() {
             The method that made the well usable.
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             Rockefeller.
-          </h2>
+          </p>
 
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             He did not strike the oil.
