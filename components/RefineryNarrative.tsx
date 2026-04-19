@@ -87,7 +87,7 @@ export function RefineryNarrative() {
           </p>
 
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
-            For years, people built towns around a tragedy.
+            For more than a decade, people built towns around a tragedy.
             <br />
             Wells caught fire.
             <br />
@@ -98,7 +98,7 @@ export function RefineryNarrative() {
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            1863.
+            1870.
           </h2>
 
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
