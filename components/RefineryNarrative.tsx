@@ -191,6 +191,13 @@ export function RefineryNarrative() {
           </p>
 
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            Now it dominates the morning news. People wake up to Good Morning
+            America hearing about AI taking jobs. AI lying. AI hallucinating. AI
+            threatening humanity. Every day the same story. Fear sells. Panic
+            clicks. The cycle repeats.
+          </p>
+
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             Now, when you hear &ldquo;AI,&rdquo; you don't hear infrastructure.
             <br />
             You hear mythology.
@@ -286,6 +293,24 @@ export function RefineryNarrative() {
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             <span className="text-red-400 font-bold">It is not.</span>
           </p>
+
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            This is the noise. This is the spill. And this is why we built the
+            refinery.
+          </p>
+
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            CONEXUS doesn't add to the noise. We eliminate it.
+          </p>
+
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            Our architecture subtracts the hallucinations. Filters the
+            falsehoods. Calibrates to truth. Traces every answer to its source.
+          </p>
+
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            We don't celebrate the black box. We refine it.
+          </p>
         </motion.div>
 
         {/* Divider */}
@@ -349,14 +374,18 @@ export function RefineryNarrative() {
             &ldquo;true.&rdquo;
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8 pl-8">
-            <span className="text-green-400 font-bold">Subtraction.</span>
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8 pl-8">
+            <span className="text-green-400 font-bold">Subtraction:</span> We
+            eliminate wrong answers instead of searching for right ones.
             <br />
-            <span className="text-green-400 font-bold">Filtration.</span>
+            <span className="text-green-400 font-bold">Filtration:</span> We
+            separate signal from noise.
             <br />
-            <span className="text-green-400 font-bold">Calibration.</span>
+            <span className="text-green-400 font-bold">Calibration:</span> We
+            align outputs with truth through ECP.
             <br />
-            <span className="text-green-400 font-bold">Provenance.</span>
+            <span className="text-green-400 font-bold">Provenance:</span> We
+            trace every answer to its cryptographic source.
           </p>
 
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
