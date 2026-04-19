@@ -91,7 +91,7 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
         >
           <a
-            href="/directory"
+            href="/refinery"
             className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700"
           >
             ENTER THE REFINERY
