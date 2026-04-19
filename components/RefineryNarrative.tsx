@@ -247,6 +247,11 @@ export function RefineryNarrative() {
             </span>
           </p>
 
+          <p className="text-base md:text-lg text-slate-400 leading-relaxed mb-8">
+            Zettabytes of compressed human life, growing year after year faster
+            than oil ever did.
+          </p>
+
           <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             And just like the early boom years,
             <br />
