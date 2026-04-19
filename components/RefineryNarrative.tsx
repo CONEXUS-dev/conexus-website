@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function RefineryNarrative() {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-green-950/20 to-transparent">
+    <section className="py-20 px-4 pt-32 bg-gradient-to-b from-green-950/20 to-transparent">
       <div className="max-w-6xl mx-auto">
         {/* Title */}
         <motion.div
