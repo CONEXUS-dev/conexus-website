@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function RefineryNarrative() {
   return (
@@ -28,9 +29,11 @@ export function RefineryNarrative() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mb-16"
         >
-          <img
+          <Image
             src="/images/refinery-diagram.png"
             alt="Oil/AI/Refiner Overview"
+            width={1200}
+            height={800}
             className="w-full h-auto rounded-lg shadow-2xl"
           />
           <p className="text-slate-500 text-sm text-center mt-2 italic">
@@ -46,7 +49,7 @@ export function RefineryNarrative() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-16 max-w-4xl mx-auto"
         >
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             You know what oil is.
             <br />
             You pump it.
@@ -56,7 +59,7 @@ export function RefineryNarrative() {
             You live inside the world it built.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-400 leading-relaxed mb-8">
             But when it first broke open, it was not a system.
             <br />
             It was a mess.
@@ -70,7 +73,7 @@ export function RefineryNarrative() {
             Pennsylvania. 1859.
           </h2>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             That was the boom.
             <br />
             Towns sprang up around the wells.
@@ -87,7 +90,7 @@ export function RefineryNarrative() {
             1863.
           </h2>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             For more than a decade, people built towns around a tragedy.
             <br />
             Wells caught fire.
@@ -98,7 +101,7 @@ export function RefineryNarrative() {
             guardrails.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             Then came the turn.
             <br />
             <br />
@@ -111,7 +114,7 @@ export function RefineryNarrative() {
             Rockefeller.
           </h2>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             He did not strike the oil.
             <br />
             He did not invent the well.
@@ -119,7 +122,7 @@ export function RefineryNarrative() {
             He understood what to do with it.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             The boom knew it was valuable.
             <br />
             <span className="text-green-400 font-bold">
@@ -127,7 +130,7 @@ export function RefineryNarrative() {
             </span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             That is the difference between a rush and an industry.
             <br />
             That is the difference between black gold in the dirt
@@ -159,9 +162,11 @@ export function RefineryNarrative() {
 
           {/* Image 2: THE SCALE */}
           <div className="mb-12">
-            <img
+            <Image
               src="/images/crude-ai-refinery-comparison.png"
               alt="The Scale"
+              width={1200}
+              height={800}
               className="w-full h-auto rounded-lg shadow-2xl"
             />
             <p className="text-slate-500 text-sm text-center mt-2 italic">
@@ -170,14 +175,14 @@ export function RefineryNarrative() {
             </p>
           </div>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             The world calls it AI.
             <br />
             <br />
             That is the first problem.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-400 leading-relaxed mb-8">
             The word arrived before the understanding did.
             <br />
             It started in research.
@@ -185,8 +190,8 @@ export function RefineryNarrative() {
             It drifted into fantasy.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            Now, when you hear "AI," you don't hear infrastructure.
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            Now, when you hear &ldquo;AI,&rdquo; you don't hear infrastructure.
             <br />
             You hear mythology.
             <br />
@@ -197,20 +202,20 @@ export function RefineryNarrative() {
             The end of us.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             <span className="text-red-400 font-bold">
               Mythology is a terrible way to introduce a technology.
             </span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-400 leading-relaxed mb-8">
             Because while the world is busy reacting to a word,
             <br />
             The thing underneath it has become the most powerful raw material in
             human history.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             A black box built from compressed human life.
           </p>
 
@@ -228,13 +233,13 @@ export function RefineryNarrative() {
             Signal.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             <span className="text-green-400 font-bold">
               That is the new crude.
             </span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             And just like the early boom years,
             <br />
             Everyone knows it is valuable.
@@ -242,7 +247,7 @@ export function RefineryNarrative() {
             No one knows how to handle it.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             So the pattern repeats.
             <br />
             The rush is on.
@@ -258,13 +263,14 @@ export function RefineryNarrative() {
             Convincing, but not yet dependable where trust actually matters.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             <span className="text-red-400 font-bold">
-              They are handing you crude and telling you it's finished.
+              They&rsquo;re handing you crude and telling you it&rsquo;s
+              finished.
             </span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             <span className="text-red-400 font-bold">It is not.</span>
           </p>
         </motion.div>
@@ -292,9 +298,11 @@ export function RefineryNarrative() {
 
           {/* Image 3: THE METHOD */}
           <div className="mb-12">
-            <img
+            <Image
               src="/images/forgetting-engine.png"
               alt="The Method"
+              width={1200}
+              height={800}
               className="w-full h-auto rounded-lg shadow-2xl"
             />
             <p className="text-slate-500 text-sm text-center mt-2 italic">
@@ -302,29 +310,30 @@ export function RefineryNarrative() {
             </p>
           </div>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             That is where{" "}
             <span className="text-green-400 font-bold">CONEXUS</span> begins.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
-            Not as another "AI" company.
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
+            Not as another &ldquo;AI&rdquo; company.
             <br />
             But as the category that comes after.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             We are not here to drill deeper into the black box.
             <br />
             We are here to refine what comes out of it.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-400 leading-relaxed mb-8">
             Not more worship of raw output.
             <br />
             Not more addiction to accumulation.
             <br />
-            Not the fantasy that "more" automatically means "true."
+            Not the fantasy that &ldquo;more&rdquo; automatically means
+            &ldquo;true.&rdquo;
           </p>
 
           <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8 pl-8">
@@ -337,7 +346,7 @@ export function RefineryNarrative() {
             <span className="text-green-400 font-bold">Provenance.</span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             The world does not need another well.
             <br />
             <span className="text-green-400 font-bold">
@@ -345,7 +354,7 @@ export function RefineryNarrative() {
             </span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-400 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-400 leading-relaxed mb-8">
             Not a promise.
             <br />
             Not another wrapper.
@@ -353,7 +362,7 @@ export function RefineryNarrative() {
             Not a voice pretending the machine is finished.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             <span className="text-red-400 font-bold">
               Raw power is not the breakthrough.
             </span>
@@ -361,7 +370,7 @@ export function RefineryNarrative() {
             <span className="text-red-400 font-bold">It never was.</span>
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             Raw power is the beginning of the problem.
             <br />
             Refinement is what makes it usable.
@@ -371,7 +380,7 @@ export function RefineryNarrative() {
             Refinement is what makes it matter.
           </p>
 
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed mb-8">
             That was true in 1863.
             <br />
             It is true again now.
