@@ -197,6 +197,14 @@ export function RefineryNarrative() {
             <br />
             You hear machines waking up.
             <br />
+            You hear Terminator.
+            <br />
+            You hear The Matrix.
+            <br />
+            You hear Skynet.
+            <br />
+            You hear HAL 9000.
+            <br />
             You hear the end of work.
             <br />
             The end of us.
