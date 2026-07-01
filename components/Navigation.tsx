@@ -15,6 +15,7 @@ export function Navigation() {
     { href: "/atlas-80", label: "Atlas 80" },
     { href: "/the-future", label: "The Future" },
     { href: "/experiences", label: "Experiences" },
+    { href: "/echoform", label: "ECHOform" },
     { href: "/dream-mirror", label: "Dream Mirror" },
     { href: "/verticals", label: "Verticals" },
     { href: "/nairthex", label: "NAiRTHEX" },
@@ -87,6 +88,12 @@ export function Navigation() {
             className="text-slate-300 hover:text-white transition-colors text-base font-medium"
           >
             Experiences
+          </a>
+          <a
+            href="/echoform"
+            className="text-slate-300 hover:text-white transition-colors text-base font-medium"
+          >
+            ECHOform
           </a>
           <a
             href="/dream-mirror"

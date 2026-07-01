@@ -1,0 +1,110 @@
+{
+  "name": "echoform-demo",
+  "version": "1.0.0",
+  "description": "Standalone Vite/Vercel deployment of the CONEXUS ECHOform guided demo",
+  "source_repo": "CONEXUS Replit monorepo — artifacts/conexus/",
+  "target_repo": "CONEXUS-dev/conexus-echoform-demo",
+  "package_type": "standalone-vite-spa",
+  "build_command": "npm run build",
+  "output_directory": "dist",
+  "install_command": "npm install",
+  "framework": "vite",
+  "env_vars_required": [],
+  "backend_dependencies": "none — fully static",
+  "fidelity_mode": "maximum — all demo components verbatim",
+  "source_files": {
+    "verbatim": [
+      "src/main.tsx",
+      "src/index.css",
+      "src/components/EclipseOrb.tsx",
+      "src/components/demo/demo.css",
+      "src/components/demo/demoData.ts",
+      "src/components/demo/demoState.ts",
+      "src/components/demo/DemoIntro.tsx",
+      "src/components/demo/DemoOnboarding.tsx",
+      "src/components/demo/DemoIdentityConfirm.tsx",
+      "src/components/demo/DemoCalibration.tsx",
+      "src/components/demo/DemoLobby.tsx",
+      "src/components/demo/DemoDreamEntry.tsx",
+      "src/components/demo/DemoDreamSelector.tsx",
+      "src/components/demo/DemoProcessing.tsx",
+      "src/components/demo/DemoReveal.tsx",
+      "src/components/demo/DemoChosenMirror.tsx",
+      "src/components/demo/DemoHistory.tsx",
+      "src/components/demo/RitualButton.tsx",
+      "src/components/demo/DreamGallery.tsx",
+      "src/components/demo/DreamCard.tsx",
+      "src/components/demo/SystemFlowDiagram.tsx"
+    ],
+    "modified": [
+      {
+        "file": "src/pages/Demo.tsx",
+        "change": "PasscodeGate import removed; export wrapper changed from PasscodeGate to direct DemoShell"
+      },
+      {
+        "file": "index.html",
+        "change": "title and robots meta updated; all Google Fonts links preserved verbatim"
+      }
+    ],
+    "new": [
+      "src/App.tsx",
+      "package.json",
+      "vite.config.ts",
+      "tsconfig.json",
+      "vercel.json",
+      "README_DEPLOY.md",
+      "FIDELITY_AUDIT.md",
+      "PACKAGE_MANIFEST.json"
+    ],
+    "excluded": [
+      "src/components/demo/PasscodeGate.tsx",
+      "src/components/demo/LiveDemoPanel.tsx",
+      "src/pages/Journal.tsx",
+      "src/pages/Lobby.tsx",
+      "src/pages/Onboarding.tsx",
+      "src/pages/not-found.tsx",
+      "src/lib/",
+      "src/hooks/",
+      "src/components/ui/"
+    ]
+  },
+  "assets": {
+    "images": [
+      "public/eclipse-orb.png",
+      "public/echoform-mirror-hall-lobby.png",
+      "public/demo/tier_01_infinite_cosmic_unity.png",
+      "public/demo/tier_02_journey_of_symbols.png",
+      "public/demo/tier_02_universal_expansion_of_self.png",
+      "public/demo/tier_06_echoes_of_unseen_presence.png",
+      "public/demo/tier_06_haunting_search.png",
+      "public/demo/tier_07_portal_to_light.png",
+      "public/demo/tier_07_threshold_of_riddles.png",
+      "public/demo/tier_08_Illuminated_Self_Knowing.png",
+      "public/demo/tier_09_golden_nostalgic_return.png",
+      "public/demo/tier_10_warmth_in_solitude.png",
+      "public/demo/tier_12_boundless_cosmic_belonging.png",
+      "public/demo/tier_15_the_worth_mirror.png",
+      "public/demo/tier_18_paradox_of_insight.png",
+      "public/demo/tier_19_Dual_Faces_of_Self_Acceptance.png",
+      "public/demo/tier_20_edge_of_certainty.png"
+    ],
+    "total_images": 17
+  },
+  "dependency_counts": {
+    "runtime": 2,
+    "dev": 10,
+    "total": 12,
+    "vs_source": "12 standalone vs 60+ in monorepo frontend"
+  },
+  "vercel_config": {
+    "rewrite": "/(.*) → /index.html",
+    "reason": "SPA fallback so direct URL loads and browser refresh work"
+  },
+  "website_doorway": {
+    "recommended": "Doorway A — simple link/button on conexus-website to standalone demo URL",
+    "alternative": "Doorway B — next.config.js redirect from /demo/echoform to standalone URL",
+    "avoid": "Doorway C — rewrite/proxy breaks asset paths across domains",
+    "branch": "echoform-demo-link on CONEXUS-dev/conexus-website",
+    "status": "not-yet-implemented"
+  }
+}

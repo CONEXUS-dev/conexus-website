@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Eye, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
+import { Eye, Sparkles, ArrowRight, ArrowLeft, Play } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import Link from "next/link";
+
+// TODO: Replace with the exact live Vercel standalone demo URL after deployment.
+// Vercel project target: conexus-echoform-demo | Root Directory: echoform-demo
+const DEMO_URL = "https://conexus-echoform-demo.vercel.app";
 
 export default function EchoformPage() {
   const journeyImages = [
@@ -99,18 +103,80 @@ export default function EchoformPage() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-purple-500/50 flex items-center justify-center gap-2"
+            >
+              <Play className="w-5 h-5" />
+              Enter the Dream Mirror
+            </a>
+            <a
               href="#journey"
-              className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-purple-500/50"
+              className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700"
             >
               See The Journey
             </a>
             <Link
               href="/follow-me"
-              className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700 flex items-center gap-2"
+              className="px-8 py-4 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700/50 flex items-center justify-center gap-2"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to Follow Me
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Guided Demo Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-br from-purple-900/30 via-slate-900/60 to-slate-900/60 backdrop-blur-sm border border-purple-500/40 rounded-2xl p-10 md:p-14"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center flex-shrink-0">
+                <Play className="w-5 h-5 text-purple-300" />
+              </div>
+              <span className="text-purple-300 text-sm font-semibold tracking-wider uppercase">
+                Interactive Guided Demo
+              </span>
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              ECHOform Dream Mirror — Guided Demo
+            </h2>
+
+            <p className="text-lg text-slate-300 mb-4 leading-relaxed">
+              Experience a complete ECHOform session with five prepared dreams
+              and real generated mirror reflections.
+            </p>
+
+            <p className="text-base text-slate-400 mb-8 leading-relaxed">
+              The routing, tier scoring, identity handling, and prompt
+              construction are ECP-calibrated. Images are rendered by a
+              foundation image model. No live generation required — this is a
+              proof run with full session fidelity.
+            </p>
+
+            <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-purple-500/30"
+            >
+              <Play className="w-5 h-5" />
+              Enter the Dream Mirror
+              <ArrowRight className="w-5 h-5" />
+            </a>
+
+            <p className="mt-6 text-xs text-slate-600">
+              Opens in a new tab. Standalone demo — no account required.
+            </p>
           </motion.div>
         </div>
       </section>
