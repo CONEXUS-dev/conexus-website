@@ -1,35 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-// lucide-react icons available if needed
+import { ArrowRight, Compass, Filter, Fingerprint } from "lucide-react";
 
-const particles = Array.from({ length: 50 }, () => ({
+const capabilities = [
+  {
+    icon: Compass,
+    title: "Calibrate",
+    description:
+      "ECP and the Nine-Gear architecture change how an AI holds tension before it answers.",
+  },
+  {
+    icon: Filter,
+    title: "Refine",
+    description:
+      "The Forgetting Engine removes what is not useful while preserving what still matters.",
+  },
+  {
+    icon: Fingerprint,
+    title: "Verify",
+    description:
+      "Provenance and audit infrastructure preserve the path behind every important result.",
+  },
+];
+
+const particles = Array.from({ length: 36 }, () => ({
   startLeft: `${Math.random() * 100}%`,
   startTop: `${Math.random() * 100}%`,
   endLeft: `${Math.random() * 100}%`,
   endTop: `${Math.random() * 100}%`,
-  duration: Math.random() * 20 + 10,
+  duration: Math.random() * 20 + 14,
 }));
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden px-4 pt-32">
-      {/* Animated background particles */}
+    <section className="relative overflow-hidden px-4 pb-24 pt-36">
       <div className="absolute inset-0 overflow-hidden">
-        {particles.map((p, i) => (
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.16),transparent_48%)]" />
+        {particles.map((particle, index) => (
           <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-500/30 rounded-full"
-            style={{
-              left: p.startLeft,
-              top: p.startTop,
-            }}
-            animate={{
-              left: p.endLeft,
-              top: p.endTop,
-            }}
+            key={index}
+            className="absolute h-1 w-1 rounded-full bg-blue-400/25"
+            style={{ left: particle.startLeft, top: particle.startTop }}
+            animate={{ left: particle.endLeft, top: particle.endTop }}
             transition={{
-              duration: p.duration,
+              duration: particle.duration,
               repeat: Infinity,
               ease: "linear",
             }}
@@ -37,82 +52,75 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto text-center">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-6 max-w-4xl mx-auto"
+          className="mx-auto max-w-5xl text-center"
         >
-          <p className="text-slate-400 text-lg md:text-xl italic leading-relaxed mb-1">
-            &ldquo;Do I contradict myself? / Very well then I contradict myself,
-            / (I am large, I contain multitudes.)&rdquo;
+          <div className="mb-6 inline-flex rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            AI Calibration • Optimization • Provenance
+          </div>
+
+          <h1 className="mb-7 text-5xl font-bold leading-tight text-white md:text-7xl">
+            AI does not need more data.
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300">
+              It needs a better way to use it.
+            </span>
+          </h1>
+
+          <p className="mx-auto mb-10 max-w-4xl text-xl leading-relaxed text-slate-300 md:text-2xl">
+            CONEXUS builds calibration and optimization infrastructure that
+            changes how AI holds contradiction, eliminates noise, and records
+            the path to a result.
           </p>
-          <p className="text-slate-500 text-sm tracking-wider">
-            &mdash; Walt Whitman
-          </p>
+
+          <div className="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="/#technology"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-8 py-4 font-semibold text-white transition-all hover:bg-blue-700"
+            >
+              Explore the Technology
+              <ArrowRight className="h-5 w-5" />
+            </a>
+            <a
+              href="/evidence"
+              className="rounded-full border border-slate-600 bg-slate-900/60 px-8 py-4 font-semibold text-white transition-all hover:border-blue-400/60 hover:bg-slate-800"
+            >
+              View the Evidence
+            </a>
+            <a
+              href="/nairthex"
+              className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-8 py-4 font-semibold text-emerald-200 transition-all hover:bg-emerald-500/20"
+            >
+              Explore Products
+            </a>
+          </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-6"
-        >
-          <span className="inline-block px-4 py-2 bg-green-500/20 border border-green-500/50 text-green-400 text-sm font-bold tracking-widest uppercase">
-            NOT ANOTHER AI COMPANY. The Solution.
-          </span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight max-w-5xl mx-auto"
-        >
-          The world is drowning in crude data because it lacks a Method to make
-          it safe. We built the refinery. We do not accumulate. We eliminate.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg md:text-xl text-green-400 font-semibold mb-12 max-w-3xl mx-auto tracking-wide"
-        >
-          We do not Celebrate. We Validate.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
-        >
-          <a
-            href="/refinery"
-            className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 border border-slate-700"
-          >
-            ENTER THE REFINERY
-          </a>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-slate-600 rounded-full flex items-start justify-center p-2"
-          >
-            <div className="w-1 h-2 bg-slate-600 rounded-full" />
-          </motion.div>
-        </motion.div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {capabilities.map((capability, index) => {
+            const Icon = capability.icon;
+            return (
+              <motion.article
+                key={capability.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.12 }}
+                className="rounded-2xl border border-slate-700/80 bg-slate-900/55 p-7 backdrop-blur-sm"
+              >
+                <Icon className="mb-5 h-8 w-8 text-cyan-300" />
+                <h2 className="mb-3 text-2xl font-semibold text-white">
+                  {capability.title}
+                </h2>
+                <p className="leading-relaxed text-slate-400">
+                  {capability.description}
+                </p>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
