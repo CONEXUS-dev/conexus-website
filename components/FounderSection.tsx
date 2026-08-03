@@ -51,10 +51,9 @@ export function FounderSection() {
             <p className="text-xl text-cyan-400 mb-6">Founder & CEO</p>
 
             <p className="text-lg text-slate-300 leading-relaxed mb-6 max-w-2xl mx-auto">
-              Inventor of the Emotional Calibration Protocol (ECP) and architect
-              of the Forgetting Engine. Conceived the Complexity Inversion Law
-              after documenting 12,198 emergence events and verifying 17,670
-              computational trials across 6 AI platforms.
+              Inventor of ECP and architect of the Forgetting Engine. Founder of
+              CONEXUS, building calibration, optimization, and provenance systems
+              through controlled experiments and cross-domain computational research.
             </p>
 
             <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-6 mb-8 max-w-xl mx-auto">
