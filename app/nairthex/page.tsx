@@ -2,307 +2,269 @@
 
 import { motion } from "framer-motion";
 import {
-  ArrowLeft,
+  ArrowDown,
+  CheckCircle2,
+  Church,
   ExternalLink,
-  Shield,
-  BookOpen,
-  Mic,
+  HeartHandshake,
   MessageSquare,
-  Lock,
-  Eye,
+  Mic,
+  Shield,
+  XCircle,
 } from "lucide-react";
-import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 
-export default function NairthexPage() {
-  const features = [
-    {
-      icon: MessageSquare,
-      title: "Contemplative Conversation",
-      description:
-        "Guided reflection grounded in Scripture and tradition. The Narthex doesn't preach — it listens, mirrors, and holds space for meaning to emerge.",
-    },
-    {
-      icon: Mic,
-      title: "Voice & Text",
-      description:
-        "Speak or type. Voice input is transcribed via Whisper and processed with the same contemplative care as text. Both modes open the same reflective space.",
-    },
-    {
-      icon: Shield,
-      title: "Sovereign Governance",
-      description:
-        "Powered by the CONEXUS Sovereign engine. Every response is governed by deterministic operators that prevent sycophancy, hold paradox, and preserve theological integrity.",
-    },
-    {
-      icon: Lock,
-      title: "Session-Aware & Private",
-      description:
-        "Each session is isolated with JWT authentication and Redis-backed state. No cross-session data leakage. 4-hour TTL. Full audit trail per session.",
-    },
-    {
-      icon: BookOpen,
-      title: "Biblical Mirror Tiers",
-      description:
-        "A tiered reflection system that deepens over time — from surface acknowledgment to scriptural resonance to paradox-holding contemplation.",
-    },
-    {
-      icon: Eye,
-      title: "Guardrailed & Observable",
-      description:
-        "Built-in guardrails prevent harmful outputs. Every interaction is auditable. The system is transparent about what it is and what it isn't.",
-    },
-  ];
+const APP_URL = "https://the-narthex.onrender.com";
 
+const doctrine = [
+  {
+    icon: HeartHandshake,
+    title: "Presence Before Intervention",
+    description:
+      "Receive the person accurately without immediately trying to convert, diagnose, correct, or resolve them.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Contradiction Without Collapse",
+    description:
+      "Allow doubt, anger, grief, joy, and uncertainty to coexist without forcing a quick answer.",
+  },
+  {
+    icon: Church,
+    title: "Human Authority First",
+    description:
+      "NAiRTHEX never replaces pastors, clinicians, sponsors, or community. It protects the moment before ministry.",
+  },
+];
+
+const capabilities = [
+  {
+    icon: Mic,
+    title: "Voice and Text",
+    description:
+      "Speak freely or type. Both paths enter the same quiet, session-aware conversation.",
+  },
+  {
+    icon: Shield,
+    title: "Governed Reflection",
+    description:
+      "The experience is designed around restraint, boundaries, and respect for the person's stated worldview.",
+  },
+  {
+    icon: Church,
+    title: "Built for the Threshold",
+    description:
+      "A private foyer before ministry, not a replacement for ministry itself.",
+  },
+];
+
+const isList = [
+  "A spiritual reflection aide",
+  "One quiet conversation",
+  "Under human and pastoral authority",
+];
+
+const isNotList = [
+  "Therapy, confession, or clergy",
+  "A diagnostic or advisory tool",
+  "An autonomous AI decision-maker",
+];
+
+export default function NairthexPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <main className="min-h-screen bg-gradient-to-b from-[#17130f] via-[#211b15] to-[#14110e] text-white">
       <Navigation />
 
-      <div className="max-w-6xl mx-auto px-4 pt-28 pb-20">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          Back to Home
-        </Link>
-
-        {/* Hero */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-900/30 border border-amber-700/50 rounded-full text-amber-400 text-sm font-medium mb-6">
-            <BookOpen className="w-4 h-4" />
-            CONEXUS Vertical — Sovereign Contemplative Node
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            NAiRTHEX
-          </h1>
-          <p className="text-2xl text-slate-300 mb-2">
-            Sovereign Contemplative Node by CONEXUS
-          </p>
-          <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-8 italic">
-            A Sovereign Contemplative Node governed by deterministic operators
-            and cryptographic provenance. A contemplative infrastructure for
-            faith communities that holds space through verified truth.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://the-narthex.onrender.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full transition-all text-lg shadow-lg shadow-amber-500/20"
-            >
-              <ExternalLink className="w-5 h-5" />
-              Enter The Narthex
-            </a>
-            <Link
-              href="/observer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all text-lg border border-slate-600"
-            >
-              <Eye className="w-5 h-5" />
-              View Sovereign Observer
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* What is The Narthex */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              What is The Narthex?
-            </h2>
-            <div className="space-y-4 text-lg text-slate-300 leading-relaxed">
-              <p>
-                In church architecture, the <em>narthex</em> is the threshold
-                space — the entryway between the outside world and the sacred
-                interior. You stand there before you commit to entering. It is a
-                place of pause, of preparation, of quiet decision.
-              </p>
-              <p>
-                <strong className="text-white">NAiRTHEX by CONEXUS</strong> is a
-                Sovereign Contemplative Node — a digital narthex designed for
-                faith communities who need contemplative infrastructure governed
-                by deterministic operators. It doesn&apos;t tell you what to
-                think. It holds space for you to think more deeply through
-                verified truth.
-              </p>
-              <p>
-                Unlike conventional chatbots that optimize for user satisfaction
-                and quick resolution, The Narthex is built on CONEXUS Sovereign
-                governance — the same architecture that holds 84 paradoxes
-                without collapsing them. It mirrors this capacity in
-                conversation: sitting with tension, honoring complexity, and
-                refusing to simplify what should remain whole.
-              </p>
+      <section className="relative flex min-h-screen items-center overflow-hidden px-4 pb-20 pt-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,169,110,0.18),transparent_45%)]" />
+        <div className="relative z-10 mx-auto w-full max-w-6xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-200/10 px-4 py-2 text-sm font-medium tracking-wide text-amber-200">
+              <Church className="h-4 w-4" />
+              CONEXUS Product for Faith and Reflection
             </div>
-          </div>
-        </motion.div>
 
-        {/* Design Philosophy */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20 max-w-4xl mx-auto"
-        >
-          <div className="bg-amber-900/10 border border-amber-800/30 rounded-2xl p-8 md:p-12">
-            <h2 className="text-2xl font-bold text-amber-400 mb-6">
-              Design Philosophy
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6 text-slate-300">
-              <div className="space-y-3">
-                <p>Every element must feel calm, spacious, and invitational.</p>
-                <p>Nothing behaves like a call-to-action.</p>
-                <p>Motion feels like ambient light, not UI feedback.</p>
-              </div>
-              <div className="space-y-3">
-                <p>The button is a threshold, not a prompt.</p>
-                <p>Silence and stillness are part of the interface.</p>
-                <p>Text is readable for all ages without becoming loud.</p>
-              </div>
+            <h1 className="mx-auto mb-6 max-w-5xl text-5xl font-bold leading-tight md:text-7xl">
+              NAiRTHEX
+              <span className="mt-3 block text-3xl font-medium text-amber-200 md:text-5xl">
+                A Digital Threshold for Sacred Space
+              </span>
+            </h1>
+
+            <p className="mx-auto mb-10 max-w-3xl text-xl leading-relaxed text-stone-300 md:text-2xl">
+              A private AI reflection companion serving as a quiet foyer before
+              ministry, built on a doctrine of restraint and respect for human
+              authority.
+            </p>
+
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a
+                href={APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-8 py-4 text-lg font-semibold text-stone-950 transition-all hover:bg-amber-400"
+              >
+                <ExternalLink className="h-5 w-5" />
+                Enter NAiRTHEX
+              </a>
+              <a
+                href="#doctrine"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-stone-600 bg-stone-900/40 px-8 py-4 text-lg font-semibold text-stone-200 transition-all hover:border-amber-300/50 hover:text-white"
+              >
+                How It Works
+                <ArrowDown className="h-5 w-5" />
+              </a>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Features */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl font-bold text-white mb-10 text-center">
-            Capabilities
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
+      <section id="doctrine" className="px-4 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">
+              Product Doctrine
+            </p>
+            <h2 className="mb-5 text-4xl font-bold md:text-5xl">
+              The moment before ministry matters.
+            </h2>
+            <p className="text-lg leading-relaxed text-stone-400">
+              NAiRTHEX does not rush a person toward an answer. It creates a
+              quiet threshold where they can speak honestly, remain whole, and
+              decide what human support comes next.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {doctrine.map((item, index) => {
+              const Icon = item.icon;
               return (
-                <motion.div
-                  key={feature.title}
+                <motion.article
+                  key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-slate-800/50 border border-slate-700 rounded-xl p-6"
+                  transition={{ duration: 0.55, delay: index * 0.1 }}
+                  className="rounded-2xl border border-amber-200/15 bg-stone-900/50 p-7"
                 >
-                  <Icon className="w-8 h-8 text-amber-400 mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    {feature.description}
+                  <Icon className="mb-5 h-8 w-8 text-amber-300" />
+                  <h3 className="mb-3 text-xl font-semibold">{item.title}</h3>
+                  <p className="leading-relaxed text-stone-400">
+                    {item.description}
                   </p>
-                </motion.div>
+                </motion.article>
               );
             })}
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* Technical Stack */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl font-bold text-white mb-10 text-center">
-            Technical Architecture
+      <section className="border-y border-stone-800 bg-stone-950/45 px-4 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">
+              Operational Boundaries
+            </p>
+            <h2 className="text-4xl font-bold md:text-5xl">
+              Clear by design.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-400/20 bg-emerald-950/20 p-8">
+              <h3 className="mb-6 text-2xl font-semibold text-emerald-300">
+                NAiRTHEX is
+              </h3>
+              <div className="space-y-4">
+                {isList.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-emerald-400" />
+                    <p className="text-lg text-stone-200">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-rose-400/20 bg-rose-950/20 p-8">
+              <h3 className="mb-6 text-2xl font-semibold text-rose-300">
+                NAiRTHEX is not
+              </h3>
+              <div className="space-y-4">
+                {isNotList.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <XCircle className="mt-0.5 h-6 w-6 shrink-0 text-rose-400" />
+                    <p className="text-lg text-stone-200">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">
+              The Experience
+            </p>
+            <h2 className="mb-5 text-4xl font-bold md:text-5xl">
+              One quiet conversation.
+            </h2>
+            <p className="text-lg leading-relaxed text-stone-400">
+              The interface stays calm, the person stays in control, and the
+              path back to human community remains visible.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {capabilities.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: index * 0.1 }}
+                  className="rounded-2xl border border-stone-700 bg-stone-900/45 p-7"
+                >
+                  <Icon className="mb-5 h-8 w-8 text-amber-300" />
+                  <h3 className="mb-3 text-xl font-semibold">{item.title}</h3>
+                  <p className="leading-relaxed text-stone-400">
+                    {item.description}
+                  </p>
+                </motion.article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-24">
+        <div className="mx-auto max-w-4xl rounded-3xl border border-amber-300/20 bg-gradient-to-br from-amber-950/30 to-stone-950 p-10 text-center md:p-14">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+            Step into the threshold.
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-slate-800/30 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-cyan-400 mb-4">
-                Frontend
-              </h3>
-              <ul className="space-y-2 text-slate-300 text-sm">
-                <li>React + Vite + Tailwind CSS</li>
-                <li>Framer Motion animations</li>
-                <li>Crimson Text + Inter typography</li>
-                <li>Voice input via MediaRecorder API</li>
-                <li>JWT session management</li>
-              </ul>
-            </div>
-            <div className="bg-slate-800/30 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-green-400 mb-4">
-                Backend
-              </h3>
-              <ul className="space-y-2 text-slate-300 text-sm">
-                <li>FastAPI (Python 3.11)</li>
-                <li>Redis-backed session state (4hr TTL)</li>
-                <li>OpenAI Whisper transcription</li>
-                <li>CONEXUS Sovereign governance engine</li>
-                <li>Per-session audit logging</li>
-              </ul>
-            </div>
-            <div className="bg-slate-800/30 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-purple-400 mb-4">
-                Governance
-              </h3>
-              <ul className="space-y-2 text-slate-300 text-sm">
-                <li>Biblical Mirror Tiers (depth-aware reflection)</li>
-                <li>Guardrails against harmful content</li>
-                <li>Anti-sycophancy operators</li>
-                <li>Deterministic veto system</li>
-                <li>Full audit trail per session</li>
-              </ul>
-            </div>
-            <div className="bg-slate-800/30 border border-slate-700 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-amber-400 mb-4">
-                Deployment
-              </h3>
-              <ul className="space-y-2 text-slate-300 text-sm">
-                <li>Hosted on Render (auto-deploy from main)</li>
-                <li>Static frontend served by FastAPI</li>
-                <li>Redis Cloud for session persistence</li>
-                <li>Zero-downtime deployments</li>
-                <li>Continuous integration via GitHub</li>
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <div className="bg-gradient-to-r from-amber-900/20 to-amber-800/10 border border-amber-700/30 rounded-2xl p-12 max-w-3xl mx-auto">
-            <p className="text-2xl text-white font-semibold mb-4">
-              Step into the threshold.
-            </p>
-            <p className="text-slate-400 mb-8">
-              The Narthex is live and waiting. No account required.
-            </p>
-            <a
-              href="https://the-narthex.onrender.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full transition-all text-lg shadow-lg shadow-amber-500/20"
-            >
-              <ExternalLink className="w-5 h-5" />
-              Enter The Narthex
-            </a>
-          </div>
-        </motion.div>
-      </div>
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-stone-400">
+            No account is required. Speak or type, pause when you need to, and
+            leave the conversation whenever you choose.
+          </p>
+          <a
+            href={APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-8 py-4 text-lg font-semibold text-stone-950 transition-all hover:bg-amber-400"
+          >
+            <ExternalLink className="h-5 w-5" />
+            Enter NAiRTHEX
+          </a>
+        </div>
+      </section>
     </main>
   );
 }
