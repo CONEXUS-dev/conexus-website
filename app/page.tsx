@@ -19,10 +19,10 @@ export default function Home() {
       <EvidenceWall />
       <TechnologyShowcase />
       <NairthexFeature />
+      <FounderSection />
       <ComplexityInversion />
       <ComparisonSection />
       <TimelineSection />
-      <FounderSection />
       <CallToAction />
     </main>
   );
