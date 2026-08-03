@@ -44,7 +44,7 @@ const navigationGroups = [
     label: "Company",
     href: "/#team",
     links: [
-      { href: "/#team", label: "About" },
+      { href: "/#team", label: "Founder & Company" },
       { href: "/investors", label: "Investors & Partners" },
       { href: "/directory", label: "Site Directory" },
     ],
