@@ -59,29 +59,32 @@ export function HeroSection() {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-5xl text-center"
         >
-          <div className="mb-6 inline-flex rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
-            AI Calibration • Optimization • Provenance
+          <div className="mb-6 inline-flex rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-300">
+            The CONEXUS Foundation • The Refinery
           </div>
 
           <h1 className="mb-7 text-5xl font-bold leading-tight text-white md:text-7xl">
-            AI does not need more data.
+            The world is drowning in crude data.
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300">
-              It needs a better way to use it.
+              We built the refinery.
             </span>
           </h1>
 
-          <p className="mx-auto mb-10 max-w-4xl text-xl leading-relaxed text-slate-300 md:text-2xl">
-            CONEXUS builds calibration and optimization infrastructure that
-            changes how AI holds contradiction, eliminates noise, and records
-            the path to a result.
+          <p className="mx-auto mb-5 max-w-4xl text-xl leading-relaxed text-slate-300 md:text-2xl">
+            CONEXUS builds the calibration, optimization, and provenance
+            infrastructure that turns raw information into usable intelligence.
+          </p>
+
+          <p className="mx-auto mb-10 max-w-3xl text-lg font-semibold tracking-wide text-emerald-300 md:text-xl">
+            We do not accumulate. We eliminate. We do not celebrate. We validate.
           </p>
 
           <div className="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
             <a
-              href="/#technology"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-8 py-4 font-semibold text-white transition-all hover:bg-blue-700"
+              href="/refinery"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-8 py-4 font-semibold text-white transition-all hover:bg-emerald-700"
             >
-              Explore the Technology
+              Enter the Refinery
               <ArrowRight className="h-5 w-5" />
             </a>
             <a
@@ -92,7 +95,7 @@ export function HeroSection() {
             </a>
             <a
               href="/nairthex"
-              className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-8 py-4 font-semibold text-emerald-200 transition-all hover:bg-emerald-500/20"
+              className="rounded-full border border-blue-500/30 bg-blue-500/10 px-8 py-4 font-semibold text-blue-200 transition-all hover:bg-blue-500/20"
             >
               Explore Products
             </a>
