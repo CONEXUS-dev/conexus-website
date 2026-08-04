@@ -1,157 +1,150 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Navigation } from "@/components/Navigation";
 import Link from "next/link";
-import { Palette, Compass, Sparkles } from "lucide-react";
+import { ArrowRight, Church, MoonStar, ShieldCheck } from "lucide-react";
+import { Navigation } from "@/components/Navigation";
+
+const products = [
+  {
+    title: "NAiRTHEX",
+    subtitle: "A Digital Threshold for Sacred Space",
+    description:
+      "A private voice-and-text reflection companion designed as a quiet foyer before human ministry. It emphasizes restraint, user control, and pastoral authority.",
+    href: "/nairthex",
+    icon: Church,
+    accent: "amber",
+    boundaries: [
+      "Not therapy, confession, or clergy",
+      "Not a diagnostic or autonomous decision tool",
+      "Human support remains primary",
+    ],
+  },
+  {
+    title: "ECHOform",
+    subtitle: "A Symbolic Dream and Reflection Journal",
+    description:
+      "A creative reflection experience that turns a dream or written moment into multiple symbolic perspectives and visual mirror choices.",
+    href: "/echoform",
+    icon: MoonStar,
+    accent: "purple",
+    boundaries: [
+      "Not clinical dream interpretation",
+      "Does not reveal hidden psychological truth",
+      "The user remains the author of meaning",
+    ],
+  },
+];
 
 export default function ExperiencesPage() {
-  const experiences = [
-    {
-      title: "Canvas",
-      subtitle: "Creative Workspace",
-      description:
-        "A collaborative creative environment where ideas flow freely. Build, iterate, and refine your creative projects with AI-assisted tools designed for seamless collaboration.",
-      icon: Palette,
-      href: "/canvas",
-      color: "from-purple-500 to-pink-500",
-      bgGradient: "from-purple-900/20 to-pink-900/20",
-    },
-    {
-      title: "Follow Me",
-      subtitle: "Guided Journeys",
-      description:
-        "Embark on curated emotional journeys through calibrated states. Experience the Sacred Chain where your release becomes someone else's offering.",
-      icon: Compass,
-      href: "/follow-me",
-      color: "from-blue-500 to-cyan-500",
-      bgGradient: "from-blue-900/20 to-cyan-900/20",
-    },
-    {
-      title: "Echoform",
-      subtitle: "Deep Reflection",
-      description:
-        "Explore meaning and becoming through symbolic reflection. A space for profound introspection and understanding your emotional landscape.",
-      icon: Sparkles,
-      href: "/echoform",
-      color: "from-indigo-500 to-purple-500",
-      bgGradient: "from-indigo-900/20 to-purple-900/20",
-    },
-  ];
-
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative pt-48 pb-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 via-transparent to-transparent" />
-
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+      <section className="relative overflow-hidden px-4 pb-20 pt-44">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.15),transparent_48%)]" />
+        <div className="relative z-10 mx-auto max-w-5xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.75 }}
           >
-            <h1 className="text-6xl md:text-8xl font-bold text-white mb-6">
-              The CONEXUS Experience
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">
+              CONEXUS Products
+            </p>
+            <h1 className="mb-7 text-5xl font-bold md:text-7xl">
+              Human-facing experiences with explicit boundaries.
             </h1>
-            <p className="text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 font-bold mb-8">
-              Three Integrated Experiences
-            </p>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Creative collaboration, guided journeys, and deep symbolic
-              reflection through calibrated emotional states.
+            <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300">
+              CONEXUS translates its calibration architecture into reflective
+              products without claiming therapy, diagnosis, spiritual authority,
+              or privileged access to a person's inner truth.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Experiences Grid */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            {experiences.map((experience, index) => {
-              const Icon = experience.icon;
-              return (
-                <motion.div
-                  key={experience.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+      <section className="border-y border-slate-800 px-4 py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
+          {products.map((product, index) => {
+            const Icon = product.icon;
+            const isAmber = product.accent === "amber";
+
+            return (
+              <motion.article
+                key={product.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={`rounded-3xl border p-8 md:p-10 ${
+                  isAmber
+                    ? "border-amber-400/20 bg-amber-950/15"
+                    : "border-violet-400/20 bg-violet-950/15"
+                }`}
+              >
+                <div
+                  className={`mb-6 inline-flex rounded-2xl p-4 ${
+                    isAmber
+                      ? "bg-amber-500/15 text-amber-300"
+                      : "bg-violet-500/15 text-violet-300"
+                  }`}
                 >
-                  <Link href={experience.href}>
-                    <div
-                      className={`group relative bg-gradient-to-br ${experience.bgGradient} backdrop-blur-sm border-2 border-slate-800 hover:border-slate-600 rounded-2xl p-8 h-full transition-all duration-300 hover:scale-105 cursor-pointer`}
-                    >
-                      {/* Icon */}
-                      <div
-                        className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${experience.color} mb-6`}
-                      >
-                        <Icon className="w-8 h-8 text-white" />
-                      </div>
+                  <Icon className="h-9 w-9" />
+                </div>
+                <h2 className="mb-2 text-4xl font-bold">{product.title}</h2>
+                <p
+                  className={`mb-5 text-lg font-semibold ${
+                    isAmber ? "text-amber-300" : "text-violet-300"
+                  }`}
+                >
+                  {product.subtitle}
+                </p>
+                <p className="mb-7 text-lg leading-relaxed text-slate-300">
+                  {product.description}
+                </p>
 
-                      {/* Title */}
-                      <h2
-                        className={`text-3xl font-bold mb-2 bg-gradient-to-r ${experience.color} bg-clip-text text-transparent`}
-                      >
-                        {experience.title}
-                      </h2>
-
-                      {/* Subtitle */}
-                      <p className="text-lg font-semibold text-slate-400 mb-4">
-                        {experience.subtitle}
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-slate-300 leading-relaxed mb-6">
-                        {experience.description}
-                      </p>
-
-                      {/* CTA */}
-                      <div className="flex items-center gap-2 text-white font-semibold group-hover:gap-4 transition-all">
-                        <span>Explore</span>
-                        <span className="text-2xl">→</span>
-                      </div>
-
-                      {/* Hover Glow Effect */}
-                      <div
-                        className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${experience.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                <div className="mb-8 space-y-3 border-t border-slate-700 pt-6">
+                  {product.boundaries.map((boundary) => (
+                    <div key={boundary} className="flex items-start gap-3">
+                      <ShieldCheck
+                        className={`mt-0.5 h-5 w-5 shrink-0 ${
+                          isAmber ? "text-amber-300" : "text-violet-300"
+                        }`}
                       />
+                      <p className="text-slate-400">{boundary}</p>
                     </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
+                  ))}
+                </div>
+
+                <Link
+                  href={product.href}
+                  className={`inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-semibold text-slate-950 transition ${
+                    isAmber
+                      ? "bg-amber-400 hover:bg-amber-300"
+                      : "bg-violet-400 hover:bg-violet-300"
+                  }`}
+                >
+                  Explore {product.title}
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </motion.article>
+            );
+          })}
         </div>
       </section>
 
-      {/* Additional Info Section */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-slate-900/50 border-2 border-slate-800 rounded-2xl p-10"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              20 Mirror Tiers
-            </h2>
-            <p className="text-xl text-slate-300 leading-relaxed mb-8">
-              Each experience is calibrated through our proprietary Emotional
-              Calibration Protocol (ECP), creating a unique journey tailored to
-              your emotional state and creative needs.
-            </p>
-            <Link
-              href="/#technology"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold rounded-full transition-all transform hover:scale-105"
-            >
-              Learn About the Technology
-            </Link>
-          </motion.div>
+      <section className="px-4 py-24">
+        <div className="mx-auto max-w-4xl rounded-3xl border border-slate-700 bg-slate-900/55 p-10 text-center md:p-14">
+          <ShieldCheck className="mx-auto mb-5 h-10 w-10 text-cyan-300" />
+          <h2 className="mb-5 text-3xl font-bold md:text-4xl">
+            Reflection remains an invitation, not a verdict.
+          </h2>
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-300">
+            Product outputs are prompts for personal interpretation. They should
+            not be treated as medical, psychological, legal, financial, or
+            spiritual advice.
+          </p>
         </div>
       </section>
     </main>
