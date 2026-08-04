@@ -9,18 +9,18 @@ export function ComparisonSection() {
   const comparisons = [
     {
       src: "/How ECP AI Behave.png",
-      alt: "How ECP Alters AI Behavior",
-      title: "ECP Transformation",
+      alt: "Conceptual visualization of how ECP may alter AI search behavior",
+      title: "ECP Behavior Model",
     },
     {
       src: "/landing-diagrams/Normal AI or CONEXUS AI.png",
-      alt: "Normal AI vs CONEXUS AI",
-      title: "The Difference",
+      alt: "Conceptual comparison of standard prompting and CONEXUS calibration",
+      title: "Design Comparison",
     },
     {
       src: "/landing-diagrams/Which Mirror Do You Want To Meet.png",
-      alt: "Which Mirror Do You Want To Meet",
-      title: "Your Choice",
+      alt: "Conceptual mirror-selection experience",
+      title: "Mirror Experience",
     },
   ];
 
@@ -38,15 +38,16 @@ export function ComparisonSection() {
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
             The CONEXUS Difference
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            See how Proto-AI transforms AI behavior
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+            Visual models for the interaction patterns and search behaviors
+            CONEXUS is testing.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {comparisons.map((comparison, index) => (
             <motion.div
-              key={index}
+              key={comparison.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -70,7 +71,6 @@ export function ComparisonSection() {
           ))}
         </div>
 
-        {/* REFLECT Concept — Link to Verticals */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export function ComparisonSection() {
             <div className="relative aspect-[21/9]">
               <Image
                 src="/landing-diagrams/REFLECT-concept.png"
-                alt="REFLECT — Resonant Emotional Framework for Listening, Empathy, Compassionate Transformation"
+                alt="REFLECT concept for a human-governed support and reflection framework"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -95,7 +95,7 @@ export function ComparisonSection() {
                 Explore CONEXUS Verticals
               </h3>
               <p className="text-slate-400 text-sm italic">
-                Concept image — REFLECT trauma recovery
+                Concept image - REFLECT support and reflection framework
               </p>
             </div>
           </Link>
