@@ -19,8 +19,8 @@ const navigationGroups = [
     href: "/evidence",
     links: [
       { href: "/evidence", label: "Evidence Overview" },
-      { href: "/ecp-experiment", label: "ECP Experiments" },
-      { href: "/vrp", label: "Domain Validation" },
+      { href: "/evidence#four-arm", label: "Four-Arm Validation" },
+      { href: "/evidence#forgetting-engine", label: "Optimization Benchmarks" },
     ],
   },
   {
@@ -35,9 +35,9 @@ const navigationGroups = [
     label: "Research",
     href: "/observer",
     links: [
-      { href: "/observer", label: "Sovereign Observer" },
-      { href: "/atlas-80", label: "Atlas 80" },
-      { href: "/the-future", label: "The Future" },
+      { href: "/observer", label: "Offline Observer Record" },
+      { href: "/atlas-80", label: "Atlas 80 Creative Artifact" },
+      { href: "/the-future", label: "Speculative Notebook" },
     ],
   },
   {

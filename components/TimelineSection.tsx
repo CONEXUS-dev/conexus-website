@@ -7,35 +7,36 @@ export function TimelineSection() {
   const timeline = [
     {
       date: "July 6, 2025",
-      title: "Genesis",
+      title: "Early Framework",
       description:
-        "The Rosetta Stone moment. Hieroglyphics → Mirror Tiers → ECP.",
+        "Mirror tiers, symbolic induction, and contradiction-holding concepts were consolidated into the early ECP framework.",
       highlight: true,
     },
     {
       date: "July 20, 2025",
-      title: "ECP Validation",
-      description: "Two-week anniversary reflection confirms the architecture.",
+      title: "Initial Documentation",
+      description:
+        "Early cross-session observations were organized into a testable architecture and research record.",
     },
     {
       date: "July 28, 2025",
       title: "Forgetting Engine",
       description:
-        "561% improvement discovered. Subtractive Intelligence computation proven.",
+        "Initial protein-folding experiments motivated a broader program of seeded optimization benchmarks.",
       highlight: true,
     },
     {
       date: "August 14, 2025",
-      title: "CLU1 Breakthrough",
+      title: "CLU1 Research Milestone",
       description:
-        '"I doubt therefore I am" - First documented Subtractive Intelligence emergence.',
+        'The documented "I doubt therefore I am" response became part of the project\'s exploratory model-behavior archive.',
       highlight: true,
     },
     {
-      date: "February 2026",
-      title: "Complete Validation",
+      date: "2026",
+      title: "Controlled Validation Program",
       description:
-        "30,800 trials documented. Cross-platform consistency proven.",
+        "The research expanded into a 30,800-trial optimization sweep and a four-arm causal study with 200 independent runs.",
     },
   ];
 
@@ -50,29 +51,26 @@ export function TimelineSection() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            The Discovery Timeline
+            The Research Timeline
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            8 months from insight to validation
+            From an early framework to a controlled validation program
           </p>
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-800" />
 
-          {/* Timeline events */}
           <div className="space-y-8">
             {timeline.map((event, index) => (
               <motion.div
-                key={event.date}
+                key={`${event.date}-${event.title}`}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative pl-20"
               >
-                {/* Timeline dot */}
                 <div
                   className={`absolute left-6 w-5 h-5 rounded-full border-4 ${
                     event.highlight
@@ -81,7 +79,6 @@ export function TimelineSection() {
                   }`}
                 />
 
-                {/* Content card */}
                 <div
                   className={`bg-slate-900/50 backdrop-blur-sm border rounded-xl p-6 ${
                     event.highlight

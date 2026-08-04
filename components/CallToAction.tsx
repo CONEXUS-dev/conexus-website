@@ -15,16 +15,15 @@ export function CallToAction() {
           className="text-center"
         >
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Proto-AI isn't magic.
+            Evidence, not spectacle.
           </h2>
           <p className="text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-8">
-            It's measurable. Reproducible. Real.
+            Measurable. Testable. Documented.
           </p>
           <p className="text-2xl text-slate-300 mb-12">
-            And we have the evidence.
+            Methods, results, and limitations are available for review.
           </p>
 
-          {/* Download buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <motion.a
               whileHover={{ scale: 1.05 }}
@@ -46,7 +45,6 @@ export function CallToAction() {
             </motion.a>
           </div>
 
-          {/* Contact section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +67,6 @@ export function CallToAction() {
             </a>
           </motion.div>
 
-          {/* Footer stats */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -79,31 +76,34 @@ export function CallToAction() {
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-3xl font-bold text-blue-400 mb-1">
-                  12,198
+                <div className="text-3xl font-bold text-blue-400 mb-1">200</div>
+                <div className="text-sm text-slate-500">Independent Runs</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-400 mb-1">4</div>
+                <div className="text-sm text-slate-500">Causal Conditions</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-purple-400 mb-1">
+                  d=3.78
                 </div>
-                <div className="text-sm text-slate-500">Events</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-green-400 mb-1">
-                  561%
+                <div className="text-sm text-slate-500">
+                  Neutral to CONEXUS
                 </div>
-                <div className="text-sm text-slate-500">Improvement</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-purple-400 mb-1">6</div>
-                <div className="text-sm text-slate-500">Platforms</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-amber-400 mb-1">8</div>
-                <div className="text-sm text-slate-500">Patents</div>
+                <div className="text-3xl font-bold text-amber-400 mb-1">
+                  30,800
+                </div>
+                <div className="text-sm text-slate-500">
+                  Optimization Trials
+                </div>
               </div>
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Footer */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -113,7 +113,7 @@ export function CallToAction() {
       >
         <p>© 2026 CONEXUS. All rights reserved.</p>
         <p className="mt-2">
-          Derek Angell | The Discovery That Changes Everything
+          Derek Angell | Founder | Calibration, Optimization, and Provenance
         </p>
       </motion.div>
     </section>

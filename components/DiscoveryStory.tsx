@@ -49,13 +49,16 @@ export default function DiscoveryStory() {
           </div>
 
           <h2 className="mb-6 text-4xl font-bold leading-tight text-white md:text-6xl">
-            Architecture, not token priming,
-            <span className="block text-cyan-300">drove the expansion.</span>
+            The full architecture produced
+            <span className="block text-cyan-300">
+              the largest measured shift.
+            </span>
           </h2>
 
           <p className="text-xl leading-relaxed text-slate-300">
             Two hundred independent runs across four controlled conditions
-            isolated the mechanism behind CONEXUS semantic expansion.
+            separated the contribution of token exposure, multi-turn prompting,
+            and the complete contradiction-holding architecture.
           </p>
         </motion.div>
 
@@ -74,7 +77,7 @@ export default function DiscoveryStory() {
           >
             <Image
               src="/images/evidence/conexus-geometric-proof.webp"
-              alt="CONEXUS four-arm causal validation infographic showing architecture-driven expansion"
+              alt="CONEXUS four-arm causal validation infographic showing the measured differences among four conditions"
               width={1143}
               height={2048}
               className="h-auto max-h-[900px] w-full object-contain"
@@ -82,8 +85,9 @@ export default function DiscoveryStory() {
             />
           </a>
           <figcaption className="px-3 pb-2 pt-4 text-center text-sm leading-relaxed text-slate-400">
-            The four controlled conditions separate prompt length, token exposure,
-            and paradox-holding architecture. Select the image to view it at full size.
+            The four conditions test prompt format, token exposure, and the full
+            paradox-holding architecture. Select the image to view it at full
+            size.
           </figcaption>
         </motion.figure>
 
@@ -115,11 +119,13 @@ export default function DiscoveryStory() {
           >
             <p className="mb-2 text-4xl font-bold text-cyan-300">39.9%</p>
             <h3 className="mb-3 text-xl font-semibold text-white">
-              Idea-level variance expansion
+              Descriptive idea-level shift
             </h3>
             <p className="leading-relaxed text-slate-400">
-              The initial two-arm analysis showed a 39.9242% shift in latent
-              exploratory variance without evidence of noise inflation.
+              The initial two-arm pass showed 39.9242% higher latent variance.
+              The Levene variance test was not statistically significant
+              (p = 0.304), so this is reported as a descriptive result rather
+              than the primary causal finding.
             </p>
           </motion.article>
 
@@ -135,8 +141,9 @@ export default function DiscoveryStory() {
               Neutral to CONEXUS
             </h3>
             <p className="leading-relaxed text-slate-400">
-              The length-matched analytical condition compressed search while
-              the full paradox-holding architecture expanded it.
+              At the independent run level, the CONEXUS condition had a higher
+              mean semantic distance than the neutral multi-turn condition
+              (Welch p = 2.97e-32; bootstrap interval excluded zero).
             </p>
           </motion.article>
 
@@ -149,11 +156,12 @@ export default function DiscoveryStory() {
           >
             <p className="mb-2 text-4xl font-bold text-slate-200">p = 0.361</p>
             <h3 className="mb-3 text-xl font-semibold text-white">
-              Tokens alone did not work
+              No token-only difference detected
             </h3>
             <p className="leading-relaxed text-slate-400">
-              Arm 4a was statistically indistinguishable from the neutral
-              condition, isolating structure rather than emoji exposure.
+              The token-only arm was not statistically distinguishable from the
+              neutral condition, which weighs against emoji exposure alone as
+              the explanation for the measured effect.
             </p>
           </motion.article>
         </div>
@@ -165,10 +173,10 @@ export default function DiscoveryStory() {
           className="mt-12 text-center"
         >
           <p className="mx-auto mb-8 max-w-4xl text-lg leading-relaxed text-slate-300">
-            The supported causal interpretation is precise: the active
-            ingredient was the simultaneous unresolved contradiction held
-            across the Nine-Gear sequence, not prompt length, multi-turn format,
-            or unusual tokens alone.
+            Within this model, task, and configuration, the complete
+            contradiction-holding sequence best explains the observed run-level
+            semantic expansion. Replication on additional models and tasks is
+            required before making broader general claims.
           </p>
           <Link
             href="/evidence"
