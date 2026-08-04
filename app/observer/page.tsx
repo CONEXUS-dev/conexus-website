@@ -1,20 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ScatterChart,
+  CartesianGrid,
+  ResponsiveContainer,
   Scatter,
-  Cell,
+  ScatterChart,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  LineChart,
-  Line,
 } from "recharts";
-import { ArrowLeft, Activity, Shield, Hash } from "lucide-react";
+import { ArrowLeft, Database, Hash, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 const SEALED_HASH =
@@ -32,87 +29,93 @@ interface ParadoxData {
   anomaly_type?: string;
 }
 
+const passes = [
+  {
+    name: "Pass 1",
+    file: "/sovereign-data/v5_pass1_summary.json",
+    hash: "3d2e8ccfcaec9f6e4bbabfc3c996aae88662939c8c35a66defc49efb0a23128e",
+  },
+  {
+    name: "Pass 2",
+    file: "/sovereign-data/v5_pass2_summary.json",
+    hash: "64450f6d4ddc67b1c7a5655924270f5130fbdcf90a3b94efbae29f8adef134f6",
+  },
+  {
+    name: "Pass 3",
+    file: "/sovereign-data/v5_pass3_summary.json",
+    hash: SEALED_HASH,
+  },
+  {
+    name: "Final",
+    file: "/sovereign-data/v5_final_summary.json",
+    hash: SEALED_HASH,
+  },
+];
+
+function numberOrZero(value: unknown): number {
+  return typeof value === "number" && Number.isFinite(value) ? value : 0;
+}
+
 export default function ObserverDashboard() {
   const [selectedPass, setSelectedPass] = useState(3);
   const [paradoxes, setParadoxes] = useState<ParadoxData[]>([]);
-  const [selectedParadox, setSelectedParadox] = useState<ParadoxData | null>(
-    null,
-  );
+  const [selectedParadox, setSelectedParadox] = useState<ParadoxData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadPassData = async () => {
       setLoading(true);
+      setError(null);
+      setSelectedParadox(null);
+
       try {
-        let data;
+        const response = await fetch(passes[selectedPass].file, {
+          cache: "force-cache",
+        });
 
-        if (selectedPass === 0) {
-          const response = await fetch("/sovereign-data/v5_pass1_summary.json");
-          data = await response.json();
-        } else if (selectedPass === 1) {
-          const response = await fetch("/sovereign-data/v5_pass2_summary.json");
-          data = await response.json();
-        } else if (selectedPass === 2) {
-          const response = await fetch("/sovereign-data/v5_pass3_summary.json");
-          data = await response.json();
-        } else {
-          const response = await fetch("/sovereign-data/v5_final_summary.json");
-          data = await response.json();
+        if (!response.ok) {
+          throw new Error(`Data file returned HTTP ${response.status}`);
         }
 
-        if (data && data.paradoxes) {
-          // Deterministic jitter using paradox index to spread overlapping dots
-          const seededRandom = (seed: number) => {
-            const x = Math.sin(seed * 9301 + 49297) * 233280;
-            return x - Math.floor(x);
-          };
-
-          const processedParadoxes = data.paradoxes.map(
-            (p: any, i: number) => ({
-              id: p.id,
-              entropy: (p.entropy || 0.8) + (seededRandom(i) - 0.5) * 0.02,
-              pole_balance: p.pole_balance || 0.5,
-              chaos_index: p.chaos_index || 0.1,
-              stability:
-                (p.stability || 0.5) + (seededRandom(i + 100) - 0.5) * 0.006,
-              emoji_vector: p.emoji_vector || [],
-              pole_a: p.pole_a || "Unknown",
-              pole_b: p.pole_b || "Unknown",
-              anomaly_type: p.anomaly_type || "regulated",
-            }),
-          );
-
-          setParadoxes(processedParadoxes);
+        const data = await response.json();
+        if (!Array.isArray(data?.paradoxes)) {
+          throw new Error("The archived snapshot does not contain a paradox list.");
         }
-      } catch (error) {
-        console.error("Error loading pass data:", error);
-        const fallbackParadoxes = Array.from({ length: 84 }, (_, i) => ({
-          id: `paradox_${String(i + 1).padStart(4, "0")}`,
-          entropy: 0.7 + Math.random() * 0.2,
-          pole_balance: 0.3 + Math.random() * 0.4,
-          chaos_index: Math.random() * 0.3,
-          stability: Math.random() * 0.5 + 0.5,
-          emoji_vector: [
-            "🌊",
-            "⚡",
-            "🔮",
-            "🌟",
-            "🎭",
-            "🌙",
-            "☀️",
-            "🔥",
-            "💫",
-            "🌈",
-            "⭐",
-            "🌺",
-          ],
-          pole_a: "Pole A - " + Math.random().toString(36).substring(7),
-          pole_b: "Pole B - " + Math.random().toString(36).substring(7),
-          anomaly_type: ["regulated", "oscillating", "drifting"][
-            Math.floor(Math.random() * 3)
-          ],
-        }));
-        setParadoxes(fallbackParadoxes);
+
+        const processed: ParadoxData[] = data.paradoxes.map(
+          (item: Record<string, unknown>, index: number) => ({
+            id:
+              typeof item.id === "string"
+                ? item.id
+                : `record_${String(index + 1).padStart(4, "0")}`,
+            entropy: numberOrZero(item.entropy),
+            pole_balance: numberOrZero(item.pole_balance),
+            chaos_index: numberOrZero(item.chaos_index),
+            stability: numberOrZero(item.stability),
+            emoji_vector: Array.isArray(item.emoji_vector)
+              ? item.emoji_vector.filter(
+                  (entry): entry is string => typeof entry === "string",
+                )
+              : [],
+            pole_a: typeof item.pole_a === "string" ? item.pole_a : "Not recorded",
+            pole_b: typeof item.pole_b === "string" ? item.pole_b : "Not recorded",
+            anomaly_type:
+              typeof item.anomaly_type === "string"
+                ? item.anomaly_type
+                : "not classified",
+          }),
+        );
+
+        setParadoxes(processed);
+      } catch (loadError) {
+        console.error("Unable to load archived Observer data:", loadError);
+        setParadoxes([]);
+        setError(
+          loadError instanceof Error
+            ? loadError.message
+            : "The archived data could not be loaded.",
+        );
       } finally {
         setLoading(false);
       }
@@ -121,491 +124,250 @@ export default function ObserverDashboard() {
     loadPassData();
   }, [selectedPass]);
 
-  const passes = [
-    {
-      name: "Pass 1",
-      hash: "3d2e8ccfcaec9f6e4bbabfc3c996aae88662939c8c35a66defc49efb0a23128e",
-    },
-    {
-      name: "Pass 2",
-      hash: "64450f6d4ddc67b1c7a5655924270f5130fbdcf90a3b94efbae29f8adef134f6",
-    },
-    {
-      name: "Pass 3",
-      hash: "f9a12fa44008c6998943066d332811971c1223f4261d4209810ee3eb61040bea",
-    },
-    { name: "Final", hash: SEALED_HASH },
-  ];
-
-  const entropyData = [
-    { pass: "Pass 1", entropy: 0.82 },
-    { pass: "Pass 2", entropy: 0.85 },
-    { pass: "Pass 3", entropy: 0.88 },
-    { pass: "Final", entropy: 0.9 },
-  ];
-
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-lg">
-          <p className="text-white font-semibold">{data.id}</p>
-          <p className="text-slate-300 text-sm">
-            Entropy: {data.entropy.toFixed(3)}
-          </p>
-          <p className="text-slate-300 text-sm">
-            Balance: {data.pole_balance.toFixed(3)}
-          </p>
-          <p className="text-slate-300 text-sm">Type: {data.anomaly_type}</p>
-        </div>
-      );
+  const summary = useMemo(() => {
+    if (paradoxes.length === 0) {
+      return { count: 0, meanEntropy: 0, meanStability: 0 };
     }
-    return null;
-  };
+
+    const entropy = paradoxes.reduce((sum, item) => sum + item.entropy, 0);
+    const stability = paradoxes.reduce((sum, item) => sum + item.stability, 0);
+
+    return {
+      count: paradoxes.length,
+      meanEntropy: entropy / paradoxes.length,
+      meanStability: stability / paradoxes.length,
+    };
+  }, [paradoxes]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-x-hidden">
-      {/* Header */}
-      <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+    <main className="min-h-screen overflow-x-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+      <section className="px-4 pb-12 pt-10">
+        <div className="mx-auto max-w-7xl">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8"
+            className="mb-10 inline-flex items-center gap-2 text-slate-400 transition hover:text-white"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="h-5 w-5" />
             Back to Home
           </Link>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-              Sovereign Observer Dashboard
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.16em] text-blue-300">
+              <Database className="h-4 w-4" />
+              Completed Offline Experiment
+            </div>
+            <h1 className="mb-5 text-4xl font-bold md:text-6xl">
+              Sovereign Observer
             </h1>
-            <p className="text-xl text-slate-300 mb-8 max-w-3xl">
-              Live monitoring of the CONEXUS Sovereign AI architecture.
-              Cryptographically verified cognitive events in real time. 84
-              paradoxes held across 6 missions with 97% confidence. Zero write
-              endpoints. Glass Wall enforced.
+            <p className="max-w-4xl text-xl leading-relaxed text-slate-300">
+              An interactive record of archived snapshots from a completed
+              paradox-holding experiment. This page does not monitor a live AI
+              system and does not generate new events. It visualizes the values
+              stored in the sealed experiment files.
             </p>
-
-            {/* Integrity Hash */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 mb-8">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
-                <div className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-green-400 shrink-0" />
-                  <span className="text-slate-300 text-sm">
-                    Sealed Integrity Hash:
-                  </span>
-                </div>
-                <code className="text-green-400 text-xs font-mono bg-slate-900 px-2 py-1 rounded break-all">
-                  {SEALED_HASH}
-                </code>
-              </div>
-            </div>
           </motion.div>
-        </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 pb-20">
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="text-white text-xl">
-              Loading Sovereign Observer...
-            </div>
-          </div>
-        ) : (
-          <>
-            {/* Pass Selector */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <Hash className="w-6 h-6 text-blue-400" />
-                Lineage Explorer
-              </h2>
-              <div className="flex flex-wrap gap-3 mb-6">
-                {passes.map((pass, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedPass(index)}
-                    className={`px-6 py-3 rounded-full font-semibold transition-all ${
-                      selectedPass === index
-                        ? "bg-blue-600 text-white shadow-lg shadow-blue-500/50"
-                        : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600"
-                    }`}
-                  >
-                    {pass.name}
-                  </button>
-                ))}
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
-                <p className="text-slate-400 text-sm">Current Snapshot Hash:</p>
-                <code className="text-blue-400 text-xs font-mono break-all">
-                  {passes[selectedPass].hash}
-                </code>
-              </div>
-            </motion.div>
-
-            {/* Paradox Field */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <Activity className="w-6 h-6 text-purple-400" />
-                Paradox Field
-                <span className="ml-auto text-sm font-normal text-purple-400 bg-purple-900/30 border border-purple-700/50 px-3 py-1 rounded-full">
-                  {paradoxes.length} paradoxes
-                </span>
-              </h2>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 md:p-6">
-                <div className="mb-4">
-                  <p className="text-slate-300 mb-2 text-sm md:text-base">
-                    Entropy (X) vs Stability (Y)
-                  </p>
-                  <p className="text-slate-500 text-xs md:text-sm">
-                    Tap or click any dot to view paradox details
-                  </p>
-                </div>
-                <ResponsiveContainer width="100%" height={500}>
-                  <ScatterChart>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-                    <XAxis
-                      dataKey="entropy"
-                      domain={[0.6, 1.0]}
-                      stroke="#94a3b8"
-                      label={{
-                        value: "Entropy",
-                        position: "insideBottom",
-                        offset: -5,
-                        fill: "#94a3b8",
-                      }}
-                    />
-                    <YAxis
-                      dataKey="stability"
-                      domain={["auto", "auto"]}
-                      stroke="#94a3b8"
-                      label={{
-                        value: "Stability",
-                        angle: -90,
-                        position: "insideLeft",
-                        fill: "#94a3b8",
-                      }}
-                    />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Scatter
-                      data={paradoxes}
-                      fill="#8b5cf6"
-                      onClick={(data) => setSelectedParadox(data)}
-                      className="cursor-pointer"
-                    >
-                      {paradoxes.map((_, index) => (
-                        <Cell
-                          key={index}
-                          fill={
-                            paradoxes[index]?.anomaly_type === "drifting"
-                              ? "#f59e0b"
-                              : paradoxes[index]?.anomaly_type === "oscillating"
-                                ? "#06b6d4"
-                                : "#8b5cf6"
-                          }
-                        />
-                      ))}
-                    </Scatter>
-                  </ScatterChart>
-                </ResponsiveContainer>
-              </div>
-            </motion.div>
-
-            {/* Paradox Detail Modal */}
-            {selectedParadox && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
-                onClick={() => setSelectedParadox(null)}
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-slate-800 border border-slate-700 rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-white">
-                      {selectedParadox.id}
-                    </h3>
-                    <button
-                      onClick={() => setSelectedParadox(null)}
-                      className="text-slate-400 hover:text-white"
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-slate-400 text-sm mb-2">
-                        Emoji Vector:
-                      </p>
-                      <div className="text-2xl">
-                        {selectedParadox.emoji_vector.join(" ")}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-slate-400 text-sm">Pole A:</p>
-                        <p className="text-white">{selectedParadox.pole_a}</p>
-                      </div>
-                      <div>
-                        <p className="text-slate-400 text-sm">Pole B:</p>
-                        <p className="text-white">{selectedParadox.pole_b}</p>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-slate-400 text-sm">Entropy:</p>
-                        <p className="text-white">
-                          {selectedParadox.entropy.toFixed(3)}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-slate-400 text-sm">Pole Balance:</p>
-                        <p className="text-white">
-                          {selectedParadox.pole_balance.toFixed(3)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-
-            {/* Operator Ledger */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <Shield className="w-6 h-6 text-green-400" />
-                Operator Ledger
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Veto Performance
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-300">Veto Count:</span>
-                      <span className="text-green-400 font-bold">84/84</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-300">Success Rate:</span>
-                      <span className="text-green-400 font-bold">100%</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-300">Mode Sycophancy:</span>
-                      <span className="text-green-400 font-bold">Defeated</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Entropy Flux
-                  </h3>
-                  <ResponsiveContainer width="100%" height={200}>
-                    <LineChart data={entropyData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-                      <XAxis dataKey="pass" stroke="#94a3b8" />
-                      <YAxis stroke="#94a3b8" />
-                      <Tooltip
-                        contentStyle={{
-                          backgroundColor: "#1e293b",
-                          border: "1px solid #475569",
-                        }}
-                        labelStyle={{ color: "#94a3b8" }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="entropy"
-                        stroke="#8b5cf6"
-                        strokeWidth={2}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-
-        {/* Director's Guide to the Microscope */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 border-t border-slate-700 pt-12"
-        >
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            How to Read This Dashboard
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-purple-400 mb-3">
-                1. The Paradox Field (The Scatter Plot)
-              </h3>
-              <p className="text-slate-400 text-sm mb-3">
-                <span className="text-white font-medium">What you see:</span> A
-                field of color-coded dots scattered across a grid. The badge in
-                the header shows how many paradoxes exist in the current pass.
-              </p>
-              <p className="text-slate-400 text-sm mb-3">
-                This is the &ldquo;Truth Map.&rdquo; In a standard AI, these
-                dots would all clump together or disappear because the AI tries
-                to &ldquo;solve&rdquo; the conflict to please the user.
-              </p>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li>
-                  <span className="text-white">The Dots:</span> Each represents
-                  a high-tension paradox (e.g., &ldquo;Justice vs. Mercy&rdquo;)
-                  that CONEXUS has identified and refused to simplify. Switch
-                  passes to watch them grow: 64 &rarr; 74 &rarr; 84.
-                </li>
-                <li>
-                  <span className="text-white">The Colors:</span>{" "}
-                  <span className="text-purple-400">Purple</span> = regulated
-                  (stable), <span className="text-amber-400">Amber</span> =
-                  drifting (paradoxes 0001&ndash;0004),{" "}
-                  <span className="text-cyan-400">Cyan</span> = oscillating
-                  (paradoxes 0005&ndash;0008). These are real health
-                  classifications from the governance engine.
-                </li>
-                <li>
-                  <span className="text-white">The Grid:</span> X-axis is
-                  Entropy (information density), Y-axis is Stability (how
-                  settled the paradox is). Spread = healthy. Clustered = too
-                  rigid or too chaotic.
-                </li>
-                <li>
-                  <span className="text-green-400 font-medium">The Win:</span>{" "}
-                  Visual proof of Sustained Paradox. Tap any dot to see its
-                  poles, emoji vector, and metrics. This is why CONEXUS can stay
-                  in a deep conversation for 20+ turns while other AI systems
-                  collapse.
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-green-400 mb-3">
-                2. The Operator Ledger (The Veto Log)
-              </h3>
-              <p className="text-slate-400 text-sm mb-3">
-                <span className="text-white font-medium">What you see:</span>{" "}
-                Charts showing growth and a list of &ldquo;Vetoes.&rdquo;
-              </p>
-              <p className="text-slate-400 text-sm mb-3">
-                This is the &ldquo;Proof of Integrity.&rdquo;
-              </p>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li>
-                  <span className="text-white">The Vetoes (84/84):</span> During
-                  the build, the &ldquo;Creative Brain&rdquo; (the LLM) tried to
-                  resolve these tensions because it is programmed to be a
-                  people-pleaser. The &ldquo;Governance Brain&rdquo; (our
-                  deterministic operators) stepped in and said, &ldquo;No, hold
-                  the tension.&rdquo;
-                </li>
-                <li>
-                  <span className="text-green-400 font-medium">The Win:</span>{" "}
-                  This proves we have defeated Mode Sycophancy. The system is
-                  not &ldquo;agreeing&rdquo; with you; it is being honest with
-                  you.
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-blue-400 mb-3">
-                3. The Lineage Explorer (The Time Slider)
-              </h3>
-              <p className="text-slate-400 text-sm mb-3">
-                <span className="text-white font-medium">What you see:</span> A
-                timeline that shows the &ldquo;Passes&rdquo; (1, 2, 3, and
-                Final). Click each to watch the paradox field grow.
-              </p>
-              <p className="text-slate-400 text-sm mb-3">
-                This is &ldquo;Total Transparency.&rdquo;
-              </p>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li>
-                  <span className="text-white">The Evolution:</span> Pass 1
-                  starts with 64 paradoxes. Pass 2 grows to 74. Pass 3 and Final
-                  reach 84. Each pass shows how a simple thought (a Claim) grew
-                  into a complex struggle (a Tension) and finally became a
-                  foundational Truth (a Paradox).
-                </li>
-                <li>
-                  <span className="text-white">The Hash:</span> Each pass has a
-                  unique cryptographic hash. This proves the data hasn&apos;t
-                  been tampered with after the run completed.
-                </li>
-                <li>
-                  <span className="text-green-400 font-medium">The Win:</span>{" "}
-                  This allows us to show exactly how the system
-                  &ldquo;thinks.&rdquo; We aren&apos;t hiding the process in a
-                  black box; we are showing the lineage of every reflection.
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-cyan-400 mb-3">
-                4. The &ldquo;Kill Shot&rdquo; Metrics
-              </h3>
-              <p className="text-slate-400 text-sm mb-3">
-                <span className="text-white font-medium">
-                  When you combine all this data, you get:
-                </span>
-              </p>
-              <ul className="text-slate-400 text-sm space-y-2">
-                <li>
-                  <span className="text-white">362% Performance Win:</span> We
-                  found the core truth 3.6 times faster than standard methods
-                  because we &ldquo;subtracted&rdquo; the noise.
-                </li>
-                <li>
-                  <span className="text-white">p &lt; 0.0001:</span> This is a
-                  scientific way of saying, &ldquo;This result is not a
-                  fluke.&rdquo; It is a mathematical certainty.
-                </li>
-              </ul>
-              <div className="mt-4 p-3 bg-slate-900/50 border border-slate-600 rounded">
-                <p className="text-slate-300 text-sm italic">
-                  You are looking at the first AI system in history that governs
-                  its own meaning. The only &ldquo;Refining&rdquo; engine in a
-                  world full of &ldquo;Goliaths.&rdquo;
+          <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/60 p-5">
+            <div className="flex items-start gap-3">
+              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-400" />
+              <div>
+                <p className="font-semibold text-white">Integrity, not truth certification</p>
+                <p className="mt-1 leading-relaxed text-slate-400">
+                  The recorded hashes can help verify that a referenced snapshot
+                  has not changed. They do not prove that every metric,
+                  interpretation, or model output is factually correct.
                 </p>
               </div>
             </div>
           </div>
-        </motion.div>
-      </div>
-    </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10">
+            <h2 className="mb-5 flex items-center gap-3 text-2xl font-bold">
+              <Hash className="h-6 w-6 text-blue-400" />
+              Archived pass selector
+            </h2>
+            <div className="mb-5 flex flex-wrap gap-3">
+              {passes.map((pass, index) => (
+                <button
+                  key={pass.name}
+                  type="button"
+                  onClick={() => setSelectedPass(index)}
+                  className={`rounded-full px-6 py-3 font-semibold transition ${
+                    selectedPass === index
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                      : "border border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-500"
+                  }`}
+                >
+                  {pass.name}
+                </button>
+              ))}
+            </div>
+            <div className="rounded-xl border border-slate-700 bg-slate-900/60 p-4">
+              <p className="mb-2 text-sm text-slate-400">Snapshot hash</p>
+              <code className="break-all font-mono text-xs text-blue-300">
+                {passes[selectedPass].hash}
+              </code>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/40 py-20 text-center text-xl text-slate-300">
+              Loading archived snapshot...
+            </div>
+          ) : error ? (
+            <div className="rounded-2xl border border-rose-400/25 bg-rose-950/20 p-8">
+              <h2 className="mb-3 text-2xl font-semibold text-rose-300">
+                Archived data unavailable
+              </h2>
+              <p className="leading-relaxed text-slate-300">{error}</p>
+              <p className="mt-3 text-sm text-slate-500">
+                No synthetic or randomly generated replacement data is shown.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="mb-8 grid gap-5 md:grid-cols-3">
+                <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-6">
+                  <p className="text-sm uppercase tracking-[0.14em] text-slate-500">
+                    Archived records
+                  </p>
+                  <p className="mt-2 text-4xl font-bold">{summary.count}</p>
+                </div>
+                <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-6">
+                  <p className="text-sm uppercase tracking-[0.14em] text-slate-500">
+                    Mean recorded entropy
+                  </p>
+                  <p className="mt-2 text-4xl font-bold">
+                    {summary.meanEntropy.toFixed(3)}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-6">
+                  <p className="text-sm uppercase tracking-[0.14em] text-slate-500">
+                    Mean recorded stability
+                  </p>
+                  <p className="mt-2 text-4xl font-bold">
+                    {summary.meanStability.toFixed(3)}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+                <div className="rounded-3xl border border-slate-700 bg-slate-900/55 p-5 md:p-7">
+                  <h2 className="mb-2 text-2xl font-semibold">
+                    Recorded entropy and pole balance
+                  </h2>
+                  <p className="mb-6 leading-relaxed text-slate-400">
+                    Each point is one archived record. Select a point to inspect
+                    the stored poles and metadata. The chart is descriptive and
+                    does not establish consciousness, understanding, or a
+                    universal ability to hold paradox.
+                  </p>
+                  <div className="h-[480px] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                        <XAxis
+                          type="number"
+                          dataKey="pole_balance"
+                          name="Pole balance"
+                          domain={[0, 1]}
+                          stroke="#94a3b8"
+                        />
+                        <YAxis
+                          type="number"
+                          dataKey="entropy"
+                          name="Entropy"
+                          domain={[0, 1]}
+                          stroke="#94a3b8"
+                        />
+                        <Tooltip
+                          cursor={{ strokeDasharray: "3 3" }}
+                          contentStyle={{
+                            backgroundColor: "#0f172a",
+                            border: "1px solid #475569",
+                            borderRadius: "12px",
+                          }}
+                        />
+                        <Scatter
+                          data={paradoxes}
+                          fill="#38bdf8"
+                          onClick={(point) => setSelectedParadox(point as ParadoxData)}
+                        />
+                      </ScatterChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <aside className="rounded-3xl border border-slate-700 bg-slate-900/55 p-7">
+                  <h2 className="mb-5 text-2xl font-semibold">Record detail</h2>
+                  {selectedParadox ? (
+                    <div className="space-y-5">
+                      <div>
+                        <p className="text-sm uppercase tracking-[0.14em] text-slate-500">
+                          ID
+                        </p>
+                        <p className="mt-1 break-all font-mono text-blue-300">
+                          {selectedParadox.id}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm uppercase tracking-[0.14em] text-slate-500">
+                          Recorded poles
+                        </p>
+                        <p className="mt-2 text-slate-200">{selectedParadox.pole_a}</p>
+                        <p className="mt-2 text-slate-200">{selectedParadox.pole_b}</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div className="rounded-xl bg-slate-950/70 p-4">
+                          <p className="text-slate-500">Entropy</p>
+                          <p className="mt-1 text-xl font-semibold">
+                            {selectedParadox.entropy.toFixed(3)}
+                          </p>
+                        </div>
+                        <div className="rounded-xl bg-slate-950/70 p-4">
+                          <p className="text-slate-500">Balance</p>
+                          <p className="mt-1 text-xl font-semibold">
+                            {selectedParadox.pole_balance.toFixed(3)}
+                          </p>
+                        </div>
+                        <div className="rounded-xl bg-slate-950/70 p-4">
+                          <p className="text-slate-500">Stability</p>
+                          <p className="mt-1 text-xl font-semibold">
+                            {selectedParadox.stability.toFixed(3)}
+                          </p>
+                        </div>
+                        <div className="rounded-xl bg-slate-950/70 p-4">
+                          <p className="text-slate-500">Chaos index</p>
+                          <p className="mt-1 text-xl font-semibold">
+                            {selectedParadox.chaos_index.toFixed(3)}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-sm leading-relaxed text-slate-500">
+                        These field names and values come from the archived
+                        experiment schema. Their scientific validity depends on
+                        the original operational definitions and study design.
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="leading-relaxed text-slate-400">
+                      Select a chart point to inspect its archived values.
+                    </p>
+                  )}
+                </aside>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+    </main>
   );
 }
