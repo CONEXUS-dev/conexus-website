@@ -12,6 +12,7 @@ import {
   Shield,
   XCircle,
 } from "lucide-react";
+import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 
 const APP_URL = "https://the-narthex.onrender.com";
@@ -121,6 +122,36 @@ export default function NairthexPage() {
             </div>
           </motion.div>
         </div>
+      </section>
+
+      <section className="px-4 pb-8 pt-4">
+        <motion.figure
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-amber-300/20 bg-stone-950/60 p-3 shadow-2xl shadow-black/30 md:p-5"
+        >
+          <a
+            href="/images/products/nairthex-digital-threshold.webp"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open the full NAiRTHEX product infographic"
+          >
+            <Image
+              src="/images/products/nairthex-digital-threshold.webp"
+              alt="NAiRTHEX digital threshold for sacred space product infographic"
+              width={2048}
+              height={1143}
+              className="h-auto w-full rounded-2xl object-contain"
+              sizes="(max-width: 768px) 100vw, 1152px"
+            />
+          </a>
+          <figcaption className="px-3 pb-2 pt-4 text-center text-sm leading-relaxed text-stone-400">
+            NAiRTHEX is designed as a reflective threshold under human and pastoral authority,
+            not as therapy, clergy, diagnosis, or autonomous decision-making.
+          </figcaption>
+        </motion.figure>
       </section>
 
       <section id="doctrine" className="px-4 py-24">
