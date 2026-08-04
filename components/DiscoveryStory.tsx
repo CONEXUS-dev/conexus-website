@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, FlaskConical } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const arms = [
@@ -57,6 +58,34 @@ export default function DiscoveryStory() {
             isolated the mechanism behind CONEXUS semantic expansion.
           </p>
         </motion.div>
+
+        <motion.figure
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mx-auto mb-16 max-w-4xl overflow-hidden rounded-3xl border border-cyan-400/20 bg-slate-950/80 p-3 shadow-2xl shadow-cyan-950/30 md:p-5"
+        >
+          <a
+            href="/images/evidence/conexus-geometric-proof.webp"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open the full CONEXUS four-arm causal validation infographic"
+          >
+            <Image
+              src="/images/evidence/conexus-geometric-proof.webp"
+              alt="CONEXUS four-arm causal validation infographic showing architecture-driven expansion"
+              width={1143}
+              height={2048}
+              className="h-auto max-h-[900px] w-full object-contain"
+              sizes="(max-width: 768px) 100vw, 896px"
+            />
+          </a>
+          <figcaption className="px-3 pb-2 pt-4 text-center text-sm leading-relaxed text-slate-400">
+            The four controlled conditions separate prompt length, token exposure,
+            and paradox-holding architecture. Select the image to view it at full size.
+          </figcaption>
+        </motion.figure>
 
         <div className="mb-10 grid gap-5 md:grid-cols-4">
           {arms.map((arm, index) => (
