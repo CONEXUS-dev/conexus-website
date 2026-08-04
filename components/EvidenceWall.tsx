@@ -48,23 +48,23 @@ export function EvidenceWall() {
     {
       icon: Database,
       value: 30800,
-      label: "Fully Controlled Trials",
-      description: "Deterministically seeded and reproducible",
+      label: "Controlled Optimization Trials",
+      description: "Seeded benchmark runs under documented test conditions",
       color: "blue",
     },
     {
       icon: TrendingUp,
       value: 561,
       suffix: "%",
-      label: "Improvement on 3D Protein Folding",
-      description: "Subtractive Intelligence performance leap",
+      label: "Largest Reported Relative Improvement",
+      description: "Observed in the stated 3D protein-folding comparison",
       color: "green",
     },
     {
       icon: Cpu,
-      value: 79,
-      label: "Years of Algorithmic Assumptions Overturned",
-      description: "The Monte Carlo paradigm replaced",
+      value: 200,
+      label: "Independent Four-Arm Runs",
+      description: "Fifty runs per causal condition in the current ECP study",
       color: "purple",
     },
   ];
@@ -73,7 +73,6 @@ export function EvidenceWall() {
     blue: "text-blue-400 bg-blue-500/10",
     green: "text-green-400 bg-green-500/10",
     purple: "text-purple-400 bg-purple-500/10",
-    amber: "text-amber-400 bg-amber-500/10",
   };
 
   return (
@@ -89,12 +88,12 @@ export function EvidenceWall() {
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
             The Evidence
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Not philosophy. Not theory. Empirical validation.
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+            Controlled experiments, explicit baselines, and documented limits.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -131,9 +130,10 @@ export function EvidenceWall() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-slate-400 text-lg">
-            Statistical significance:{" "}
-            <span className="text-blue-400 font-semibold">p&lt;10⁻¹²</span>
+          <p className="text-slate-400 text-lg max-w-4xl mx-auto">
+            Results are benchmark-specific. Percentages from different domains
+            use different objectives and baselines and should not be compared as
+            a single universal performance measure.
           </p>
         </motion.div>
       </div>
