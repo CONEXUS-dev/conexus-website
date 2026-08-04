@@ -1,89 +1,103 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowRight, Church, Eye } from "lucide-react";
 import Link from "next/link";
+
+const products = [
+  {
+    icon: Church,
+    eyebrow: "Faith and Reflection",
+    title: "NAiRTHEX",
+    description:
+      "A private AI reflection companion serving as a quiet foyer before ministry, with restraint, clear boundaries, and human authority first.",
+    href: "/nairthex",
+    accent: "amber",
+  },
+  {
+    icon: Eye,
+    eyebrow: "Dreams and Symbolic Reflection",
+    title: "ECHOform",
+    description:
+      "A dream mirror that routes each entry through Shadow, Light, and Reality before opening a path through twenty symbolic Mirror Tiers.",
+    href: "/echoform",
+    accent: "purple",
+  },
+];
 
 export function NairthexFeature() {
   return (
-    <section className="py-24 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section className="px-4 py-24">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-gradient-to-br from-amber-900/20 via-slate-800/50 to-slate-900/50 border border-amber-700/30 rounded-2xl p-8 md:p-12"
+          transition={{ duration: 0.7 }}
+          className="mx-auto mb-12 max-w-3xl text-center"
         >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-900/30 border border-amber-700/50 rounded-full text-amber-400 text-sm font-medium mb-4">
-                <BookOpen className="w-4 h-4" />
-                CONEXUS Vertical — Sovereign Contemplative Node
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                NAiRTHEX
-                <span className="text-amber-400 text-lg ml-3 font-normal">
-                  by CONEXUS
-                </span>
-              </h2>
-              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                A Sovereign Contemplative Node governed by deterministic
-                operators and cryptographic provenance. A contemplative
-                infrastructure for faith communities that holds space through
-                verified truth.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="https://the-narthex.onrender.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full transition-all shadow-lg shadow-amber-500/20"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Try It Live
-                </a>
-                <Link
-                  href="/nairthex"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full transition-all border border-slate-600"
-                >
-                  Learn More
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <p className="text-amber-400 font-semibold mb-1">
-                  Contemplative Conversation
-                </p>
-                <p className="text-slate-400 text-sm">
-                  Guided reflection grounded in Scripture and tradition. Holds
-                  tension instead of resolving it.
-                </p>
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <p className="text-green-400 font-semibold mb-1">
-                  Sovereign Governed
-                </p>
-                <p className="text-slate-400 text-sm">
-                  Every response governed by deterministic operators. Zero
-                  sycophancy. Full audit trail.
-                </p>
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <p className="text-cyan-400 font-semibold mb-1">
-                  Voice & Text Input
-                </p>
-                <p className="text-slate-400 text-sm">
-                  Speak or type. Whisper transcription. Session-aware with
-                  Redis-backed state.
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
+            CONEXUS Products
+          </p>
+          <h2 className="mb-5 text-4xl font-bold text-white md:text-5xl">
+            See the architecture become an experience.
+          </h2>
+          <p className="text-lg leading-relaxed text-slate-400">
+            Each product has its own purpose, boundaries, and visual language.
+            The research stays underneath. The human experience stays in front.
+          </p>
         </motion.div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {products.map((product, index) => {
+            const Icon = product.icon;
+            const isAmber = product.accent === "amber";
+            return (
+              <motion.article
+                key={product.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.12 }}
+                className={`rounded-3xl border p-8 md:p-10 ${
+                  isAmber
+                    ? "border-amber-500/25 bg-gradient-to-br from-amber-950/30 to-slate-900/70"
+                    : "border-purple-500/25 bg-gradient-to-br from-purple-950/30 to-slate-900/70"
+                }`}
+              >
+                <Icon
+                  className={`mb-6 h-9 w-9 ${
+                    isAmber ? "text-amber-300" : "text-purple-300"
+                  }`}
+                />
+                <p
+                  className={`mb-3 text-sm font-semibold uppercase tracking-[0.18em] ${
+                    isAmber ? "text-amber-300" : "text-purple-300"
+                  }`}
+                >
+                  {product.eyebrow}
+                </p>
+                <h3 className="mb-4 text-4xl font-bold text-white">
+                  {product.title}
+                </h3>
+                <p className="mb-8 text-lg leading-relaxed text-slate-300">
+                  {product.description}
+                </p>
+                <Link
+                  href={product.href}
+                  className={`inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold transition-all ${
+                    isAmber
+                      ? "bg-amber-500 text-slate-950 hover:bg-amber-400"
+                      : "bg-purple-500 text-white hover:bg-purple-400"
+                  }`}
+                >
+                  Explore {product.title}
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
