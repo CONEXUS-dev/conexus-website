@@ -1,366 +1,126 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import {
-  Truck,
-  Zap,
-  TrendingUp,
-  CheckCircle2,
-  Code,
-  Target,
-  Gauge,
-  Shield,
-} from "lucide-react";
+import Link from "next/link";
+import { AlertTriangle, ArrowRight, Route, Scale } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 
-export default function VRPPage() {
+const findings = [
+  {
+    title: "Defined benchmark comparison",
+    description:
+      "The Forgetting Engine was compared with a stated vehicle-routing baseline under a fixed experimental configuration.",
+  },
+  {
+    title: "Scale-dependent results",
+    description:
+      "The reported relative gap varied by problem size, with the largest stated improvement reaching 89.3% at the largest tested scale.",
+  },
+  {
+    title: "Feasibility and objective both matter",
+    description:
+      "Route quality should be interpreted alongside constraint satisfaction, search budget, instance generation, and baseline tuning.",
+  },
+];
+
+export default function VehicleRoutingPage() {
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       <Navigation />
 
-      <section className="relative pt-48 pb-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyan-900/20 via-slate-950 to-slate-950" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
+      <section className="relative overflow-hidden px-4 pb-20 pt-44">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.14),transparent_48%)]" />
+        <div className="relative z-10 mx-auto max-w-5xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.75 }}
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Truck className="w-8 h-8 text-cyan-400" />
-              <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase">
-                CONEXUS-STEEL-04
-              </span>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-5 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-orange-300">
+              <Route className="h-4 w-4" />
+              Benchmark Case Study
             </div>
-            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
-              The Fleet{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Protocol
-              </span>
+            <h1 className="mb-7 text-5xl font-bold md:text-7xl">
+              Vehicle Routing
             </h1>
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-8">
-              Vehicle Routing Problem optimization through distributed synchrony
-              calibration
+            <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300">
+              A computational test of strategic candidate elimination in a
+              constrained routing problem. The results are evidence about the
+              tested benchmark, not a claim of universal superiority in real
+              fleet operations.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-12 text-center"
-          >
-            <h2 className="text-3xl font-bold text-white mb-6">
-              Core Contradiction
-            </h2>
-            <p className="text-2xl text-cyan-300 italic leading-relaxed">
-              I divide the weight to multiply the speed. The burden of the one
-              is the liberty of the many.
-            </p>
-            <div className="mt-6 text-slate-400">
-              Cognitive State:{" "}
-              <span className="text-cyan-400 font-semibold">
-                Distributed Synchrony
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-24 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl font-bold text-white mb-4">
-              The 9 Gears of The Fleet
-            </h2>
-            <p className="text-xl text-slate-400">
-              Progressive calibration stages for multi-agent optimization
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                number: "01",
-                name: "The Depot",
-                desc: "Silence before the start",
-              },
-              {
-                number: "02",
-                name: "The Manifest",
-                desc: "Assigning the weight",
-              },
-              {
-                number: "03",
-                name: "The Dispersion",
-                desc: "The fleet scatters",
-              },
-              {
-                number: "04",
-                name: "The Bottleneck",
-                desc: "Traffic and delay",
-              },
-              { number: "05", name: "The Handoff", desc: "Resource balancing" },
-              {
-                number: "06",
-                name: "The Breakdown",
-                desc: "Handling failure and re-routing",
-              },
-              {
-                number: "07",
-                name: "The Cluster",
-                desc: "Servicing the dense zone",
-              },
-              {
-                number: "08",
-                name: "The Convergence",
-                desc: "Returning to base",
-              },
-              {
-                number: "09",
-                name: "The Empty Truck",
-                desc: "Mission Complete",
-              },
-            ].map((gear, index) => (
-              <motion.div
-                key={gear.number}
-                initial={{ opacity: 0, y: 20 }}
+      <section className="border-y border-slate-800 px-4 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-6 md:grid-cols-3">
+            {findings.map((finding, index) => (
+              <motion.article
+                key={finding.title}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-all"
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="rounded-2xl border border-slate-700 bg-slate-900/60 p-8"
               >
-                <div className="text-4xl font-bold text-cyan-400/30 mb-2">
-                  {gear.number}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {gear.name}
-                </h3>
-                <p className="text-slate-400">{gear.desc}</p>
-              </motion.div>
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-orange-300">
+                  Finding {index + 1}
+                </p>
+                <h2 className="mb-4 text-2xl font-semibold">{finding.title}</h2>
+                <p className="leading-relaxed text-slate-400">
+                  {finding.description}
+                </p>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl font-bold text-white mb-4">
-              Technical Architecture
-            </h2>
-            <p className="text-xl text-slate-400">
-              Constraint choke detection with paradox retention
+      <section className="px-4 py-24">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
+          <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/15 p-8">
+            <Scale className="mb-5 h-9 w-9 text-emerald-300" />
+            <h2 className="mb-4 text-3xl font-semibold">What is supported</h2>
+            <p className="leading-relaxed text-slate-300">
+              Under the documented test conditions, the Forgetting Engine
+              produced better routing-objective results than the selected
+              baseline, with the relative difference changing across tested
+              scales.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <Gauge className="w-8 h-8 text-purple-400" />
-                <h3 className="text-2xl font-bold text-white">
-                  Constraint Choke Detection
-                </h3>
-              </div>
-              <div className="space-y-4 text-slate-300">
-                <p>
-                  Monitors capacity violation rate in real-time. When violations
-                  spike, paradox retention increases to explore harder
-                  constraint regions.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <Shield className="w-8 h-8 text-cyan-400" />
-                <h3 className="text-2xl font-bold text-white">
-                  Paradox Buffer
-                </h3>
-              </div>
-              <div className="space-y-4 text-slate-300">
-                <p>
-                  Retains violating routes with high structural promise. Routes
-                  that violate capacity but show promising structure are
-                  repaired and reinjected.
-                </p>
-              </div>
-            </motion.div>
+          <div className="rounded-3xl border border-amber-400/20 bg-amber-950/15 p-8">
+            <AlertTriangle className="mb-5 h-9 w-9 text-amber-300" />
+            <h2 className="mb-4 text-3xl font-semibold">What remains open</h2>
+            <p className="leading-relaxed text-slate-300">
+              Production value would require stronger and tuned baselines,
+              standard public datasets, sensitivity analysis, implementation
+              cost measurement, and independent replication on operational fleet
+              constraints.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-4 bg-slate-900/30">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+      <section className="px-4 pb-24">
+        <div className="mx-auto max-w-4xl rounded-3xl border border-orange-400/20 bg-gradient-to-br from-orange-950/25 to-slate-950 p-10 text-center md:p-14">
+          <h2 className="mb-5 text-3xl font-bold md:text-4xl">
+            Read the result inside its benchmark.
+          </h2>
+          <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
+            The Evidence page places the routing result alongside the other
+            optimization studies and explains why cross-domain percentages are
+            not directly interchangeable.
+          </p>
+          <Link
+            href="/evidence#forgetting-engine"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-8 py-4 font-semibold text-slate-950 transition hover:bg-orange-400"
           >
-            <h2 className="text-5xl font-bold text-white mb-4">
-              Benchmark Configuration
-            </h2>
-            <p className="text-xl text-slate-400">
-              Production-ready validation parameters
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <Target className="w-8 h-8 text-green-400" />
-                <h3 className="text-2xl font-bold text-white">
-                  Laptop-Safe Demo
-                </h3>
-              </div>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Customers</div>
-                    <div className="text-2xl font-bold text-green-400">300</div>
-                  </div>
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Vehicles</div>
-                    <div className="text-2xl font-bold text-green-400">12</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-red-900/40 to-orange-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <Zap className="w-8 h-8 text-orange-400" />
-                <h3 className="text-2xl font-bold text-white">
-                  Heavy Stress Test
-                </h3>
-              </div>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Customers</div>
-                    <div className="text-2xl font-bold text-orange-400">
-                      800
-                    </div>
-                  </div>
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Vehicles</div>
-                    <div className="text-2xl font-bold text-orange-400">30</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-4 bg-slate-900/30">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Live Validation Results
-            </h2>
-            <p className="text-xl text-slate-400">
-              Titan Engine benchmark audit vs Clarke-Wright standard
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 mb-8"
-          >
-            <Image
-              src="/fe-algorithm/CONEXUS_TITAN_BENCHMARK_LOG.png"
-              alt="Titan Engine Benchmark Results"
-              width={1200}
-              height={600}
-              className="w-full rounded-lg"
-            />
-            <p className="text-center text-slate-400 mt-6 text-sm">
-              Benchmark audit: 0.77% distance reduction over Clarke–Wright
-              savings baseline in 10-minute deep search (~75 million
-              optimization steps), achieved without CONEXUS proprietary AI
-              piloting.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-12"
-          >
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Ready for Enterprise Deployment
-            </h2>
-            <p className="text-xl text-slate-300 mb-8">
-              Contact us for custom VRP protocol calibration and validation
-              services
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/pitch"
-                className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all duration-300"
-              >
-                View Investor Pitch
-              </a>
-              <a
-                href="/fe-algorithm"
-                className="px-8 py-4 bg-slate-800 text-white rounded-lg font-semibold hover:bg-slate-700 transition-all duration-300"
-              >
-                Learn About FE Algorithm
-              </a>
-            </div>
-          </motion.div>
+            Review the Optimization Evidence
+            <ArrowRight className="h-5 w-5" />
+          </Link>
         </div>
       </section>
     </main>
