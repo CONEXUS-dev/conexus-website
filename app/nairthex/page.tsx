@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 
-const APP_URL = "https://the-narthex.onrender.com";
+const APP_URL = "https://the-narthex-staging-564338352424.us-east1.run.app";
 
 const doctrine = [
   {
