@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-editorial), "Editorial New", Georgia, serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+
+  --color-void: oklch(0% 0 0);
+  --color-surface: oklch(15% 0 0);
+  --color-surface-2: oklch(20% 0 0);
+  --color-data: oklch(90% 0 0);
+  --color-ember: oklch(68% 0.17 45);
+  --color-refined: oklch(82% 0.06 200);
+
+  --animate-cinematic-fade: cinematic-fade 2s ease-in-out both;
+  --animate-tick: tick 1.4s steps(2) infinite;
+}
+
+@keyframes cinematic-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tick {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+html {
+  background-color: var(--color-void);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-data);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-void);
+}
+
+/* Exposed mathematical grid line utility */
+.gridline {
+  border-color: color-mix(in oklab, white 20%, transparent);
+}
