@@ -105,7 +105,7 @@ export default function ProductGateways({
                 alt={active.name}
                 fill
                 sizes="92vw"
-                className="object-cover w-full h-full object-center opacity-60"
+                className="object-contain w-full h-full opacity-60"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-void/90 via-void/40 to-transparent" />
 

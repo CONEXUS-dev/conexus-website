@@ -6,10 +6,10 @@ import { useFocusMode } from "./FocusContext";
 
 const SECTIONS = [
   { label: "REFINERY", href: "#refinery" },
-  { label: "EVIDENCE", href: "#evidence" },
-  { label: "PRODUCTS", href: "#products" },
+  { label: "EVIDENCE", href: "/evidence" },
+  { label: "PRODUCTS", href: "/nairthex" },
   { label: "TEAM", href: "#team" },
-  { label: "MANIFESTO", href: "#manifesto" },
+  { label: "MANIFESTO", href: "/echoform" },
 ] as const;
 
 export default function GlobalNav() {

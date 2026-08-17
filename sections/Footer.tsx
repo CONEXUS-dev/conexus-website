@@ -44,10 +44,10 @@ export default function Footer() {
             <ul className="mt-4 space-y-2">
               {[
                 ["REFINERY", "#refinery"],
-                ["EVIDENCE", "#evidence"],
-                ["PRODUCTS", "#products"],
-                ["NAiRTHEX", "#nairthex"],
-                ["ECHOform", "#echoform"],
+                ["EVIDENCE", "/evidence"],
+                ["PRODUCTS", "/nairthex"],
+                ["NAiRTHEX", "/nairthex"],
+                ["ECHOform", "/echoform"],
                 ["TEAM", "#team"],
               ].map(([label, href]) => (
                 <li key={href}>

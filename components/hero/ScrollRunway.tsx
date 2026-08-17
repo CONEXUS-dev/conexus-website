@@ -37,7 +37,7 @@ export default function ScrollRunway() {
   const typeScale = useTransform(smooth, [0, 1], [1, 1.06]);
 
   return (
-    <div id="top" ref={containerRef} className="relative h-[400vh]">
+    <div id="top" ref={containerRef} className="relative h-[200vh]">
       <div className="sticky top-0 h-[100vh] w-full overflow-hidden bg-black">
         <motion.div
           style={{ scale, y: mediaY, filter: blur, opacity: dissolve }}
@@ -51,12 +51,12 @@ export default function ScrollRunway() {
           className="absolute inset-0 flex flex-col justify-between px-4 pb-10 pt-20 md:px-8 md:pt-24"
         >
           <div className="flex items-start justify-between">
-            <p className="max-w-[240px] text-[0.65rem] uppercase leading-relaxed tracking-[0.25em] text-data/60">
+            <p className="max-w-[240px] text-sm uppercase leading-relaxed tracking-[0.25em] text-data/80">
               “Do I contradict myself? / Very well then I contradict myself, / (I
               am large, I contain multitudes.)” — Walt Whitman
             </p>
-            <p className="hidden text-[0.65rem] uppercase tracking-[0.25em] text-data/40 md:block">
-              OKLCH(0% 0 0) // VOID FIELD ACTIVE
+            <p className="hidden text-sm uppercase tracking-[0.25em] text-data/40 md:block">
+              VOID FIELD ACTIVE
             </p>
           </div>
 

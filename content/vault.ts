@@ -117,7 +117,7 @@ export const GATEWAYS: GatewayProduct[] = [
       "A dream mirror that routes each entry through Shadow, Light, and Reality before opening a path through twenty symbolic Mirror Tiers.",
     cta: "Open the Guided Demo",
     href: "https://conexus-echoform-demo.vercel.app/",
-    image: "/images/evidence/conexus-geometric-proof.webp",
+    image: "/echoform/ECHOFORM The Mirror Awakens.png",
   },
 ];
 
