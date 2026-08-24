@@ -110,7 +110,7 @@ export default function Scene3() {
               Hover an arm to isolate its runs — sound on
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 divide-x divide-white/10 border-y border-white/10 py-12 pointer-events-auto max-md:py-5">
+            <div className="grid grid-cols-4 gap-0 divide-x divide-white/10 border-y border-white/10 py-5 pointer-events-auto md:gap-4 md:py-12">
               {ARMS.map((arm) => {
                 const isActive = activeArm === arm.id;
                 const isDimmed = activeArm !== "NONE" && !isActive;
@@ -123,7 +123,7 @@ export default function Scene3() {
                     onFocus={() => setActiveArm(arm.id)}
                     onBlur={resetActiveArm}
                     aria-label={`${arm.name} — mean semantic distance ${arm.value}`}
-                    className={`group relative cursor-crosshair py-4 text-left outline-none transition-all duration-500 md:px-6 md:py-2 md:first:pl-0 ${isDimmed ? "opacity-30" : "opacity-100"}`}
+                    className={`group relative min-w-0 cursor-crosshair px-2 py-4 text-left outline-none transition-all duration-500 first:pl-0 md:px-6 md:py-2 ${isDimmed ? "opacity-30" : "opacity-100"}`}
                   >
                     <span className="font-mono text-[0.65rem] tracking-[0.3em] text-white/55">{arm.index}</span>
                     <p className={`mt-2 font-mono text-[0.75rem] tracking-[0.25em] ${arm.conexus ? "italic text-[#ff5500]" : "text-white/90"}`}>{arm.name}</p>
