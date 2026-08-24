@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Editorial New", "Times New Roman", serif;
+  --font-display: var(--font-fraunces), "Editorial New", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-void: oklch(0% 0 0);
+  --color-surface: oklch(15% 0 0);
+  --color-data: oklch(90% 0 0);
+  --color-accent: oklch(60% 0.2 250);
+  --animate-cinematic-fade: fade 2s ease-in-out;
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes data-streak {
+  0% {
+    transform: translateX(-10vw);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(110vw);
+    opacity: 0;
+  }
+}
+
+html, body {
+  overflow: hidden;
+  background-color: var(--color-void);
+  color: var(--color-data);
+  font-family: var(--font-serif);
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Kinetic reticle: the hiding class is added by KineticCursor on mount, so a
+   JS failure leaves native cursors intact as the fallback. */
+html.kinetic-cursor,
+html.kinetic-cursor * {
+  cursor: none !important;
+}

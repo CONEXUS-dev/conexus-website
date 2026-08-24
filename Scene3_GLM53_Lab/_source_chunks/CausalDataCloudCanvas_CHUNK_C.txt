@@ -1,0 +1,958 @@
+/* ============================================================================
+ * RUNTIME — SHARED SCENE STATE + SCROLL / VISIBILITY / POINTER HELPERS
+ *
+ * One mutable module object holds scroll energy, scene visibility, pointer
+ * parallax, and the published focus state. Components read and write it
+ * imperatively inside useFrame; React state is never touched per frame.
+ * The supplemental react import below extends the hooks imported at the top
+ * of this file (duplicate module imports are merged by the bundler).
+ * ==========================================================================*/
+
+import { useCallback, useLayoutEffect, useState } from "react";
+
+interface SceneRuntimeState {
+  /** Smoothed scroll energy in [0, 1] driving the causal separation. */
+  energy: number;
+  /** Frame-rate-independent target the energy eases toward. */
+  energyTarget: number;
+  /** Raw local scene scroll progress in [0, 1]. */
+  rawProgress: number;
+  /** IntersectionObserver visibility of the scene runway. */
+  visible: boolean;
+  /** Pointer position in [-1, 1] for camera parallax. */
+  pointerX: number;
+  pointerY: number;
+  /** Discrete focused arm index (-1 = NONE), published by PhysicsField. */
+  focusArm: number;
+  /** Eased focus amount in [0, 1], published by PhysicsField. */
+  focusAmount: number;
+}
+
+const RUNTIME: SceneRuntimeState = {
+  energy: 0,
+  energyTarget: 0,
+  rawProgress: 0,
+  visible: true,
+  pointerX: 0,
+  pointerY: 0,
+  focusArm: -1,
+  focusAmount: 0,
+};
+
+/* --- Scroll / focus / camera tuning (architecture-locked values above) --- */
+const ENERGY_WINDOW_START = 0.16;
+const ENERGY_WINDOW_END = 0.74;
+const MEASURE_FALLBACK_MS = 500;
+const ELEMENT_RETRY_MS = 600;
+const ENERGY_SMOOTH_RATE = 2.2;
+const FOCUS_FADE_UP = 2.2;
+const FOCUS_FADE_DOWN = 3.2;
+const GRAVITY_SOFTEN = 4.0;
+const CONTAINMENT = 0.55;
+const REST_WANDER_AMP = 0.045;
+
+/* --- Dust environment --- */
+const DUST_COUNT = 850;
+const DUST_MIN_RADIUS = 14;
+const DUST_MAX_RADIUS = 60;
+
+/* --- Reference instrumentation rings --- */
+const RING_ARM_OPACITY: readonly number[] = [0.1, 0.1, 0.12, 0.16];
+const RING_OUTER_OPACITY = 0.05;
+const RING_DESATURATE = 0.45;
+const RING_FOCUS_GAIN = 2.1;
+const RING_DIM_FACTOR = 0.5;
+const RING_ROTATION_RATE = 0.01;
+
+/* --- Cinematic camera --- */
+const CAMERA_RADIUS_REST = 17;
+const CAMERA_RADIUS_PULL = 16;
+const CAMERA_PHI_REST = 1.06;
+const CAMERA_PHI_DROP = 0.24;
+const CAMERA_DRIFT_RATE = 0.022;
+const CAMERA_PARALLAX_AZIMUTH = 0.15;
+const CAMERA_PARALLAX_PHI = 0.1;
+const CAMERA_POINTER_RATE = 2.5;
+const CAMERA_EVOLVE_RATE = 1.4;
+
+/* --- Postprocessing targets --- */
+const BLOOM_BASE = 0.52;
+const BLOOM_ENERGY_GAIN = 0.5;
+const BLOOM_FOCUS_GAIN: readonly number[] = [0.28, 0.28, 0.68, 1.75];
+const CA_ENERGY_GAIN = 2.6;
+const CA_FOCUS_GAIN = 1.6;
+const VIGNETTE_BASE_DARKNESS = 0.78;
+
+/** Reused per-frame matrix — no allocations inside the 200-orb loop. */
+const TMP_MATRIX = new THREE.Matrix4();
+
+/**
+ * Measures local Scene 3 scroll progress against the element with id
+ * "data-vault-scene" (document progress only as a fallback), tracks scene
+ * visibility via IntersectionObserver, and captures pointer parallax.
+ * Passive listeners only mark dirty; a single requestAnimationFrame loop
+ * performs at most one DOM measurement per frame.
+ */
+function SceneRuntimeController({
+  onVisibilityChange,
+}: {
+  onVisibilityChange: (visible: boolean) => void;
+}) {
+  useEffect(() => {
+    let disposed = false;
+    let rafId = 0;
+    let retryTimer: ReturnType<typeof setInterval> | null = null;
+    let observer: IntersectionObserver | null = null;
+    let sceneElement: HTMLElement | null = null;
+    let dirty = true;
+    let lastMeasure = 0;
+
+    const measure = () => {
+      let raw: number;
+      if (sceneElement) {
+        const rect = sceneElement.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        raw = (viewportHeight - rect.top) / (rect.height + viewportHeight);
+      } else {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        raw = max > 1 ? window.scrollY / max : 0;
+      }
+      RUNTIME.rawProgress = clamp01(raw);
+      RUNTIME.energyTarget = smoothstep01(
+        ENERGY_WINDOW_START,
+        ENERGY_WINDOW_END,
+        RUNTIME.rawProgress,
+      );
+    };
+
+    const attachObserver = (element: HTMLElement) => {
+      if (observer) {
+        observer.disconnect();
+      }
+      try {
+        observer = new IntersectionObserver(
+          (entries) => {
+            if (disposed || entries.length === 0) {
+              return;
+            }
+            const visible = entries[entries.length - 1].isIntersecting;
+            if (visible) {
+              dirty = true;
+            }
+            if (RUNTIME.visible !== visible) {
+              RUNTIME.visible = visible;
+              onVisibilityChange(visible);
+            }
+          },
+          { rootMargin: "30% 0px 30% 0px", threshold: 0 },
+        );
+        observer.observe(element);
+      } catch {
+        // IntersectionObserver unavailable: keep the scene active.
+        observer = null;
+      }
+    };
+
+    const tryLocateSceneElement = (): boolean => {
+      if (sceneElement) {
+        return true;
+      }
+      const element = document.getElementById(SCENE_ELEMENT_ID);
+      if (element) {
+        sceneElement = element;
+        attachObserver(element);
+        dirty = true;
+        return true;
+      }
+      return false;
+    };
+
+    const markDirty = () => {
+      dirty = true;
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      RUNTIME.pointerX = (event.clientX / window.innerWidth) * 2 - 1;
+      RUNTIME.pointerY = (event.clientY / window.innerHeight) * 2 - 1;
+    };
+
+    window.addEventListener("scroll", markDirty, { passive: true });
+    window.addEventListener("resize", markDirty, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    if (!tryLocateSceneElement()) {
+      retryTimer = setInterval(() => {
+        if (tryLocateSceneElement() && retryTimer) {
+          clearInterval(retryTimer);
+          retryTimer = null;
+        }
+      }, ELEMENT_RETRY_MS);
+    }
+
+    const tick = (now: number) => {
+      if (disposed) {
+        return;
+      }
+      if (RUNTIME.visible && (dirty || now - lastMeasure >= MEASURE_FALLBACK_MS)) {
+        measure();
+        dirty = false;
+        lastMeasure = now;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      disposed = true;
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", markDirty);
+      window.removeEventListener("resize", markDirty);
+      window.removeEventListener("pointermove", onPointerMove);
+      if (retryTimer) {
+        clearInterval(retryTimer);
+        retryTimer = null;
+      }
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+    };
+  }, [onVisibilityChange]);
+
+  return null;
+}
+
+/* ============================================================================
+ * PHYSICS FIELD — ONE InstancedMesh FOR ALL 200 EMPIRICAL RUNS
+ *
+ * Escape classification was fixed at deterministic data construction by
+ * vLaunch > sqrt((2 * GM) / radius0). This loop only integrates real
+ * frame-based forces: softened central gravity (emerging with scroll
+ * energy), a home spring that reforms the empirical field at rest, radial
+ * tightening + swirl for bound runs, outward thrust + swirl + soft
+ * containment for equation-classified escape runs, drag, and restoration
+ * damping. No position lerping, no per-frame allocations, no setState.
+ * ==========================================================================*/
+
+function PhysicsField() {
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const focusRef = useRef({ arm: -1, target: -1, amount: 0 });
+
+  const geometry = useMemo(() => {
+    const geo = new THREE.IcosahedronGeometry(1, 3);
+    geo.setAttribute(
+      "aDistance",
+      new THREE.InstancedBufferAttribute(ATTRS.distance, 1),
+    );
+    geo.setAttribute("aArm", new THREE.InstancedBufferAttribute(ATTRS.arm, 1));
+    geo.setAttribute("aSeed", new THREE.InstancedBufferAttribute(ATTRS.seed, 1));
+    geo.setAttribute(
+      "aEscape",
+      new THREE.InstancedBufferAttribute(ATTRS.escape, 1),
+    );
+    geo.setAttribute(
+      "aExcess",
+      new THREE.InstancedBufferAttribute(ATTRS.excess, 1),
+    );
+    geo.setAttribute(
+      "aColor",
+      new THREE.InstancedBufferAttribute(ATTRS.color, 3),
+    );
+    return geo;
+  }, []);
+
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader: ORB_VERTEX_SHADER,
+        fragmentShader: ORB_FRAGMENT_SHADER,
+        uniforms: {
+          uTime: { value: 0 },
+          uEnergy: { value: 0 },
+          uFocusArmIndex: { value: -1 },
+          uFocusAmount: { value: 0 },
+          uFocusBoost: { value: 0 },
+        },
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
+    [],
+  );
+
+  // Seed the instance matrices before the first rendered frame so the
+  // empirical field exists immediately, and mark the matrix buffer dynamic.
+  useLayoutEffect(() => {
+    const mesh = meshRef.current;
+    if (!mesh) {
+      return;
+    }
+    mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    for (let i = 0; i < SCENE3_RUN_COUNT; i++) {
+      const i3 = i * 3;
+      const s = FIELD.baseScale[i];
+      TMP_MATRIX.makeScale(s, s, s);
+      TMP_MATRIX.setPosition(FIELD.home[i3], FIELD.home[i3 + 1], FIELD.home[i3 + 2]);
+      mesh.setMatrixAt(i, TMP_MATRIX);
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+  }, []);
+
+  useEffect(() => {
+    const mesh = meshRef.current;
+    return () => {
+      geometry.dispose();
+      material.dispose();
+      mesh?.dispose();
+    };
+  }, [geometry, material]);
+
+  useFrame((state, delta) => {
+    const mesh = meshRef.current;
+    if (!mesh || !RUNTIME.visible) {
+      return;
+    }
+
+    const dt = Math.min(delta, MAX_DELTA);
+    const time = state.clock.elapsedTime;
+
+    // Frame-rate-independent scroll energy easing.
+    RUNTIME.energy +=
+      (RUNTIME.energyTarget - RUNTIME.energy) *
+      (1 - Math.exp(-dt * ENERGY_SMOOTH_RATE));
+
+    // Focus state machine: fade the current arm down, switch the discrete
+    // arm only near zero, then fade the new arm up. Never interpolates
+    // numerically through unrelated arm identifiers.
+    const activeArm = useDataVaultStore.getState().activeArm;
+    const focus = focusRef.current;
+    focus.target = ARM_INDEX[activeArm];
+    if (focus.arm !== focus.target) {
+      focus.amount = Math.max(0, focus.amount - dt * FOCUS_FADE_DOWN);
+      if (focus.amount <= 1e-4) {
+        focus.amount = 0;
+        focus.arm = focus.target;
+      }
+    } else if (focus.arm === -1) {
+      focus.amount = 0;
+    } else {
+      focus.amount = Math.min(1, focus.amount + dt * FOCUS_FADE_UP);
+    }
+    const focusEase =
+      focus.amount * focus.amount * (3 - 2 * focus.amount);
+    const focusBoost = focus.arm >= 0 && focus.arm < 4 ? FOCUS_BOOST[focus.arm] : 0;
+
+    RUNTIME.focusArm = focus.arm;
+    RUNTIME.focusAmount = focusEase;
+
+    const energy = RUNTIME.energy;
+    const homeBlend = 1 - energy;
+
+    const pos = FIELD.position;
+    const vel = FIELD.velocity;
+    const home = FIELD.home;
+    const tangent = FIELD.tangent;
+    const radius0 = FIELD.radius0;
+    const escaped = FIELD.escaped;
+    const excess = FIELD.excess;
+    const baseScale = FIELD.baseScale;
+    const seed = FIELD.seed;
+
+    for (let i = 0; i < SCENE3_RUN_COUNT; i++) {
+      const i3 = i * 3;
+      let px = pos[i3];
+      let py = pos[i3 + 1];
+      let pz = pos[i3 + 2];
+      let vx = vel[i3];
+      let vy = vel[i3 + 1];
+      let vz = vel[i3 + 2];
+
+      const r = Math.sqrt(px * px + py * py + pz * pz) || 1e-6;
+      const invR = 1 / r;
+      const dx = px * invR;
+      const dy = py * invR;
+      const dz = pz * invR;
+
+      let ax = 0;
+      let ay = 0;
+      let az = 0;
+
+      // Softened central gravity — the centroid becomes a gravity well as
+      // scroll energy rises.
+      const gMag = (GM / (r * r + GRAVITY_SOFTEN)) * energy;
+      ax -= dx * gMag;
+      ay -= dy * gMag;
+      az -= dz * gMag;
+
+      // At rest the home spring reforms the exact empirical field.
+      if (homeBlend > 0.001) {
+        const homeK = HOME_SPRING * homeBlend;
+        ax += (home[i3] - px) * homeK;
+        ay += (home[i3 + 1] - py) * homeK;
+        az += (home[i3 + 2] - pz) * homeK;
+      }
+
+      let drag: number;
+      if (escaped[i] === 1) {
+        // Equation-classified escape run: outward thrust scales with the
+        // measured escape excess, tangential swirl spirals it through the
+        // field, and soft containment beyond R_SOFT prevents hard stops.
+        const thrust = ESCAPE_THRUST * (0.4 + 0.6 * excess[i]) * energy;
+        ax += dx * thrust;
+        ay += dy * thrust;
+        az += dz * thrust;
+
+        const swirl = ESCAPED_SWIRL * energy;
+        ax += tangent[i3] * swirl;
+        ay += tangent[i3 + 1] * swirl;
+        az += tangent[i3 + 2] * swirl;
+
+        if (r > R_SOFT) {
+          const contain = (r - R_SOFT) * CONTAINMENT;
+          ax -= dx * contain;
+          ay -= dy * contain;
+          az -= dz * contain;
+        }
+        drag = DRAG_ESCAPED;
+      } else {
+        // Gravitationally bound run: tighten toward radius0 * 0.86 while
+        // gravity still pulls inward — the bound population stays inside.
+        const rTarget = radius0[i] * TRAPPED_TIGHTEN;
+        const radial = (rTarget - r) * SPRING_TRAPPED * energy;
+        ax += dx * radial;
+        ay += dy * radial;
+        az += dz * radial;
+
+        const swirl = TRAPPED_SWIRL * energy;
+        ax += tangent[i3] * swirl;
+        ay += tangent[i3 + 1] * swirl;
+        az += tangent[i3 + 2] * swirl;
+        drag = DRAG_TRAPPED;
+      }
+
+      // Real frame-integrated velocity.
+      vx += ax * dt;
+      vy += ay * dt;
+      vz += az * dt;
+
+      // Regime drag plus low-energy restoration damping.
+      let damp = Math.exp(-dt * drag * (0.2 + 0.8 * energy));
+      if (homeBlend > 0.001) {
+        damp *= Math.exp(-dt * homeBlend * REST_DAMP_RATE);
+      }
+      vx *= damp;
+      vy *= damp;
+      vz *= damp;
+
+      px += vx * dt;
+      py += vy * dt;
+      pz += vz * dt;
+
+      pos[i3] = px;
+      pos[i3 + 1] = py;
+      pos[i3 + 2] = pz;
+      vel[i3] = vx;
+      vel[i3 + 1] = vy;
+      vel[i3 + 2] = vz;
+
+      // Instance matrix: distance-driven base scale plus a tiny deterministic
+      // rest wander that keeps the field alive without touching physics state.
+      const s = baseScale[i];
+      const wanderAmp = homeBlend * REST_WANDER_AMP;
+      const orbSeed = seed[i];
+      TMP_MATRIX.makeScale(s, s, s);
+      TMP_MATRIX.setPosition(
+        px + Math.sin(time * 0.5 + orbSeed * 6.2831853) * wanderAmp,
+        py + Math.sin(time * 0.43 + orbSeed * 12.5663706) * wanderAmp,
+        pz + Math.cos(time * 0.37 + orbSeed * 9.42477796) * wanderAmp,
+      );
+      mesh.setMatrixAt(i, TMP_MATRIX);
+    }
+
+    mesh.instanceMatrix.needsUpdate = true;
+
+    material.uniforms.uTime.value = time;
+    material.uniforms.uEnergy.value = energy;
+    material.uniforms.uFocusArmIndex.value = focus.arm;
+    material.uniforms.uFocusAmount.value = focusEase;
+    material.uniforms.uFocusBoost.value = focusBoost;
+  });
+
+  return (
+    <instancedMesh
+      ref={meshRef}
+      args={[geometry, material, SCENE3_RUN_COUNT]}
+      frustumCulled={false}
+    />
+  );
+}
+
+/* ============================================================================
+ * CENTROID CORE — the embedding centroid / gravity well
+ * ==========================================================================*/
+
+function CentroidCore() {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  const geometry = useMemo(() => new THREE.SphereGeometry(0.55, 48, 24), []);
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader: CORE_VERTEX_SHADER,
+        fragmentShader: CORE_FRAGMENT_SHADER,
+        uniforms: {
+          uTime: { value: 0 },
+          uEnergy: { value: 0 },
+        },
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    return () => {
+      geometry.dispose();
+      material.dispose();
+    };
+  }, [geometry, material]);
+
+  useFrame((state) => {
+    if (!RUNTIME.visible) {
+      return;
+    }
+    const time = state.clock.elapsedTime;
+    const energy = RUNTIME.energy;
+    material.uniforms.uTime.value = time;
+    material.uniforms.uEnergy.value = energy;
+    const mesh = meshRef.current;
+    if (mesh) {
+      const pulse =
+        1 + 0.05 * Math.sin(time * 1.7 + Math.sin(time * 0.53) * 1.3) + 0.22 * energy;
+      mesh.scale.setScalar(pulse);
+    }
+  });
+
+  return <mesh ref={meshRef} args={[geometry, material]} />;
+}
+
+/* ============================================================================
+ * REFERENCE RINGS — empirical measurement instrumentation
+ *
+ * Four faint rings at armMean * DISTANCE_SCALE (NEUTRAL and TOKEN_ONLY
+ * nearly overlap by design — the data places them there) plus a very faint
+ * outer ring near the fade boundary. Focus brightens the focused arm's ring
+ * and dims the others.
+ * ==========================================================================*/
+
+interface RingEntry {
+  geometry: THREE.RingGeometry;
+  material: THREE.ShaderMaterial;
+  baseOpacity: number;
+  armIndex: number;
+}
+
+function ReferenceRings() {
+  const groupRef = useRef<THREE.Group>(null);
+
+  const rings = useMemo<RingEntry[]>(() => {
+    const list: RingEntry[] = [];
+    const instrumentGray = new THREE.Color("#8a93a6");
+
+    for (const armName of SCENE3_ARM_ORDER) {
+      const meta = SCENE3_ARM_META[armName];
+      const radius = meta.mean * DISTANCE_SCALE;
+      const halfWidth = 0.07;
+      const geometry = new THREE.RingGeometry(
+        radius - halfWidth,
+        radius + halfWidth,
+        220,
+        1,
+      );
+      const color = new THREE.Color(meta.color).lerp(instrumentGray, RING_DESATURATE);
+      const baseOpacity = RING_ARM_OPACITY[meta.index];
+      const material = new THREE.ShaderMaterial({
+        vertexShader: RING_VERTEX_SHADER,
+        fragmentShader: RING_FRAGMENT_SHADER,
+        uniforms: {
+          uColor: { value: color },
+          uOpacity: { value: baseOpacity },
+          uInner: { value: radius - halfWidth },
+          uOuter: { value: radius + halfWidth },
+        },
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        side: THREE.DoubleSide,
+      });
+      list.push({ geometry, material, baseOpacity, armIndex: meta.index });
+    }
+
+    // Very faint outer instrumentation ring near the fade boundary.
+    const outerRadius = FADE_END;
+    const outerGeometry = new THREE.RingGeometry(
+      outerRadius - 0.22,
+      outerRadius + 0.22,
+      260,
+      1,
+    );
+    const outerMaterial = new THREE.ShaderMaterial({
+      vertexShader: RING_VERTEX_SHADER,
+      fragmentShader: RING_FRAGMENT_SHADER,
+      uniforms: {
+        uColor: { value: new THREE.Color("#8a93a6") },
+        uOpacity: { value: RING_OUTER_OPACITY },
+        uInner: { value: outerRadius - 0.22 },
+        uOuter: { value: outerRadius + 0.22 },
+      },
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide,
+    });
+    list.push({
+      geometry: outerGeometry,
+      material: outerMaterial,
+      baseOpacity: RING_OUTER_OPACITY,
+      armIndex: -1,
+    });
+
+    return list;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      for (const ring of rings) {
+        ring.geometry.dispose();
+        ring.material.dispose();
+      }
+    };
+  }, [rings]);
+
+  useFrame((_, delta) => {
+    if (!RUNTIME.visible) {
+      return;
+    }
+    const dt = Math.min(delta, MAX_DELTA);
+
+    // Extremely slow in-plane rotation: instrumentation that feels alive.
+    const group = groupRef.current;
+    if (group) {
+      group.rotation.y += dt * RING_ROTATION_RATE;
+    }
+
+    const focusArm = RUNTIME.focusArm;
+    const focusAmount = RUNTIME.focusAmount;
+    const blend = 1 - Math.exp(-dt * 6);
+    for (let i = 0; i < rings.length; i++) {
+      const ring = rings[i];
+      let target = ring.baseOpacity;
+      if (focusArm >= 0 && focusAmount > 0.001) {
+        target =
+          ring.armIndex === focusArm
+            ? ring.baseOpacity * RING_FOCUS_GAIN
+            : ring.baseOpacity * RING_DIM_FACTOR;
+      }
+      const uniform = ring.material.uniforms.uOpacity;
+      uniform.value += (target - uniform.value) * blend;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      {rings.map((ring, index) => (
+        <mesh
+          key={index}
+          geometry={ring.geometry}
+          material={ring.material}
+          rotation={[-Math.PI / 2, 0, 0]}
+        />
+      ))}
+    </group>
+  );
+}
+
+/* ============================================================================
+ * DUST FIELD — sparse environmental depth cues (deterministic)
+ * ==========================================================================*/
+
+function DustField() {
+  const geometry = useMemo(() => {
+    const rng = mulberry32(0x5eedd057);
+    const positions = new Float32Array(DUST_COUNT * 3);
+    const seeds = new Float32Array(DUST_COUNT);
+    const scales = new Float32Array(DUST_COUNT);
+    for (let i = 0; i < DUST_COUNT; i++) {
+      const u = rng() * 2 - 1;
+      const angle = rng() * Math.PI * 2;
+      const s = Math.sqrt(Math.max(0, 1 - u * u));
+      const radius = DUST_MIN_RADIUS + (DUST_MAX_RADIUS - DUST_MIN_RADIUS) * rng();
+      const i3 = i * 3;
+      positions[i3] = s * Math.cos(angle) * radius;
+      positions[i3 + 1] = u * radius;
+      positions[i3 + 2] = s * Math.sin(angle) * radius;
+      seeds[i] = rng();
+      scales[i] = 0.6 + rng() * 1.2;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 1));
+    geo.setAttribute("aScale", new THREE.BufferAttribute(scales, 1));
+    return geo;
+  }, []);
+
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader: DUST_VERTEX_SHADER,
+        fragmentShader: DUST_FRAGMENT_SHADER,
+        uniforms: { uTime: { value: 0 } },
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    return () => {
+      geometry.dispose();
+      material.dispose();
+    };
+  }, [geometry, material]);
+
+  useFrame((state) => {
+    if (!RUNTIME.visible) {
+      return;
+    }
+    material.uniforms.uTime.value = state.clock.elapsedTime;
+  });
+
+  return <points args={[geometry, material]} frustumCulled={false} />;
+}
+
+/* ============================================================================
+ * CAMERA RIG — cinematic autonomous camera
+ *
+ * No OrbitControls. Very slow orbital drift, scroll-dependent phi/radius
+ * (pulling back as the escape develops), subtle pointer parallax, and tiny
+ * handheld sinusoidal drift. Always looks toward the centroid.
+ * ==========================================================================*/
+
+function CameraRig() {
+  const rigRef = useRef({
+    azimuth: 0.65,
+    phi: 1.12,
+    radius: 18.5,
+    pointerX: 0,
+    pointerY: 0,
+  });
+
+  useFrame((state, delta) => {
+    if (!RUNTIME.visible) {
+      return;
+    }
+    const dt = Math.min(delta, MAX_DELTA);
+    const time = state.clock.elapsedTime;
+    const rig = rigRef.current;
+
+    // Smoothed pointer parallax.
+    const pointerBlend = 1 - Math.exp(-dt * CAMERA_POINTER_RATE);
+    rig.pointerX += (RUNTIME.pointerX - rig.pointerX) * pointerBlend;
+    rig.pointerY += (RUNTIME.pointerY - rig.pointerY) * pointerBlend;
+
+    const energy = RUNTIME.energy;
+
+    // Scroll pulls the camera back and lowers the eye as escape develops.
+    const radiusTarget = CAMERA_RADIUS_REST + CAMERA_RADIUS_PULL * energy;
+    const phiTarget = CAMERA_PHI_REST + CAMERA_PHI_DROP * energy;
+    const evolve = 1 - Math.exp(-dt * CAMERA_EVOLVE_RATE);
+    rig.radius += (radiusTarget - rig.radius) * evolve;
+    rig.phi += (phiTarget - rig.phi) * evolve;
+
+    // Very slow autonomous orbital drift.
+    rig.azimuth += dt * CAMERA_DRIFT_RATE;
+
+    const azimuth =
+      rig.azimuth +
+      rig.pointerX * CAMERA_PARALLAX_AZIMUTH +
+      Math.sin(time * 0.1) * 0.04;
+    const phi = clamp(
+      rig.phi - rig.pointerY * CAMERA_PARALLAX_PHI + Math.sin(time * 0.13) * 0.02,
+      0.32,
+      1.46,
+    );
+
+    const sinPhi = Math.sin(phi);
+    const x = rig.radius * sinPhi * Math.sin(azimuth);
+    const y = rig.radius * Math.cos(phi);
+    const z = rig.radius * sinPhi * Math.cos(azimuth);
+
+    // Tiny handheld drift keeps the frame alive without spinning.
+    const handheldX = Math.sin(time * 0.27) * 0.06 + Math.sin(time * 0.61) * 0.02;
+    const handheldY = Math.cos(time * 0.23) * 0.05;
+
+    const camera = state.camera;
+    camera.position.set(x + handheldX, y + handheldY, z);
+    camera.lookAt(rig.pointerX * 0.7, -rig.pointerY * 0.4, 0);
+  });
+
+  return null;
+}
+
+/* ============================================================================
+ * POSTPROCESSING — Bloom / ChromaticAberration / Vignette / ToneMapping
+ *
+ * Effect parameters are animated imperatively through effect refs inside a
+ * priority-0 useFrame, which always runs before the composer's render pass.
+ * ==========================================================================*/
+
+function PostFX() {
+  const bloomRef = useRef<BloomEffect | null>(null);
+  const chromaticRef = useRef<ChromaticAberrationEffect | null>(null);
+  const vignetteRef = useRef<VignetteEffect | null>(null);
+  const caOffset = useMemo(() => new THREE.Vector2(0.0005, 0.0007), []);
+
+  useFrame(() => {
+    if (!RUNTIME.visible) {
+      return;
+    }
+    const energy = RUNTIME.energy;
+    const focusArm = RUNTIME.focusArm;
+    const focusAmount = RUNTIME.focusAmount;
+    const focusGain =
+      focusArm >= 0 && focusArm < BLOOM_FOCUS_GAIN.length
+        ? BLOOM_FOCUS_GAIN[focusArm] * focusAmount
+        : 0;
+    const conexusFocus = focusArm === 3 ? focusAmount : 0;
+
+    // Bloom: restrained at rest, energy adds, focus escalates by condition —
+    // CONEXUS focus is dramatically stronger but stays legible.
+    const bloom = bloomRef.current;
+    if (bloom) {
+      bloom.intensity = BLOOM_BASE + BLOOM_ENERGY_GAIN * energy + focusGain;
+    }
+
+    // Chromatic aberration: subtle at rest, grows mainly with E^2 and with
+    // CONEXUS focus; radial modulation keeps it reading near the edges.
+    const chromatic = chromaticRef.current;
+    if (chromatic) {
+      const growth = 1 + CA_ENERGY_GAIN * energy * energy + CA_FOCUS_GAIN * conexusFocus;
+      chromatic.offset.set(0.0005 * growth, 0.0007 * growth);
+    }
+
+    // Vignette: darkens the absolute edges, subtly deepening with energy.
+    const vignette = vignetteRef.current;
+    if (vignette) {
+      vignette.darkness = Math.min(
+        0.94,
+        VIGNETTE_BASE_DARKNESS + 0.07 * energy + 0.06 * conexusFocus,
+      );
+    }
+  });
+
+  return (
+    <EffectComposer multisampling={0}>
+      <Bloom
+        ref={bloomRef}
+        mipmapBlur
+        intensity={BLOOM_BASE}
+        luminanceThreshold={0.19}
+        luminanceSmoothing={0.34}
+        radius={0.72}
+      />
+      <ChromaticAberration
+        ref={chromaticRef}
+        offset={caOffset}
+        radialModulation
+        modulationOffset={0.41}
+      />
+      <Vignette
+        ref={vignetteRef}
+        eskil={false}
+        offset={0.23}
+        darkness={VIGNETTE_BASE_DARKNESS}
+      />
+      <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+    </EffectComposer>
+  );
+}
+
+/* ============================================================================
+ * SCENE ROOT
+ * ==========================================================================*/
+
+function SceneRoot() {
+  return (
+    <>
+      <color attach="background" args={["#020204"]} />
+      <PhysicsField />
+      <CentroidCore />
+      <ReferenceRings />
+      <DustField />
+      <CameraRig />
+      <PostFX />
+    </>
+  );
+}
+
+/* ============================================================================
+ * DEFAULT EXPORT — CAUSAL DATA CLOUD CANVAS
+ *
+ * The canvas renders a flat linear HDR frame that the postprocessing stack
+ * tone-maps coherently. When the scene runway is genuinely offscreen, the
+ * render loop pauses entirely (frameloop "never") and the sonification
+ * fades to silence; both resume when the scene returns.
+ * ==========================================================================*/
+
+export default function CausalDataCloudCanvas() {
+  const [active, setActive] = useState(true);
+
+  const handleVisibilityChange = useCallback((visible: boolean) => {
+    setActive(visible);
+  }, []);
+
+  // Fade sonification to silence while the scene is offscreen and restore
+  // the store's focused arm when it returns. Before unlock this only
+  // records the pending arm and creates no audio resources.
+  useEffect(() => {
+    VAULT_AUDIO.setActiveArm(
+      active ? useDataVaultStore.getState().activeArm : "NONE",
+    );
+  }, [active]);
+
+  // Full audio teardown when the scene unmounts; the engine recreates
+  // itself if the user returns and unlocks again.
+  useEffect(() => {
+    return () => {
+      VAULT_AUDIO.dispose();
+    };
+  }, []);
+
+  return (
+    <>
+      <SceneRuntimeController onVisibilityChange={handleVisibilityChange} />
+      <Canvas
+        flat
+        dpr={[1, 2]}
+        frameloop={active ? "always" : "never"}
+        gl={{
+          antialias: false,
+          alpha: false,
+          stencil: false,
+          powerPreference: "high-performance",
+        }}
+        camera={{
+          fov: CAMERA_FOV,
+          near: 0.1,
+          far: CAMERA_FAR,
+          position: [0, 7.5, 17.5],
+        }}
+      >
+        <SceneRoot />
+      </Canvas>
+    </>
+  );
+}

@@ -5,10 +5,10 @@ import { motion } from "motion/react";
 import { useFocusMode } from "./FocusContext";
 
 const SECTIONS = [
-  { label: "REFINERY", href: "#refinery" },
+  { label: "REFINERY", href: "/ledger#refinery" },
   { label: "EVIDENCE", href: "/evidence" },
   { label: "PRODUCTS", href: "/nairthex" },
-  { label: "TEAM", href: "#team" },
+  { label: "TEAM", href: "/ledger#team" },
   { label: "MANIFESTO", href: "/echoform" },
 ] as const;
 
@@ -26,7 +26,7 @@ export default function GlobalNav() {
       }`}
     >
       <div className="mx-auto grid max-w-[1600px] grid-cols-12 items-center px-4 py-3 md:px-8">
-        <a href="#top" className="col-span-6 flex items-center gap-3 md:col-span-3">
+        <a href="/ledger#top" className="col-span-6 flex items-center gap-3 md:col-span-3">
           <Image
             src="/logos/CONEXUS LOGO.png"
             alt="CONEXUS"
@@ -47,10 +47,22 @@ export default function GlobalNav() {
             </a>
           ))}
         </nav>
-        <div className="col-span-6 flex justify-end md:hidden">
+        <a
+          href="/"
+          className="col-span-3 hidden justify-self-end text-[0.6rem] uppercase tracking-[0.2em] text-data/60 transition-colors hover:text-ember md:block"
+        >
+          RETURN TO VAULT
+        </a>
+        <div className="col-span-6 flex items-center justify-end gap-4 md:hidden">
           <span className="text-[0.65rem] uppercase tracking-[0.25em] text-data/50">
             CONEXUS/2.0
           </span>
+          <a
+            href="/"
+            className="text-[0.6rem] uppercase tracking-[0.18em] text-data/70 transition-colors hover:text-ember"
+          >
+            RETURN TO VAULT
+          </a>
         </div>
       </div>
     </motion.header>

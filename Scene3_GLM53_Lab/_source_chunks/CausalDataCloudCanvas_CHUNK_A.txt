@@ -1,0 +1,372 @@
+"use client";
+
+import { useEffect, useMemo, useRef } from "react";
+import * as THREE from "three";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  Bloom,
+  ChromaticAberration,
+  EffectComposer,
+  ToneMapping,
+  Vignette,
+} from "@react-three/postprocessing";
+import {
+  BloomEffect,
+  ChromaticAberrationEffect,
+  ToneMappingMode,
+  VignetteEffect,
+} from "postprocessing";
+import { useDataVaultStore } from "../store/useDataVaultStore";
+import type { ArmIdentifier } from "../store/useDataVaultStore";
+import {
+  SCENE3_ARM_META,
+  SCENE3_ARM_ORDER,
+  SCENE3_RUN_COUNT,
+  SCENE3_RUNS_PER_ARM,
+  type Scene3ArmName,
+} from "../data/scene3ValidationData";
+
+/* ============================================================================
+ * TYPES — mutable physics state + static instanced attributes for 200 runs
+ * ==========================================================================*/
+
+interface FieldArrays {
+  /** Current world position per orb (x, y, z) — force-integrated every frame. */
+  position: Float32Array;
+  /** Current world velocity per orb (x, y, z) — real physical state, never lerped. */
+  velocity: Float32Array;
+  /** Deterministic rest position: the empirical field at zero scroll energy. */
+  home: Float32Array;
+  /** Deterministic signed unit tangent used for orbital swirl. */
+  tangent: Float32Array;
+  /** Empirical launch radius: runDistance * DISTANCE_SCALE (never jittered). */
+  radius0: Float32Array;
+  /** Escape classification from vLaunch > sqrt((2 * GM) / radius0). */
+  escaped: Uint8Array;
+  /** Normalized escape excess: min(1, (vLaunch / vEscape - 1) / EXCESS_SPAN). */
+  excess: Float32Array;
+  /** Arm index: 0 CONTROL, 1 NEUTRAL, 2 TOKEN_ONLY, 3 CONEXUS. */
+  arm: Uint8Array;
+  /** Deterministic per-orb seed in [0, 1). */
+  seed: Float32Array;
+  /** Distance-driven base orb scale. */
+  baseScale: Float32Array;
+}
+
+interface AttrArrays {
+  /** Exact run-level semantic distance — the shader's instability input. */
+  distance: Float32Array;
+  arm: Float32Array;
+  seed: Float32Array;
+  escape: Float32Array;
+  excess: Float32Array;
+  /** Linear-space base color per orb (RGB). */
+  color: Float32Array;
+}
+
+interface FieldBundle {
+  field: FieldArrays;
+  attrs: AttrArrays;
+  escapeCounts: Record<Scene3ArmName, number>;
+}
+
+/* ============================================================================
+ * LOCKED CONSTANTS
+ * ==========================================================================*/
+
+/** Scene 3 root element measured for local scroll progress. */
+const SCENE_ELEMENT_ID = "data-vault-scene";
+
+/* --- Empirically derived escape physics (the only classification source) --- */
+const GM = 34;
+const K = 10;
+const DISTANCE_SCALE = 35;
+
+/* --- Cinematic dynamics (applied only AFTER the equation classifies) --- */
+const FADE_START = 30;
+const FADE_END = 44;
+const R_SOFT = 38;
+const ESCAPE_THRUST = 3.4;
+const TRAPPED_SWIRL = 1.2;
+const ESCAPED_SWIRL = 0.8;
+const HOME_SPRING = 1.1;
+const SPRING_TRAPPED = 0.6;
+const DRAG_TRAPPED = 1.5;
+const DRAG_ESCAPED = 0.3;
+const TRAPPED_TIGHTEN = 0.86;
+const REST_DAMP_RATE = 2.2;
+const MAX_DELTA = 0.05;
+
+/* --- Deterministic placement --- */
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
+const ARM_PHASE: readonly [number, number, number, number] = [0.0, 1.7, 3.1, 4.9];
+const DIRECTION_JITTER = 0.12;
+
+/* --- Distance-driven scale + escape excess normalization --- */
+const INSTABILITY_LOW = 0.2;
+const INSTABILITY_HIGH = 0.315;
+const BASE_SCALE_MIN = 0.105;
+const BASE_SCALE_RANGE = 0.085;
+const EXCESS_SPAN = 0.25;
+
+/* --- Focus treatment (indexed by arm index) --- */
+const FOCUS_BOOST: readonly [number, number, number, number] = [0.3, 0.3, 0.45, 0.65];
+const ARM_INDEX: Record<ArmIdentifier, number> = {
+  NONE: -1,
+  CONTROL: 0,
+  NEUTRAL: 1,
+  TOKEN_ONLY: 2,
+  CONEXUS: 3,
+};
+
+/* --- Camera framing --- */
+const CAMERA_FOV = 42;
+const CAMERA_FAR = 220;
+
+/* ============================================================================
+ * DETERMINISTIC HELPERS
+ * ==========================================================================*/
+
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function clamp(v: number, min: number, max: number): number {
+  return v < min ? min : v > max ? max : v;
+}
+
+function clamp01(v: number): number {
+  return clamp(v, 0, 1);
+}
+
+function smoothstep01(edge0: number, edge1: number, x: number): number {
+  const t = clamp01((x - edge0) / (edge1 - edge0));
+  return t * t * (3 - 2 * t);
+}
+
+/* ============================================================================
+ * DATA -> SPACE + EMPIRICALLY DERIVED ESCAPE CLASSIFICATION
+ *
+ * For each of the 200 canonical runs:
+ *
+ *   radius0  = runDistance * DISTANCE_SCALE
+ *   vLaunch  = armMean * K
+ *   vEscape  = sqrt((2 * GM) / radius0)
+ *   escaped  = vLaunch > vEscape
+ *
+ * The escaped flag is computed ONLY from that equation. Arm identity never
+ * determines classification; it only contributes the arm mean as a physical
+ * launch velocity, exactly as the study measured it.
+ *
+ * Placement uses a per-arm Fibonacci sphere with deterministic organic
+ * direction jitter. radius0 is never jittered — the radial thickness of each
+ * arm is the real empirical distribution of its 50 runs.
+ * ==========================================================================*/
+
+function buildField(): FieldBundle {
+  const field: FieldArrays = {
+    position: new Float32Array(SCENE3_RUN_COUNT * 3),
+    velocity: new Float32Array(SCENE3_RUN_COUNT * 3),
+    home: new Float32Array(SCENE3_RUN_COUNT * 3),
+    tangent: new Float32Array(SCENE3_RUN_COUNT * 3),
+    radius0: new Float32Array(SCENE3_RUN_COUNT),
+    escaped: new Uint8Array(SCENE3_RUN_COUNT),
+    excess: new Float32Array(SCENE3_RUN_COUNT),
+    arm: new Uint8Array(SCENE3_RUN_COUNT),
+    seed: new Float32Array(SCENE3_RUN_COUNT),
+    baseScale: new Float32Array(SCENE3_RUN_COUNT),
+  };
+
+  const attrs: AttrArrays = {
+    distance: new Float32Array(SCENE3_RUN_COUNT),
+    arm: new Float32Array(SCENE3_RUN_COUNT),
+    seed: new Float32Array(SCENE3_RUN_COUNT),
+    escape: new Float32Array(SCENE3_RUN_COUNT),
+    excess: new Float32Array(SCENE3_RUN_COUNT),
+    color: new Float32Array(SCENE3_RUN_COUNT * 3),
+  };
+
+  const escapeCounts: Record<Scene3ArmName, number> = {
+    CONTROL: 0,
+    NEUTRAL: 0,
+    TOKEN_ONLY: 0,
+    CONEXUS: 0,
+  };
+
+  const armColor = new THREE.Color();
+  let index = 0;
+
+  for (const armName of SCENE3_ARM_ORDER) {
+    const meta = SCENE3_ARM_META[armName];
+    const armIndex = meta.index;
+    armColor.set(meta.color);
+
+    for (let runIndex = 0; runIndex < SCENE3_RUNS_PER_ARM; runIndex++) {
+      const runDistance = meta.runs[runIndex];
+
+      /* --- Empirically derived escape classification (single source of truth) --- */
+      const radius0 = runDistance * DISTANCE_SCALE;
+      const vLaunch = meta.mean * K;
+      const vEscape = Math.sqrt((2 * GM) / radius0);
+      const isEscaped = vLaunch > vEscape;
+      const excess = isEscaped
+        ? Math.min(1, (vLaunch / vEscape - 1) / EXCESS_SPAN)
+        : 0;
+
+      /* --- Deterministic per-orb RNG (stable across reloads) --- */
+      const rng = mulberry32(
+        (armIndex * SCENE3_RUNS_PER_ARM + runIndex + 1) * 2654435761,
+      );
+      const seed = rng();
+
+      /* --- Fibonacci-sphere direction + deterministic organic jitter --- */
+      const y = 1 - (2 * (runIndex + 0.5)) / SCENE3_RUNS_PER_ARM;
+      const horizontal = Math.sqrt(Math.max(0, 1 - y * y));
+      const theta = GOLDEN_ANGLE * runIndex + ARM_PHASE[armIndex];
+
+      let dx = Math.cos(theta) * horizontal + (rng() * 2 - 1) * DIRECTION_JITTER;
+      let dy = y + (rng() * 2 - 1) * DIRECTION_JITTER;
+      let dz = Math.sin(theta) * horizontal + (rng() * 2 - 1) * DIRECTION_JITTER;
+
+      const dirLength = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      dx /= dirLength;
+      dy /= dirLength;
+      dz /= dirLength;
+
+      /* --- Home position: empirical radius, never jittered --- */
+      const i3 = index * 3;
+      const homeX = dx * radius0;
+      const homeY = dy * radius0;
+      const homeZ = dz * radius0;
+
+      field.home[i3] = homeX;
+      field.home[i3 + 1] = homeY;
+      field.home[i3 + 2] = homeZ;
+      field.position[i3] = homeX;
+      field.position[i3 + 1] = homeY;
+      field.position[i3 + 2] = homeZ;
+      field.velocity[i3] = 0;
+      field.velocity[i3 + 1] = 0;
+      field.velocity[i3 + 2] = 0;
+
+      /* --- Deterministic signed tangent (coherent azimuthal swirl) ---
+       * cross(worldUp, dir); near the poles fall back to cross(dir, xAxis). */
+      let tx = dz;
+      let ty = 0;
+      let tz = -dx;
+      let tangentLength = Math.sqrt(tx * tx + tz * tz);
+      if (tangentLength < 1e-4) {
+        tx = 0;
+        ty = dz;
+        tz = -dy;
+        tangentLength = Math.sqrt(ty * ty + tz * tz) || 1;
+      }
+      field.tangent[i3] = tx / tangentLength;
+      field.tangent[i3 + 1] = ty / tangentLength;
+      field.tangent[i3 + 2] = tz / tangentLength;
+
+      /* --- Distance-driven geometry: instability rises with measured distance --- */
+      const instability = smoothstep01(
+        INSTABILITY_LOW,
+        INSTABILITY_HIGH,
+        runDistance,
+      );
+      const baseScale = BASE_SCALE_MIN + BASE_SCALE_RANGE * instability;
+
+      field.radius0[index] = radius0;
+      field.escaped[index] = isEscaped ? 1 : 0;
+      field.excess[index] = excess;
+      field.arm[index] = armIndex;
+      field.seed[index] = seed;
+      field.baseScale[index] = baseScale;
+
+      attrs.distance[index] = runDistance;
+      attrs.arm[index] = armIndex;
+      attrs.seed[index] = seed;
+      attrs.escape[index] = isEscaped ? 1 : 0;
+      attrs.excess[index] = excess;
+      attrs.color[i3] = armColor.r;
+      attrs.color[i3 + 1] = armColor.g;
+      attrs.color[i3 + 2] = armColor.b;
+
+      if (isEscaped) {
+        escapeCounts[armName] += 1;
+      }
+
+      index += 1;
+    }
+  }
+
+  return { field, attrs, escapeCounts };
+}
+
+/* ============================================================================
+ * MODULE-LEVEL DETERMINISTIC FIELD
+ * Built exactly once per page load; identical on every reload.
+ * ==========================================================================*/
+
+const { field: FIELD, attrs: ATTRS, escapeCounts: ESCAPE_COUNTS } = buildField();
+
+/* ============================================================================
+ * DEVELOPMENT ESCAPE-INVARIANT VERIFICATION
+ * Runs once at deterministic data construction — never per frame.
+ * The canonical 4-arm dataset must produce 0 / 0 / 0 / 50 escapes under
+ * vLaunch = armMean * K vs vEscape = sqrt((2 * GM) / (runDistance * DISTANCE_SCALE)).
+ * ==========================================================================*/
+
+if (process.env.NODE_ENV !== "production") {
+  const EXPECTED_ESCAPE: Record<Scene3ArmName, number> = {
+    CONTROL: 0,
+    NEUTRAL: 0,
+    TOKEN_ONLY: 0,
+    CONEXUS: SCENE3_RUNS_PER_ARM,
+  };
+
+  // Independent recount directly from the typed arrays.
+  const recount = [0, 0, 0, 0];
+  for (let i = 0; i < SCENE3_RUN_COUNT; i++) {
+    recount[FIELD.arm[i]] += FIELD.escaped[i];
+  }
+
+  const failures: string[] = [];
+
+  SCENE3_ARM_ORDER.forEach((armName, orderIndex) => {
+    const meta = SCENE3_ARM_META[armName];
+    if (meta.index !== orderIndex) {
+      failures.push(
+        `${armName}: meta.index (${meta.index}) does not match SCENE3_ARM_ORDER position (${orderIndex}).`,
+      );
+    }
+    if (meta.runs.length !== SCENE3_RUNS_PER_ARM) {
+      failures.push(
+        `${armName}: expected ${SCENE3_RUNS_PER_ARM} runs, found ${meta.runs.length}.`,
+      );
+    }
+    const expected = EXPECTED_ESCAPE[armName];
+    if (
+      ESCAPE_COUNTS[armName] !== expected ||
+      recount[meta.index] !== expected
+    ) {
+      failures.push(
+        `${armName}: expected ${expected}/${SCENE3_RUNS_PER_ARM} escapes, ` +
+          `equation produced ${ESCAPE_COUNTS[armName]}/${SCENE3_RUNS_PER_ARM} ` +
+          `(field recount ${recount[meta.index]}/${SCENE3_RUNS_PER_ARM}).`,
+      );
+    }
+  });
+
+  if (failures.length > 0) {
+    throw new Error(
+      "[CausalDataCloudCanvas] Empirical escape invariant violated — the canonical " +
+        "4-arm dataset no longer produces 0 / 0 / 0 / 50 escapes under " +
+        `vLaunch = armMean * ${K} vs vEscape = sqrt((2 * ${GM}) / (runDistance * ${DISTANCE_SCALE})).\n` +
+        failures.join("\n"),
+    );
+  }
+}
