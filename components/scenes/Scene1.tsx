@@ -45,7 +45,7 @@ export default function Scene1() {
   }, [phase]);
 
   return (
-    <section className="flex h-full w-full flex-col items-center justify-center gap-5 overflow-hidden px-4 py-14 [@media(max-height:650px)]:gap-2.5 [@media(max-height:650px)]:px-3 [@media(max-height:650px)]:py-12 md:gap-8 md:p-16">
+    <section className="flex h-full w-full -translate-y-2 flex-col items-center justify-center gap-5 overflow-hidden px-4 py-14 [@media(max-height:650px)]:-translate-y-1 [@media(max-height:650px)]:gap-2.5 [@media(max-height:650px)]:px-3 [@media(max-height:650px)]:py-12 md:translate-y-0 md:gap-8 md:p-16">
       <div className="w-[calc(100%-5rem)] min-w-0 max-w-5xl -translate-x-6 text-center font-serif leading-[1.15] text-data [@media(max-height:650px)]:leading-[1.08] md:w-full md:translate-x-0 md:leading-tight">
         <span className="block text-[1.75rem] [@media(max-height:650px)]:text-[1.55rem] md:text-[clamp(1.5rem,4vw,3rem)]">
           {typed.split("/").map((line, i, arr) => (
@@ -72,7 +72,7 @@ export default function Scene1() {
         <Link
           href="/ledger"
           aria-label="CONEXUS company site"
-          className="block w-[calc(100vw-6rem)] max-w-[46rem] -translate-x-7 cursor-pointer outline-none md:w-[min(78vw,64rem)] md:translate-x-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
+          className="mt-2 block w-[calc(100vw-6rem)] max-w-[46rem] -translate-x-7 cursor-pointer outline-none [@media(max-height:650px)]:mt-1 md:mt-0 md:w-[min(78vw,64rem)] md:translate-x-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
         >
           <motion.span
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
@@ -98,7 +98,7 @@ export default function Scene1() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-[90vw] text-center font-mono text-[0.9rem] uppercase leading-relaxed tracking-[0.16em] text-white/70 [@media(max-height:650px)]:text-[0.8rem] [@media(max-height:650px)]:leading-snug [@media(max-height:650px)]:tracking-[0.12em] md:text-[0.8rem] md:leading-normal md:tracking-[0.2em]"
+          className="mt-2 max-w-[90vw] text-center font-mono text-[0.9rem] uppercase leading-relaxed tracking-[0.16em] text-white/70 [@media(max-height:650px)]:mt-1 [@media(max-height:650px)]:text-[0.8rem] [@media(max-height:650px)]:leading-snug [@media(max-height:650px)]:tracking-[0.12em] md:mt-0 md:text-[0.8rem] md:leading-normal md:tracking-[0.2em]"
         >
           Not another AI company. The solution.
         </motion.p>
