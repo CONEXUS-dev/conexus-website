@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 
 const fullText = "Do I contradict myself? / Very well then I contradict myself, / (I am large, I contain multitudes.)";
@@ -44,9 +45,9 @@ export default function Scene1() {
   }, [phase]);
 
   return (
-    <section className="h-full w-full flex flex-col items-center justify-center gap-8 p-8 md:p-16">
-      <div className="font-serif text-data leading-tight text-center max-w-5xl">
-        <span className="block text-[clamp(1.5rem,4vw,3rem)]">
+    <section className="flex h-full w-full flex-col items-center justify-center gap-5 overflow-hidden px-4 py-14 [@media(max-height:650px)]:gap-2.5 [@media(max-height:650px)]:px-3 [@media(max-height:650px)]:py-12 md:gap-8 md:p-16">
+      <div className="w-[calc(100%-5rem)] min-w-0 max-w-5xl -translate-x-6 text-center font-serif leading-[1.15] text-data [@media(max-height:650px)]:leading-[1.08] md:w-full md:translate-x-0 md:leading-tight">
+        <span className="block text-[1.75rem] [@media(max-height:650px)]:text-[1.55rem] md:text-[clamp(1.5rem,4vw,3rem)]">
           {typed.split("/").map((line, i, arr) => (
             <span key={i} className="block">
               {line}
@@ -61,7 +62,7 @@ export default function Scene1() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.5 }}
-          className="font-mono text-[0.65rem] uppercase tracking-widest text-white/50"
+          className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-white/50 [@media(max-height:650px)]:text-[0.65rem] [@media(max-height:650px)]:tracking-widest md:text-[0.65rem] md:tracking-widest"
         >
           — Walt Whitman
         </motion.p>
@@ -71,16 +72,24 @@ export default function Scene1() {
         <Link
           href="/ledger"
           aria-label="CONEXUS company site"
-          className="cursor-pointer outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
+          className="block w-[calc(100vw-6rem)] max-w-[46rem] -translate-x-7 cursor-pointer outline-none md:w-[min(78vw,64rem)] md:translate-x-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
         >
-          <motion.h1
+          <motion.span
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-[clamp(4rem,12vw,12rem)] tracking-tighter text-data"
+            className="block"
           >
-            CONEXUS
-          </motion.h1>
+            <Image
+              src="/branding/CONEXUS_Logo_White_Transparent.png"
+              alt="CONEXUS"
+              width={2172}
+              height={724}
+              priority
+              sizes="(max-width: 767px) calc(100vw - 96px), min(78vw, 1024px)"
+              className="h-auto w-full"
+            />
+          </motion.span>
         </Link>
       )}
 
@@ -89,7 +98,7 @@ export default function Scene1() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-mono text-[0.8rem] uppercase tracking-[0.2em] text-white/70"
+          className="max-w-[90vw] text-center font-mono text-[0.9rem] uppercase leading-relaxed tracking-[0.16em] text-white/70 [@media(max-height:650px)]:text-[0.8rem] [@media(max-height:650px)]:leading-snug [@media(max-height:650px)]:tracking-[0.12em] md:text-[0.8rem] md:leading-normal md:tracking-[0.2em]"
         >
           Not another AI company. The solution.
         </motion.p>
