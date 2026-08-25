@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 const fullText = "Do I contradict myself? / Very well then I contradict myself, / (I am large, I contain multitudes.)";
 const slowWord = "multitudes";
@@ -67,14 +68,20 @@ export default function Scene1() {
       )}
 
       {phase >= 2 && (
-        <motion.h1 
-          initial={{ opacity: 0, y: 30, scale: 0.9 }} 
-          animate={{ opacity: 1, y: 0, scale: 1 }} 
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(4rem,12vw,12rem)] tracking-tighter text-data"
+        <Link
+          href="/ledger"
+          aria-label="CONEXUS company site"
+          className="cursor-pointer outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
         >
-          CONEXUS
-        </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="font-serif text-[clamp(4rem,12vw,12rem)] tracking-tighter text-data"
+          >
+            CONEXUS
+          </motion.h1>
+        </Link>
       )}
 
       {phase >= 3 && (
