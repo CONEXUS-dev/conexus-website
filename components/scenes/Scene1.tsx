@@ -46,8 +46,8 @@ export default function Scene1() {
 
   return (
     <section className="flex h-full w-full -translate-y-2 flex-col items-center justify-center gap-4 overflow-hidden px-4 py-10 [@media(max-height:650px)]:-translate-y-1 [@media(max-height:650px)]:gap-2.5 [@media(max-height:650px)]:px-3 [@media(max-height:650px)]:py-12 md:translate-y-0 md:gap-8 md:p-16">
-      <div className="w-[calc(100%-5rem)] min-w-0 max-w-5xl -translate-x-6 text-center font-serif leading-[1.08] text-data md:w-full md:translate-x-0 md:leading-tight">
-        <span className="block text-[0.91rem] [@media(max-height:650px)]:text-[0.806rem] md:text-[clamp(1.5rem,4vw,3rem)]">
+      <div className="w-[calc(100%-5rem)] min-w-0 max-w-5xl text-center font-serif leading-[1.08] text-data md:w-full md:leading-tight">
+        <span className="block text-[1.3rem] [@media(max-height:650px)]:text-[1.1rem] md:text-[clamp(1.5rem,4vw,3rem)]">
           {typed.split("/").map((line, i, arr) => (
             <span key={i} className="block">
               {line}
@@ -62,7 +62,7 @@ export default function Scene1() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.5 }}
-          className="font-mono text-[1.0625rem] uppercase tracking-[0.15em] text-white/50 [@media(max-height:650px)]:text-[0.65rem] [@media(max-height:650px)]:tracking-widest md:text-[0.65rem] md:tracking-widest"
+          className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-white/50 [@media(max-height:650px)]:text-[0.65rem] [@media(max-height:650px)]:tracking-widest md:text-[0.65rem] md:tracking-widest"
         >
           — Walt Whitman
         </motion.p>
@@ -70,9 +70,9 @@ export default function Scene1() {
 
       {phase >= 2 && (
         <Link
-          href="/ledger"
+          href="/"
           aria-label="CONEXUS company site"
-          className="mt-2 block w-[364.56px] max-w-[calc(100vw-1rem)] translate-y-[81px] cursor-pointer outline-none [@media(max-height:650px)]:mt-1 [@media(max-height:650px)]:w-[277.76px] [@media(max-height:650px)]:max-w-[calc(100vw-1rem)] [@media(max-height:650px)]:translate-y-[64px] md:mt-0 md:w-[min(78vw,64rem)] md:max-w-[46rem] md:translate-y-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
+          className="mt-2 block w-[calc(100vw-6rem)] translate-y-[40px] cursor-pointer outline-none [@media(max-height:650px)]:mt-1 [@media(max-height:650px)]:translate-y-[32px] md:mt-0 md:w-[min(78vw,64rem)] md:max-w-[46rem] md:translate-y-0 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-white/70"
         >
           <motion.span
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
@@ -86,7 +86,7 @@ export default function Scene1() {
               width={2172}
               height={724}
               priority
-              sizes="(max-width: 767px) calc(100vw - 32px), min(78vw, 1024px)"
+              sizes="(max-width: 767px) calc(100vw - 6rem), min(78vw, 1024px)"
               className="h-auto w-full"
             />
           </motion.span>
@@ -98,7 +98,7 @@ export default function Scene1() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-2 max-w-[90vw] translate-y-[81px] text-center font-mono text-[1.25rem] uppercase leading-snug tracking-[0.12em] text-white/70 [@media(max-height:650px)]:mt-1 [@media(max-height:650px)]:translate-y-[64px] [@media(max-height:650px)]:text-[0.8rem] md:mt-0 md:translate-y-0 md:text-[0.8rem] md:leading-normal md:tracking-[0.2em]"
+          className="mt-2 max-w-[90vw] translate-y-[40px] text-center font-mono text-[0.9rem] uppercase leading-snug tracking-[0.12em] text-white/70 [@media(max-height:650px)]:mt-1 [@media(max-height:650px)]:translate-y-[32px] [@media(max-height:650px)]:text-[0.8rem] md:mt-0 md:translate-y-0 md:text-[0.8rem] md:leading-normal md:tracking-[0.2em]"
         >
           Not another AI company. The solution.
         </motion.p>

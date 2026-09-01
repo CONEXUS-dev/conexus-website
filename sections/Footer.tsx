@@ -43,12 +43,12 @@ export default function Footer() {
             <p className="text-[0.65rem] uppercase tracking-[0.3em] text-data/40">INDEX</p>
             <ul className="mt-4 space-y-2">
               {[
-                ["REFINERY", "/ledger#refinery"],
+                ["REFINERY", "/#refinery"],
                 ["EVIDENCE", "/evidence"],
                 ["PRODUCTS", "/nairthex"],
                 ["NAiRTHEX", "/nairthex"],
                 ["ECHOform", "/echoform"],
-                ["TEAM", "/ledger#team"],
+                ["TEAM", "/#team"],
               ].map(([label, href]) => (
                 <li key={label}>
                   <a

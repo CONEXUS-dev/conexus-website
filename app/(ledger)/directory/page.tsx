@@ -24,7 +24,7 @@ const sections = [
       {
         icon: Home,
         title: "Home",
-        path: "/ledger",
+        path: "/",
         description:
           "The CONEXUS refinery thesis, primary evidence, technology, products, founder, and research program.",
       },

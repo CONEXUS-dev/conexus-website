@@ -144,7 +144,7 @@ export default function ObserverDashboard() {
       <section className="px-4 pb-12 pt-10">
         <div className="mx-auto max-w-7xl">
           <Link
-            href="/ledger"
+            href="/"
             className="mb-10 inline-flex items-center gap-2 text-slate-400 transition hover:text-white"
           >
             <ArrowLeft className="h-5 w-5" />
