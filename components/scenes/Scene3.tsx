@@ -107,7 +107,7 @@ export default function Scene3() {
 
           <div className="mt-auto pb-8 md:pb-14">
             <p className="font-mono text-[0.7rem] tracking-[0.25em] text-white/60 uppercase mb-4">
-              Hover an arm to isolate its runs — sound on
+              Tap / Hover a condition to isolate its runs — sound on
             </p>
 
             <div className="grid grid-cols-4 gap-0 divide-x divide-white/10 border-y border-white/10 py-5 pointer-events-auto md:gap-4 md:py-12">
