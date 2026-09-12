@@ -353,11 +353,10 @@ export const NAiRTHEX_SECTION = {
   product: "CONEXUS Product for Faith and Reflection",
   name: "NAiRTHEX",
   tagline: "A Digital Threshold for Sacred Space",
-  lead: "A private AI reflection companion serving as a quiet foyer before ministry, built on a doctrine of restraint and respect for human authority.",
   enter: { label: "Enter NAiRTHEX", href: "https://the-narthex-staging-564338352424.us-east1.run.app/" },
   howItWorks: { label: "How It Works", href: "https://www.conexusglobalarts.media/nairthex#doctrine" },
-  doctrineNote:
-    "NAiRTHEX is designed as a reflective threshold under human and pastoral authority, not as therapy, clergy, diagnosis, or autonomous decision-making.",
+  lead:
+    "NAiRTHEX is designed as a reflective threshold shaped by restraint, voice and text, and human pastoral authority.",
   doctrine: {
     kicker: "Product Doctrine",
     heading: "The moment before ministry matters.",
@@ -392,7 +391,7 @@ export const NAiRTHEX_SECTION = {
 export const ECHOFORM_SECTION = {
   kicker: "ECHOform Dream Journal & Mirror",
   headings: ["Your dream becomes a symbolic reflection.", "You decide what it means."],
-  lead: "ECHOform turns a dream, memory, or written moment into multiple creative perspectives and visual mirror choices. It does not claim to decode the unconscious or reveal psychological truth.",
+  lead: "ECHOform turns a dream, memory, or written moment into multiple creative perspectives and visual mirror choices, with meaning directed by the user.",
   demo: { label: "Open the Guided Demo", href: "https://conexus-echoform-demo.vercel.app/" },
   howItWorks: { label: "See How It Works", href: "https://www.conexusglobalarts.media/echoform#how-it-works" },
   experience: {
@@ -429,4 +428,48 @@ export const FOOTER = {
   ],
   logo: "/logos/CONEXUS LOGO.png",
   logoDark: "/logos/CONEXUS DARK GLOWING LOGO.png",
+} as const;
+
+export const MISSION_025 = {
+  evidence: {
+    question:
+      "We tested whether CONEXUS changes the way an AI searches for ideas. It did.",
+    result:
+      "Across 200 independent runs, the full CONEXUS architecture pushed the model farther from its ordinary response pattern than any of the three control conditions. More tokens alone did not reproduce the effect.",
+    significance:
+      "That matters because the controlled comparison separates the full architecture from simpler explanations such as a longer exchange or exposure to the visible tokens alone.",
+    method:
+      "The same divergent-thinking task was repeated across four controlled prompt conditions: 50 independent runs per condition and 200 runs in total.",
+    definition:
+      "Think of the model's answers as points on a map. Semantic distance measures how far those answers move away from the usual neighborhood. A higher score means the search reached farther into the measured idea space.",
+    conditions: [
+      { name: "Control", value: "0.2466", descriptor: "Single-turn baseline" },
+      { name: "Neutral", value: "0.2219", descriptor: "Analytical multi-turn" },
+      { name: "Token-only / Arm 4a", value: "0.2258", descriptor: "Visible tokens only" },
+      { name: "CONEXUS", value: "0.2929", descriptor: "Complete sequence" },
+    ],
+    comparisons: [
+      {
+        value: "d = 3.7824",
+        label: "Neutral to CONEXUS",
+        detail:
+          "Very large separation between Neutral and CONEXUS in the tested configuration.",
+      },
+      {
+        value: "p = 0.3612",
+        label: "Neutral vs. token-only",
+        detail: "Token-only prompting did not reproduce the CONEXUS effect.",
+      },
+    ],
+  },
+  founder: {
+    heading: "Founder / Company",
+    statement:
+      "A founder-led company connecting controlled research, calibration and optimization architecture, provenance discipline, and human-facing products.",
+  },
+  footer: {
+    statement:
+      "Calibration, optimization, provenance, and product development grounded in visible evidence.",
+    logo: "/branding/CONEXUS_Logo_White_Transparent.png",
+  },
 } as const;

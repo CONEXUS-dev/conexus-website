@@ -10,7 +10,6 @@ import {
   MessageSquare,
   Mic,
   Shield,
-  XCircle,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -33,7 +32,7 @@ const doctrine = [
     icon: Church,
     title: "Human Authority First",
     description:
-      "NAiRTHEX never replaces pastors, clinicians, sponsors, or community. It protects the moment before ministry.",
+      "Human pastoral authority and community remain central throughout the reflective experience.",
   },
 ];
 
@@ -54,7 +53,7 @@ const capabilities = [
     icon: Church,
     title: "Built for the Threshold",
     description:
-      "A private foyer before ministry, not a replacement for ministry itself.",
+      "A private foyer that protects the reflective moment before human ministry.",
   },
 ];
 
@@ -62,12 +61,6 @@ const isList = [
   "A spiritual reflection aide",
   "One quiet conversation",
   "Under human and pastoral authority",
-];
-
-const isNotList = [
-  "Therapy, confession, or clergy",
-  "A diagnostic or advisory tool",
-  "An autonomous AI decision-maker",
 ];
 
 export default function NairthexPage() {
@@ -146,7 +139,7 @@ export default function NairthexPage() {
           </a>
           <figcaption className="px-3 pb-2 pt-4 text-center text-sm leading-relaxed text-stone-400">
             NAiRTHEX is designed as a reflective threshold under human and pastoral authority,
-            not as therapy, clergy, diagnosis, or autonomous decision-making.
+            shaped by restraint, voice and text, and user control.
           </figcaption>
         </motion.figure>
       </section>
@@ -161,9 +154,8 @@ export default function NairthexPage() {
               The moment before ministry matters.
             </h2>
             <p className="text-lg leading-relaxed text-stone-400">
-              NAiRTHEX does not rush a person toward an answer. It creates a
-              quiet threshold where they can speak honestly, remain whole, and
-              decide what human support comes next.
+              NAiRTHEX creates a quiet threshold where a person can speak
+              honestly, remain whole, and decide what human support comes next.
             </p>
           </div>
 
@@ -195,14 +187,14 @@ export default function NairthexPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-14 max-w-3xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">
-              Operational Boundaries
+              Reflective Experience
             </p>
             <h2 className="text-4xl font-bold md:text-5xl">
               Clear by design.
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="mx-auto max-w-4xl">
             <div className="rounded-2xl border border-emerald-400/20 bg-emerald-950/20 p-8">
               <h3 className="mb-6 text-2xl font-semibold text-emerald-300">
                 NAiRTHEX is
@@ -217,19 +209,6 @@ export default function NairthexPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-rose-400/20 bg-rose-950/20 p-8">
-              <h3 className="mb-6 text-2xl font-semibold text-rose-300">
-                NAiRTHEX is not
-              </h3>
-              <div className="space-y-4">
-                {isNotList.map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <XCircle className="mt-0.5 h-6 w-6 shrink-0 text-rose-400" />
-                    <p className="text-lg text-stone-200">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>

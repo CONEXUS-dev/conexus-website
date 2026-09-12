@@ -30,7 +30,7 @@ const evidence = [
   {
     value: "561%",
     label: "Largest reported relative gap",
-    note: "One stated 3D protein-folding comparison, not a universal rate",
+    note: "One stated 3D protein-folding benchmark comparison",
   },
 ];
 
@@ -53,11 +53,11 @@ const companyLayers = [
 ];
 
 const diligence = [
-  "The four-arm result currently covers one model family, one task, and one configuration.",
-  "Forgetting Engine percentages come from different benchmarks and cannot be combined into one performance score.",
-  "Internal reports and code availability do not substitute for independent replication or peer review.",
-  "Patent filings establish claimed priority positions, not guaranteed issuance, validity, scope, or freedom to operate.",
-  "Product concepts and prototypes are at different stages of deployment, testing, and commercial readiness.",
+  "Four-arm study: one model family, one task, one configuration, and 200 independent runs.",
+  "Forgetting Engine: benchmark-specific percentages with distinct objectives, baselines, and trial counts.",
+  "Technical record: public internal reports, methods, code references, and source paths.",
+  "Intellectual property: patent filings documenting claimed priority positions.",
+  "Products: concepts and prototypes across deployment, testing, and commercial-readiness stages.",
 ];
 
 export default function InvestorsPage() {
@@ -82,7 +82,7 @@ export default function InvestorsPage() {
               CONEXUS is building a common technical foundation beneath
               experimental AI methods and human-facing products. The investment
               case begins with evidence, intellectual property, working
-              prototypes, and the work still required to validate and scale them.
+              prototypes, and a defined path for validation and scale.
             </p>
           </motion.div>
         </div>
@@ -155,17 +155,17 @@ export default function InvestorsPage() {
               <p className="leading-relaxed text-slate-300">
                 Controlled calibration experiments and computational optimization
                 benchmarks are being organized into reproducible evidence
-                packages with explicit limitations.
+                packages with methods, results, and benchmark context.
               </p>
             </div>
             <div className="rounded-3xl border border-violet-400/20 bg-violet-950/15 p-8">
               <ShieldCheck className="mb-5 h-9 w-9 text-violet-300" />
               <h2 className="mb-4 text-2xl font-semibold">IP portfolio</h2>
               <p className="leading-relaxed text-slate-300">
-                Patent filings cover areas including calibration, symbolic
-                compression, strategic forgetting, provenance, and collaborative
-                authorship. Filing status is not a guarantee of issued claims or
-                commercial exclusivity.
+                The filings concern calibration, symbolic compression, strategic
+                forgetting, provenance, and collaborative human-machine
+                authorship, documenting claimed priority positions across the
+                portfolio.
               </p>
             </div>
             <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/15 p-8">
@@ -173,8 +173,8 @@ export default function InvestorsPage() {
               <h2 className="mb-4 text-2xl font-semibold">Product translation</h2>
               <p className="leading-relaxed text-slate-300">
                 NAiRTHEX and ECHOform test how the underlying architecture can
-                support bounded reflection experiences while preserving human
-                authority and clear product limits.
+                support governed reflection experiences while preserving human
+                authority and user-directed interpretation.
               </p>
             </div>
           </div>
@@ -186,15 +186,14 @@ export default function InvestorsPage() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
-                Diligence boundaries
+                Diligence record
               </p>
               <h2 className="mb-5 text-4xl font-bold md:text-5xl">
                 What a serious investor should verify
               </h2>
               <p className="text-lg leading-relaxed text-slate-400">
-                CONEXUS does not present editorial interest, internal audits,
-                patent applications, prototypes, or large effect estimates as
-                substitutes for independent technical and commercial diligence.
+                Review the study scope, benchmark contexts, technical record,
+                patent filings, and product stages directly.
               </p>
             </div>
 
@@ -220,7 +219,7 @@ export default function InvestorsPage() {
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
             The public Evidence page separates measured findings, benchmark
-            results, hypotheses, and limitations. Additional materials are
+              results, hypotheses, and source paths. Additional materials are
             available for qualified diligence.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">

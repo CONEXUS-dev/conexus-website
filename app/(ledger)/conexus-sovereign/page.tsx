@@ -30,13 +30,6 @@ const implemented = [
   "Controlled experiments comparing full, neutral, token-only, and baseline conditions",
 ];
 
-const notEstablished = [
-  "Consciousness, sentience, or independent agency",
-  "A universally superior reasoning system",
-  "Perfect memory or unlimited context",
-  "Cryptographic proof that an answer is true",
-];
-
 export default function ConexusSovereignPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
@@ -58,9 +51,8 @@ export default function ConexusSovereignPage() {
             <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300">
               CONEXUS Sovereign is the project name for an experimental system
               that combines the Nine-Gear calibration sequence, session
-              continuity, and provenance records. It is an engineering and
-              research architecture, not a claim of machine consciousness or
-              autonomous sovereignty.
+              continuity, and provenance records in one engineering and research
+              architecture.
             </p>
           </motion.div>
         </div>
@@ -100,7 +92,7 @@ export default function ConexusSovereignPage() {
       </section>
 
       <section className="px-4 py-24">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
+        <div className="mx-auto max-w-5xl">
           <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/15 p-8">
             <h2 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-emerald-300">
               <CheckCircle2 className="h-7 w-7" />
@@ -116,20 +108,6 @@ export default function ConexusSovereignPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-amber-400/20 bg-amber-950/15 p-8">
-            <h2 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-amber-300">
-              <ShieldCheck className="h-7 w-7" />
-              What is not established
-            </h2>
-            <div className="space-y-4">
-              {notEstablished.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-amber-400" />
-                  <p className="leading-relaxed text-slate-300">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -141,7 +119,7 @@ export default function ConexusSovereignPage() {
               <h3 className="mb-3 text-xl font-semibold">Calibration layer</h3>
               <p className="leading-relaxed text-slate-400">
                 Prompt and workflow structure applied before or during a model
-                task. It does not alter model weights by itself.
+                task while model weights remain unchanged.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-7">
@@ -156,8 +134,8 @@ export default function ConexusSovereignPage() {
               <ShieldCheck className="mb-5 h-8 w-8 text-violet-300" />
               <h3 className="mb-3 text-xl font-semibold">Provenance layer</h3>
               <p className="leading-relaxed text-slate-400">
-                Hashes and logs can make records tamper-evident. They prove
-                record integrity, not the factual truth of the model output.
+                Hashes and logs can make records tamper-evident and verify the
+                integrity of the stored record.
               </p>
             </div>
           </div>

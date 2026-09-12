@@ -16,12 +16,19 @@ interface Particle {
 const PARTICLE_COUNT = 220;
 const GATE_X = 0.58; // refinery column position (fraction of width)
 
-export default function HeroTerminal({ progress }: { progress: MotionValue<number> }) {
+export default function HeroTerminal({
+  progress,
+  ambient = false,
+}: {
+  progress?: MotionValue<number>;
+  ambient?: boolean;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef(0);
 
   useEffect(() => {
-    progress.on("change", (v) => {
+    if (!progress) return;
+    return progress.on("change", (v) => {
       progressRef.current = v;
     });
   }, [progress]);
@@ -63,7 +70,7 @@ export default function HeroTerminal({ progress }: { progress: MotionValue<numbe
     window.addEventListener("resize", resize);
 
     const draw = () => {
-      const p = progressRef.current;
+      const p = ambient ? 0.38 : progressRef.current;
       // refinement intensity rises with scroll; more crude particles get subtracted
       const refineThreshold = 0.35 + p * 0.45;
       const trailAlpha = 0.22 - p * 0.08;
@@ -121,16 +128,18 @@ export default function HeroTerminal({ progress }: { progress: MotionValue<numbe
         }
       }
 
-      // scan index readout tied to scroll
-      ctx.fillStyle = "rgba(255,255,255,0.35)";
-      ctx.font = "10px 'JetBrains Mono', monospace";
-      ctx.fillText(
-        `REFINERY_STREAM // SCROLL_INDEX ${(p * 100).toFixed(1).padStart(5, "0")} / SUBTRACTION ${(
-          refineThreshold * 100
-        ).toFixed(1)}%`,
-        14,
-        height - 14
-      );
+      if (!ambient) {
+        // scan index readout tied to scroll
+        ctx.fillStyle = "rgba(255,255,255,0.35)";
+        ctx.font = "10px 'JetBrains Mono', monospace";
+        ctx.fillText(
+          `REFINERY_STREAM // SCROLL_INDEX ${(p * 100).toFixed(1).padStart(5, "0")} / SUBTRACTION ${(
+            refineThreshold * 100
+          ).toFixed(1)}%`,
+          14,
+          height - 14
+        );
+      }
 
       raf = requestAnimationFrame(draw);
     };
@@ -141,7 +150,7 @@ export default function HeroTerminal({ progress }: { progress: MotionValue<numbe
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [ambient]);
 
   return (
     <canvas

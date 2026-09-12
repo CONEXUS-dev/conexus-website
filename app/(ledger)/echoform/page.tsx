@@ -10,7 +10,6 @@ import {
   MoonStar,
   Play,
   ShieldCheck,
-  XCircle,
 } from "lucide-react";
 
 const DEMO_URL = "https://conexus-echoform-demo.vercel.app";
@@ -62,12 +61,6 @@ const isList = [
   "A user-directed visual experience",
 ];
 
-const isNotList = [
-  "Clinical dream interpretation or psychotherapy",
-  "A diagnostic assessment of personality or mental health",
-  "Proof of hidden meaning, prophecy, memory, or spiritual truth",
-];
-
 export default function EchoformPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
@@ -89,8 +82,8 @@ export default function EchoformPage() {
             </h1>
             <p className="mx-auto mb-10 max-w-4xl text-xl leading-relaxed text-slate-300">
               ECHOform turns a dream, memory, or written moment into multiple
-              creative perspectives and visual mirror choices. It does not claim
-              to decode the unconscious or reveal psychological truth.
+              creative perspectives and visual mirror choices, with meaning
+              directed by the user.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <a
@@ -116,7 +109,7 @@ export default function EchoformPage() {
 
       <section id="how-it-works" className="border-y border-slate-800 px-4 py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-14 max-w-3xl text-center">
+          <div className="mx-auto max-w-4xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
               The Experience
             </p>
@@ -158,11 +151,11 @@ export default function EchoformPage() {
           <div className="mx-auto mb-14 max-w-3xl text-center">
             <Eye className="mx-auto mb-5 h-10 w-10 text-violet-300" />
             <h2 className="mb-5 text-4xl font-bold md:text-5xl">
-              What ECHOform is, and what it is not
+              What ECHOform offers
             </h2>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="mx-auto max-w-4xl">
             <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/15 p-8">
               <h3 className="mb-6 text-2xl font-semibold text-emerald-300">
                 ECHOform is
@@ -177,19 +170,6 @@ export default function EchoformPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-rose-400/20 bg-rose-950/15 p-8">
-              <h3 className="mb-6 text-2xl font-semibold text-rose-300">
-                ECHOform is not
-              </h3>
-              <div className="space-y-4">
-                {isNotList.map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <XCircle className="mt-0.5 h-6 w-6 shrink-0 text-rose-400" />
-                    <p className="text-lg text-slate-200">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -202,8 +182,8 @@ export default function EchoformPage() {
             </h2>
             <p className="text-lg leading-relaxed text-slate-400">
               These screens show the current visual journey. The guided demo
-              uses prepared examples so visitors can examine the flow without
-              treating the output as a personal assessment.
+              uses prepared examples so visitors can examine the flow and its
+              user-directed interpretation.
             </p>
           </div>
 
@@ -234,12 +214,11 @@ export default function EchoformPage() {
         <div className="mx-auto max-w-4xl rounded-3xl border border-violet-400/20 bg-gradient-to-br from-violet-950/25 to-slate-950 p-10 text-center md:p-14">
           <ShieldCheck className="mx-auto mb-5 h-10 w-10 text-violet-300" />
           <h2 className="mb-5 text-3xl font-bold md:text-4xl">
-            The mirror offers language. It does not own your meaning.
+            The mirror offers language. You direct the meaning.
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
-            ECHOform output should be treated as creative reflection, not medical,
-            psychological, legal, financial, or spiritual advice. Distressing or
-            urgent concerns belong with qualified human support.
+            ECHOform creates a journal artifact for personal reflection. Qualified
+            human support remains the path for distressing or urgent concerns.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <a

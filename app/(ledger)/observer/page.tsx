@@ -165,9 +165,8 @@ export default function ObserverDashboard() {
             </h1>
             <p className="max-w-4xl text-xl leading-relaxed text-slate-300">
               An interactive record of archived snapshots from a completed
-              paradox-holding experiment. This page does not monitor a live AI
-              system and does not generate new events. It visualizes the values
-              stored in the sealed experiment files.
+              paradox-holding experiment. It visualizes values stored in the
+              sealed experiment files as a fixed historical record.
             </p>
           </motion.div>
 
@@ -175,11 +174,10 @@ export default function ObserverDashboard() {
             <div className="flex items-start gap-3">
               <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-400" />
               <div>
-                <p className="font-semibold text-white">Integrity, not truth certification</p>
+                <p className="font-semibold text-white">Record integrity</p>
                 <p className="mt-1 leading-relaxed text-slate-400">
-                  The recorded hashes can help verify that a referenced snapshot
-                  has not changed. They do not prove that every metric,
-                  interpretation, or model output is factually correct.
+                  The recorded hashes can verify whether a referenced snapshot
+                  matches the sealed experiment file.
                 </p>
               </div>
             </div>
@@ -229,7 +227,7 @@ export default function ObserverDashboard() {
               </h2>
               <p className="leading-relaxed text-slate-300">{error}</p>
               <p className="mt-3 text-sm text-slate-500">
-                No synthetic or randomly generated replacement data is shown.
+                The display uses the archived experiment data when available.
               </p>
             </div>
           ) : (
@@ -266,9 +264,8 @@ export default function ObserverDashboard() {
                   </h2>
                   <p className="mb-6 leading-relaxed text-slate-400">
                     Each point is one archived record. Select a point to inspect
-                    the stored poles and metadata. The chart is descriptive and
-                    does not establish consciousness, understanding, or a
-                    universal ability to hold paradox.
+                    its stored poles and metadata in this descriptive experiment
+                    view.
                   </p>
                   <div className="h-[480px] w-full">
                     <ResponsiveContainer width="100%" height="100%">

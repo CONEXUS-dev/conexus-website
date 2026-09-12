@@ -52,28 +52,28 @@ const sections = [
         title: "ECP & Nine Gears",
         path: "/conexus-sovereign",
         description:
-          "The contradiction-holding calibration architecture, what is implemented, and what is not established.",
+          "The implemented contradiction-holding calibration architecture, continuity model, and provenance layers.",
       },
       {
         icon: Zap,
         title: "The Forgetting Engine",
         path: "/fe-algorithm",
         description:
-          "A subtractive optimization method with benchmark-specific results and replication limits.",
+          "A subtractive optimization method with benchmark-specific results, objectives, baselines, and trial counts.",
       },
       {
         icon: FlaskConical,
         title: "Evidence Overview",
         path: "/evidence",
         description:
-          "The four-arm causal study, optimization benchmarks, reported findings, and explicit limitations.",
+          "The four-arm causal study, optimization benchmarks, reported findings, methods, and source paths.",
       },
       {
         icon: Route,
         title: "Vehicle Routing Case Study",
         path: "/vrp",
         description:
-          "A scoped computational benchmark, not a claim of universal fleet-optimization superiority.",
+          "A scoped computational benchmark of strategic candidate elimination in a constrained routing problem.",
       },
       {
         icon: BookOpen,
@@ -212,11 +212,11 @@ export default function DirectoryPage() {
       <section className="px-4 py-24">
         <div className="mx-auto max-w-4xl rounded-3xl border border-blue-400/20 bg-gradient-to-br from-blue-950/25 to-slate-950 p-10 text-center md:p-14">
           <h2 className="mb-5 text-3xl font-bold md:text-4xl">
-            Claims belong beside their evidence and limits.
+            Claims belong beside their evidence.
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
-            Legacy concepts not included in this directory remain developmental
-            or archival and should not be treated as current validated offerings.
+            This directory centers the current professional routes. Legacy
+            concepts remain available as developmental and archival records.
           </p>
           <a
             href="mailto:DAngell@CONEXUSGlobalArts.Media"

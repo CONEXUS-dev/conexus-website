@@ -18,9 +18,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CONEXUS — Not Another AI Company. The Solution.",
+  title: "CONEXUS — Calibrated AI Systems, Products, and Research",
   description:
-    "The world is drowning in crude data because it lacks a method to make it safe. CONEXUS doesn't add to the noise. We eliminate it.",
+    "CONEXUS develops calibrated AI systems, human-facing products, controlled research, and optimization architecture.",
 };
 
 export default function RootLayout({

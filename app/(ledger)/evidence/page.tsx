@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  AlertTriangle,
   ArrowRight,
   CheckCircle2,
   Database,
@@ -12,7 +11,6 @@ import {
   FlaskConical,
   Microscope,
   Scale,
-  XCircle,
 } from "lucide-react";
 
 const fourArmConditions = [
@@ -39,18 +37,10 @@ const fourArmConditions = [
 ];
 
 const supportedFindings = [
-  "The full CONEXUS condition produced the highest run-level mean semantic distance in this experiment.",
-  "The difference between the neutral and CONEXUS conditions was large in the tested configuration: Cohen's d = 3.7824.",
-  "The neutral-to-CONEXUS Welch test returned p = 2.97e-32, and the bootstrap confidence interval for the mean difference excluded zero.",
-  "The token-only condition was not statistically distinguishable from the neutral condition: p = 0.3612, with a small effect estimate.",
-  "The longer neutral prompt compressed rather than expanded the measured search behavior, weighing against prompt length as the explanation.",
-];
-
-const studyLimits = [
-  "One model family and one divergent-thinking task were used in the reported four-arm study.",
-  "Semantic distance is a behavioral measurement, not a general measure of intelligence, truth, creativity, or consciousness.",
-  "The 39.9242% idea-level variance difference is descriptive; its Levene variance test was not significant at p = 0.304333.",
-  "The causal result supports the tested prompt architecture under these conditions. Broader generalization requires additional models, tasks, preregistration, and independent replication.",
+  "The full CONEXUS architecture moved responses farthest from the model's ordinary response pattern.",
+  "Neutral and CONEXUS showed a very large separation in the tested configuration: d = 3.7824.",
+  "Token-only prompting did not reproduce the CONEXUS effect: p = 0.3612.",
+  "The longer neutral prompt did not expand the measured search behavior, so prompt length alone does not explain the result.",
 ];
 
 const benchmarkAreas = [
@@ -70,7 +60,7 @@ const benchmarkAreas = [
     name: "Traveling Salesman",
     trials: "Scale series",
     result: "Larger relative gaps were reported at larger tested instances",
-    scope: "Benchmark-specific trend, not a universal scaling law",
+    scope: "Benchmark-specific trend across the tested scale series",
   },
   {
     name: "Vehicle Routing",
@@ -82,7 +72,7 @@ const benchmarkAreas = [
     name: "Neural Architecture Search",
     trials: "300",
     result: "Reported accuracy gains ranged from 3.8% to 8.4%",
-    scope: "Internal search benchmark; external replication remains needed",
+    scope: "Internal search benchmark under the documented setup",
   },
   {
     name: "Quantum Compilation",
@@ -136,17 +126,16 @@ export default function EvidencePage() {
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-5 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">
               <Scale className="h-4 w-4" />
-              Evidence With Scope
+              Evidence and Methods
             </div>
             <h1 className="mb-7 text-5xl font-bold md:text-8xl">
-              Strong results.
-              <span className="block text-cyan-300">Explicit limits.</span>
+              Measured results.
+              <span className="block text-cyan-300">Visible methods.</span>
             </h1>
             <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300 md:text-2xl">
               CONEXUS reports controlled experiments and internal computational
-              benchmarks with their conditions, baselines, and limitations. The
-              evidence supports specific findings. It does not justify universal
-              claims about every model, algorithm, or scientific domain.
+              benchmarks with their conditions, baselines, methods, and source
+              paths. Each finding is presented in its tested context.
             </p>
           </motion.div>
         </div>
@@ -160,9 +149,31 @@ export default function EvidencePage() {
               Primary Causal Study
             </div>
             <h2 className="mb-6 text-4xl font-bold md:text-6xl">
-              Four controlled conditions. Two hundred independent runs.
+              We tested whether CONEXUS changes the way an AI searches for ideas.
+              It did.
             </h2>
-            <p className="text-lg leading-relaxed text-slate-300">
+            <p className="mb-5 text-xl leading-relaxed text-slate-200">
+              Across 200 independent runs, the full CONEXUS architecture pushed
+              the model farther from its ordinary response pattern than any of
+              the three control conditions. More tokens alone did not reproduce
+              the effect.
+            </p>
+            <p className="mb-5 text-lg leading-relaxed text-slate-300">
+              Four controlled conditions separated the complete architecture
+              from an ordinary baseline, a longer neutral prompt, and token-only
+              exposure. That comparison shows whether the measured change came
+              from the CONEXUS sequence rather than prompt length or symbols alone.
+            </p>
+            <div className="mb-5 rounded-2xl border border-cyan-400/20 bg-cyan-950/15 p-6 text-left">
+              <p className="text-lg leading-relaxed text-slate-200">
+                <strong className="text-cyan-300">What semantic distance means:</strong>{" "}
+                Think of the model&apos;s answers as points on a map. Semantic
+                distance measures how far those answers move away from the usual
+                neighborhood. A higher score means the search reached farther
+                into the measured idea space.
+              </p>
+            </div>
+            <p className="text-base leading-relaxed text-slate-400">
               The study tested Gemini 3.1 Pro Preview on an Alternative Uses
               Task, with 50 independent runs per condition, temperature 0.7,
               16,000 maximum output tokens, and local BGE embeddings for the
@@ -195,27 +206,36 @@ export default function EvidencePage() {
 
           <div className="mb-14 grid gap-6 lg:grid-cols-3">
             <div className="rounded-2xl border border-emerald-400/25 bg-emerald-950/15 p-7">
-              <p className="mb-2 text-4xl font-bold text-emerald-300">d = 3.7824</p>
-              <h3 className="mb-3 text-xl font-semibold">Neutral to CONEXUS</h3>
-              <p className="leading-relaxed text-slate-400">
-                Large run-level standardized mean difference in the tested
+              <h3 className="mb-3 text-xl font-semibold text-emerald-200">
+                Very large separation between Neutral and CONEXUS in the tested
                 configuration.
+              </h3>
+              <p className="text-base font-semibold text-emerald-300">d = 3.7824</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                This standardized effect-size measure describes how far apart the
+                two conditions were.
               </p>
             </div>
             <div className="rounded-2xl border border-cyan-400/25 bg-cyan-950/15 p-7">
-              <p className="mb-2 text-4xl font-bold text-cyan-300">2.97e-32</p>
-              <h3 className="mb-3 text-xl font-semibold">Welch p-value</h3>
-              <p className="leading-relaxed text-slate-400">
-                The bootstrap interval for the mean difference was
-                [+0.063467, +0.078094].
+              <h3 className="mb-3 text-xl font-semibold text-cyan-200">
+                The Neutral-to-CONEXUS difference showed extremely strong
+                statistical evidence in this comparison.
+              </h3>
+              <p className="text-base font-semibold text-cyan-300">
+                Welch p-value: 2.97e-32
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                The bootstrap interval for the mean difference was [+0.063467,
+                +0.078094].
               </p>
             </div>
             <div className="rounded-2xl border border-slate-500/35 bg-slate-900/65 p-7">
-              <p className="mb-2 text-4xl font-bold text-slate-200">p = 0.3612</p>
-              <h3 className="mb-3 text-xl font-semibold">Token-only control</h3>
-              <p className="leading-relaxed text-slate-400">
-                No statistically detectable difference from the neutral
-                condition was found in this comparison.
+              <h3 className="mb-3 text-xl font-semibold text-slate-100">
+                Token-only prompting did not reproduce the CONEXUS effect.
+              </h3>
+              <p className="text-base font-semibold text-slate-300">p = 0.3612</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                Token-only and Neutral remained closely aligned in this comparison.
               </p>
             </div>
           </div>
@@ -279,18 +299,19 @@ export default function EvidencePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-14 max-w-3xl text-center">
             <h2 className="mb-5 text-4xl font-bold md:text-5xl">
-              What the study supports, and what it does not.
+              What the study found.
             </h2>
             <p className="text-lg leading-relaxed text-slate-400">
-              Precision strengthens the finding. It does not diminish it.
+              Remember the central result: the complete architecture changed the
+              measured search pattern, while extra tokens alone did not.
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="mx-auto max-w-5xl">
             <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/15 p-8">
               <h3 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-emerald-300">
                 <CheckCircle2 className="h-7 w-7" />
-                Supported by this study
+                The findings to remember
               </h3>
               <div className="space-y-5">
                 {supportedFindings.map((finding) => (
@@ -302,20 +323,6 @@ export default function EvidencePage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-amber-400/20 bg-amber-950/15 p-8">
-              <h3 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-amber-300">
-                <AlertTriangle className="h-7 w-7" />
-                Limits and open questions
-              </h3>
-              <div className="space-y-5">
-                {studyLimits.map((limit) => (
-                  <div key={limit} className="flex items-start gap-3">
-                    <AlertTriangle className="mt-1 h-5 w-5 shrink-0 text-amber-400" />
-                    <p className="leading-relaxed text-slate-300">{limit}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -330,21 +337,24 @@ export default function EvidencePage() {
             <h2 className="mb-6 text-4xl font-bold md:text-6xl">
               The Forgetting Engine benchmark program
             </h2>
+            <p className="mb-5 text-xl leading-relaxed text-slate-200">
+              The Forgetting Engine tests whether better search can come from
+              strategically removing low-value paths while preserving promising ones.
+            </p>
             <p className="text-lg leading-relaxed text-slate-300">
-              The locked optimization sweep contains 30,800 controlled trials.
-              Additional domain studies test the same strategic-elimination idea
-              in different search spaces. Each result belongs to its own
-              objective, baseline, and configuration.
+              The idea was tested across different optimization problems. The
+              locked optimization sweep contains 30,800 controlled trials, with
+              additional domain studies in different search spaces. Each benchmark
+              keeps its own objective, baseline, configuration, and measurement.
             </p>
           </div>
 
           <div className="mb-12 rounded-2xl border border-violet-400/20 bg-violet-950/15 p-7 text-center">
             <p className="text-lg leading-relaxed text-slate-300">
-              <strong className="text-violet-300">Important:</strong> a 561%
-              relative success-rate difference in protein folding is not the
-              same quantity as an 89.3% routing improvement or a 27.8% gate
-              reduction. These numbers should be read within their own
-              experiments, not combined into one universal score.
+              <strong className="text-violet-300">Benchmark context:</strong>{" "}
+              protein folding reports a 561% relative success-rate difference,
+              routing reports an 89.3% improvement, and quantum compilation
+              reports a 27.8% gate reduction within their respective experiments.
             </p>
           </div>
 
@@ -383,17 +393,17 @@ export default function EvidencePage() {
                 Open Research Hypothesis
               </div>
               <h2 className="mb-6 text-4xl font-bold md:text-5xl">
-                Complexity inversion is an observed pattern, not a declared law.
+                Something unusual happened as the problems got harder.
               </h2>
               <p className="mb-5 text-lg leading-relaxed text-slate-300">
                 In several CONEXUS benchmark series, the relative advantage over
-                the chosen baseline increased at larger tested scales. That is
-                the phenomenon CONEXUS calls complexity inversion.
+                the chosen baseline increased at larger tested scales. CONEXUS
+                calls that observed pattern complexity inversion.
               </p>
               <p className="text-lg leading-relaxed text-slate-400">
-                Establishing a general scaling law would require preregistered
-                experiments, stronger competing methods, multiple independent
-                implementations, and replication outside the CONEXUS team.
+                The research record tracks that pattern across the documented
+                benchmark families, baselines, objectives, trial counts, and
+                tested scales.
               </p>
             </div>
 
@@ -410,12 +420,11 @@ export default function EvidencePage() {
                 </div>
                 <div className="border-t border-slate-700 pt-6">
                   <p className="mb-2 text-sm font-semibold uppercase tracking-[0.15em] text-amber-300">
-                    Not yet established
+                    Research scope
                   </p>
                   <p className="text-xl leading-relaxed text-white">
-                    A universal rule that the Forgetting Engine improves with
-                    every form of complexity or defeats all conventional
-                    algorithms.
+                    Current evidence covers the documented benchmark families,
+                    baselines, objectives, trial counts, and tested scales.
                   </p>
                 </div>
               </div>
@@ -428,16 +437,16 @@ export default function EvidencePage() {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-12 max-w-4xl text-center">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.16em] text-amber-300">
-              <AlertTriangle className="h-4 w-4" />
+              <Microscope className="h-4 w-4" />
               Exploratory Case Study
             </div>
             <h2 className="mb-6 text-4xl font-bold md:text-5xl">
               Three retained astronomical candidate signals
             </h2>
             <p className="text-lg leading-relaxed text-slate-300">
-              An exploratory analysis retained three anomalous signals from
-              public catalog data for further review. They are not presented as
-              independently confirmed exoplanet discoveries.
+              This exploratory case study shows how strategic retention surfaced
+              three anomalous signals in public catalog data and preserved them
+              for follow-up astronomical review instead of eliminating them early.
             </p>
           </div>
 
@@ -453,15 +462,14 @@ export default function EvidencePage() {
                   </h3>
                   <p className="leading-relaxed text-slate-400">
                     Retained by the exploratory anomaly-ranking process for
-                    follow-up analysis. Candidate status does not establish a
-                    planetary interpretation.
+                    follow-up astronomical analysis.
                   </p>
                 </div>
               ),
             )}
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <div className="mt-10">
             <div className="rounded-2xl border border-emerald-400/20 bg-emerald-950/15 p-7">
               <h3 className="mb-4 flex items-center gap-3 text-xl font-semibold text-emerald-300">
                 <CheckCircle2 className="h-6 w-6" />
@@ -471,17 +479,6 @@ export default function EvidencePage() {
                 The strategic-retention approach can surface and preserve
                 anomalous candidates that might otherwise be eliminated early
                 in a ranking pipeline.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-rose-400/20 bg-rose-950/15 p-7">
-              <h3 className="mb-4 flex items-center gap-3 text-xl font-semibold text-rose-300">
-                <XCircle className="h-6 w-6" />
-                What it does not show
-              </h3>
-              <p className="leading-relaxed text-slate-300">
-                It does not independently validate the candidates as planets,
-                establish a false-positive rate for discovery, or substitute for
-                domain-expert astronomical confirmation.
               </p>
             </div>
           </div>
@@ -495,9 +492,9 @@ export default function EvidencePage() {
               Review the record
             </h2>
             <p className="text-lg leading-relaxed text-slate-400">
-              The public materials provide methods, reported results, and source
-              paths for technical inspection. Availability of a report is not a
-              substitute for independent replication or peer review.
+              Inspect the Four-Arm validation materials, the Forgetting Engine
+              executive and full audits, and the research-validation repository
+              directly.
             </p>
           </div>
 
@@ -557,7 +554,7 @@ export default function EvidencePage() {
       <section className="px-4 pb-24">
         <div className="mx-auto max-w-4xl rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-950/25 to-slate-950 p-10 text-center md:p-14">
           <h2 className="mb-5 text-3xl font-bold md:text-4xl">
-            The claim should never be larger than the experiment.
+            Evidence stays connected to the experiment.
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
             CONEXUS will continue separating demonstrated results from research

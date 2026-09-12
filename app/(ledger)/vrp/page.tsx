@@ -42,9 +42,8 @@ export default function VehicleRoutingPage() {
             </h1>
             <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300">
               A computational test of strategic candidate elimination in a
-              constrained routing problem. The results are evidence about the
-              tested benchmark, not a claim of universal superiority in real
-              fleet operations.
+              constrained routing problem, with results reported for the tested
+              benchmark, baseline, scale, and configuration.
             </p>
           </motion.div>
         </div>

@@ -14,9 +14,9 @@ const products = [
     icon: Church,
     accent: "amber",
     boundaries: [
-      "Not therapy, confession, or clergy",
-      "Not a diagnostic or autonomous decision tool",
-      "Human support remains primary",
+      "Private voice-and-text reflection",
+      "Governed by restraint and user control",
+      "Human and pastoral authority remains primary",
     ],
   },
   {
@@ -28,8 +28,8 @@ const products = [
     icon: MoonStar,
     accent: "purple",
     boundaries: [
-      "Not clinical dream interpretation",
-      "Does not reveal hidden psychological truth",
+      "Three simultaneous symbolic perspectives",
+      "Creative visual and written reflection",
       "The user remains the author of meaning",
     ],
   },
@@ -50,12 +50,12 @@ export default function ExperiencesPage() {
               CONEXUS Products
             </p>
             <h1 className="mb-7 text-5xl font-bold md:text-7xl">
-              Human-facing experiences with explicit boundaries.
+              Human-facing experiences for governed reflection.
             </h1>
             <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300">
               CONEXUS translates its calibration architecture into reflective
-              products without claiming therapy, diagnosis, spiritual authority,
-              or privileged access to a person's inner truth.
+              products shaped by restraint, user control, human context, and
+              user-directed meaning.
             </p>
           </motion.div>
         </div>
@@ -135,12 +135,11 @@ export default function ExperiencesPage() {
         <div className="mx-auto max-w-4xl rounded-3xl border border-slate-700 bg-slate-900/55 p-10 text-center md:p-14">
           <ShieldCheck className="mx-auto mb-5 h-10 w-10 text-cyan-300" />
           <h2 className="mb-5 text-3xl font-bold md:text-4xl">
-            Reflection remains an invitation, not a verdict.
+            Reflection remains user-directed.
           </h2>
           <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-300">
-            Product outputs are prompts for personal interpretation. They should
-            not be treated as medical, psychological, legal, financial, or
-            spiritual advice.
+            Product outputs offer prompts for personal interpretation, with
+            qualified human support available for urgent or professional concerns.
           </p>
         </div>
       </section>

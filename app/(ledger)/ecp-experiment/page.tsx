@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { AlertTriangle, Archive, ArrowRight, FlaskConical } from "lucide-react";
+import { Archive, ArrowRight, FlaskConical } from "lucide-react";
 
 export default function EcpExperimentPage() {
   return (
@@ -24,8 +24,8 @@ export default function EcpExperimentPage() {
             </h1>
             <p className="mx-auto max-w-4xl text-xl leading-relaxed text-slate-300">
               This route preserves the historical place of the earlier pilot
-              studies. Those experiments helped shape later controls, but they
-              are not the strongest current evidence for the ECP architecture.
+              studies. Those experiments shaped the controls used in the current
+              four-arm evidence for the ECP architecture.
             </p>
           </motion.div>
         </div>
@@ -33,7 +33,7 @@ export default function EcpExperimentPage() {
 
       <section className="border-y border-slate-800 px-4 py-24">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="mx-auto max-w-5xl">
             <div className="rounded-3xl border border-cyan-400/20 bg-cyan-950/15 p-8">
               <FlaskConical className="mb-5 h-9 w-9 text-cyan-300" />
               <h2 className="mb-4 text-3xl font-semibold">
@@ -48,18 +48,6 @@ export default function EcpExperimentPage() {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-amber-400/20 bg-amber-950/15 p-8">
-              <AlertTriangle className="mb-5 h-9 w-9 text-amber-300" />
-              <h2 className="mb-4 text-3xl font-semibold">
-                Why it is not the lead claim
-              </h2>
-              <p className="leading-relaxed text-slate-300">
-                Small samples, task-specific outcomes, and less complete causal
-                isolation limit the conclusions that should be drawn from the
-                pilot. It should be read as developmental evidence, not proof of
-                universal calibration effects or a general complexity law.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -71,8 +59,8 @@ export default function EcpExperimentPage() {
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
             Two hundred independent runs compare baseline, neutral multi-turn,
-            token-only, and full CONEXUS conditions with explicit statistical
-            limits.
+            token-only, and full CONEXUS conditions with complete statistical
+            reporting.
           </p>
           <Link
             href="/evidence#four-arm"

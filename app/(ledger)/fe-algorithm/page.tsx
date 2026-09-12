@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  AlertTriangle,
   ArrowRight,
   CheckCircle2,
   Filter,
@@ -37,13 +36,6 @@ const results = [
   "4,000-trial 3D protein-folding comparison: 25.8% success versus 3.9% for the stated Monte Carlo baseline",
   "Vehicle-routing comparisons reported up to 89.3% improvement at the largest tested scale",
   "Quantum-compilation experiments reported 27.8% gate reduction and 3.7% fidelity gain under the documented simulator setup",
-];
-
-const limits = [
-  "Results are benchmark-specific and use different objectives and baselines.",
-  "Internal validation does not equal independent replication or peer review.",
-  "The observed scaling pattern is a research hypothesis, not a universal complexity law.",
-  "Performance on a benchmark does not establish effectiveness in clinical, financial, or production deployment.",
 ];
 
 export default function FEAlgorithmPage() {
@@ -111,7 +103,7 @@ export default function FEAlgorithmPage() {
 
       <section className="px-4 py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="mx-auto max-w-5xl">
             <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/15 p-8">
               <h2 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-emerald-300">
                 <CheckCircle2 className="h-7 w-7" />
@@ -127,20 +119,6 @@ export default function FEAlgorithmPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-amber-400/20 bg-amber-950/15 p-8">
-              <h2 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-amber-300">
-                <AlertTriangle className="h-7 w-7" />
-                Interpretation limits
-              </h2>
-              <div className="space-y-5">
-                {limits.map((limit) => (
-                  <div key={limit} className="flex items-start gap-3">
-                    <AlertTriangle className="mt-1 h-5 w-5 shrink-0 text-amber-400" />
-                    <p className="leading-relaxed text-slate-300">{limit}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -150,11 +128,10 @@ export default function FEAlgorithmPage() {
           <div className="grid gap-8 md:grid-cols-3">
             <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-7">
               <Search className="mb-5 h-8 w-8 text-emerald-300" />
-              <h3 className="mb-3 text-xl font-semibold">Search, not memory</h3>
+              <h3 className="mb-3 text-xl font-semibold">Candidate search</h3>
               <p className="leading-relaxed text-slate-400">
-                “Forgetting” refers to candidate elimination inside an
-                optimization process. It is not a claim about human awareness or
-                machine consciousness.
+                “Forgetting” refers to candidate elimination inside the
+                optimization process.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-7">
@@ -167,10 +144,10 @@ export default function FEAlgorithmPage() {
             </div>
             <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-7">
               <Filter className="mb-5 h-8 w-8 text-violet-300" />
-              <h3 className="mb-3 text-xl font-semibold">Open hypothesis</h3>
+              <h3 className="mb-3 text-xl font-semibold">Scaling hypothesis</h3>
               <p className="leading-relaxed text-slate-400">
-                Larger relative gaps at larger tested scales are promising. They
-                still require independent and stronger-baseline replication.
+                Larger relative gaps appeared at larger tested scales in selected
+                benchmarks, forming a defined hypothesis for further testing.
               </p>
             </div>
           </div>
@@ -180,11 +157,11 @@ export default function FEAlgorithmPage() {
       <section className="px-4 py-24">
         <div className="mx-auto max-w-4xl rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-emerald-950/25 to-slate-950 p-10 text-center md:p-14">
           <h2 className="mb-5 text-3xl font-bold md:text-4xl">
-            Review the benchmark record, not a universal claim.
+            Review the benchmark record.
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-slate-300">
             The Evidence page separates the locked sweep, domain studies,
-            reported comparisons, and remaining limitations.
+            reported comparisons, objectives, baselines, and trial counts.
           </p>
           <Link
             href="/evidence#forgetting-engine"

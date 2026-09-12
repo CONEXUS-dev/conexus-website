@@ -1,16 +1,15 @@
 import Image from "next/image";
 import { SectionShell, MonoKicker, SerifHeading } from "@/components/primitives";
-import { TEAM } from "@/content/vault";
+import { MISSION_025, TEAM } from "@/content/vault";
 
 export default function Team() {
   return (
-    <SectionShell id="team">
-      <MonoKicker>{TEAM.heading}</MonoKicker>
+    <SectionShell id="company">
+      <MonoKicker>{MISSION_025.founder.heading}</MonoKicker>
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-12 md:col-span-5">
           <SerifHeading>
-            Built from first principles by a solo founder who discovered something
-            no one expected.
+            A founder-led company building from research to product.
           </SerifHeading>
         </div>
         <div className="col-span-12 md:col-span-7 md:border-l md:border-white/20">
@@ -33,6 +32,9 @@ export default function Team() {
                   {TEAM.role}
                 </p>
                 <p className="mt-6 text-sm leading-relaxed text-data/70">{TEAM.bio}</p>
+                <p className="mt-5 text-xs leading-relaxed text-data/50">
+                  {MISSION_025.founder.statement}
+                </p>
                 <blockquote className="mt-6 border-l-2 border-ember pl-6 font-serif text-xl italic leading-snug text-data">
                   {TEAM.quote}
                 </blockquote>

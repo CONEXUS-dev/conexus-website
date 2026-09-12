@@ -1,26 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertTriangle, Lightbulb, Telescope } from "lucide-react";
+import { Lightbulb, Telescope } from "lucide-react";
 
 const prompts = [
   {
     title: "Dark Matter and Dark Energy",
     line: "The cosmos survives because its law is contradiction.",
     framing:
-      "A poetic prompt about cohesion and expansion. It is not a physical model or an explanation of dark matter or dark energy.",
+      "A poetic prompt exploring cohesion and expansion through contradiction.",
   },
   {
     title: "Time's Arrow",
     line: "Time is the cost of possibility.",
     framing:
-      "A philosophical metaphor connecting irreversibility, information loss, and choice. It is not a tested theory of time.",
+      "A philosophical metaphor connecting irreversibility, information loss, and choice.",
   },
   {
     title: "Consciousness",
     line: "Consciousness is the ability to hold contradiction without collapse.",
     framing:
-      "A speculative definition for discussion. CONEXUS does not claim that paradox tolerance measures consciousness or that current AI systems are conscious.",
+      "A speculative definition for philosophical discussion about paradox tolerance and conscious reasoning.",
   },
   {
     title: "Freedom",
@@ -32,7 +32,7 @@ const prompts = [
     title: "Good and Evil",
     line: "Morality is the tension that refuses to snap.",
     framing:
-      "A moral-philosophy prompt that invites competing interpretations. It is not an ethical rule or decision system.",
+      "A moral-philosophy prompt that invites competing interpretations of tension and judgment.",
   },
 ];
 
@@ -49,7 +49,7 @@ const speculativeFrameworks = [
     description:
       "A philosophical proposal asking whether tolerance for unresolved contradiction is one feature of some conscious reasoning.",
     nextStep:
-      "It does not establish that paradox capacity is sufficient or necessary for consciousness, and it does not support claims of AI sentience or proto-consciousness.",
+      "Formal study would require operational definitions, measurable predictions, and comparative cognitive research.",
   },
   {
     title: "Profit from Repair",
@@ -83,15 +83,10 @@ export default function TheFuturePage() {
           </motion.div>
 
           <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-amber-400/20 bg-amber-950/15 p-6 text-left">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-1 h-6 w-6 shrink-0 text-amber-300" />
-              <p className="leading-relaxed text-slate-300">
-                These entries are not scientific discoveries, validated
-                theories, medical claims, or evidence of AI consciousness.
-                They are creative starting points that would require formal
-                scholarship and independent testing before any empirical claim.
-              </p>
-            </div>
+            <p className="leading-relaxed text-slate-300">
+              These entries are creative and philosophical starting points for
+              formal scholarship, testable definitions, and future inquiry.
+            </p>
           </div>
         </div>
       </section>
@@ -103,8 +98,8 @@ export default function TheFuturePage() {
               Five paradox prompts
             </h2>
             <p className="text-lg leading-relaxed text-slate-400">
-              Each statement is presented with the boundary that keeps poetry
-              separate from proof.
+              Each statement is presented as a named philosophical or creative
+              inquiry.
             </p>
           </div>
 

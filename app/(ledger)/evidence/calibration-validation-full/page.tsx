@@ -94,11 +94,11 @@ export default function CalibrationValidationFullPage() {
               <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-4 my-6">
                 <p className="mb-0">
                   <strong className="text-yellow-400">Critical context:</strong>{" "}
-                  This experiment tests a raw LLM feedback loop — <em>not</em>{" "}
-                  the full CONEXUS Forgetting Engine (FE). The FE combines ECP
-                  calibration with evolutionary optimization, population-based
-                  search, repair operators, and structured pilot decisions. This
-                  experiment strips all of that away to isolate one question:{" "}
+                  This experiment isolates the ECP calibration prompt in a raw
+                  LLM feedback loop. The full CONEXUS Forgetting Engine (FE)
+                  combines ECP calibration with evolutionary optimization,
+                  population-based search, repair operators, and structured pilot
+                  decisions. The isolation test asks one question:{" "}
                   <strong>
                     does the ECP calibration prompt alone produce measurable
                     behavioral differences in the LLM?
@@ -107,9 +107,9 @@ export default function CalibrationValidationFullPage() {
               </div>
 
               <p>
-                The answer is <strong>yes</strong> — and the limitations
-                observed (thrashing at n=200, small effect sizes) are precisely
-                what the Forgetting Engine was designed to address.
+                The answer is <strong>yes</strong>. The observed n=200 thrashing
+                and small effect sizes identify the behaviors addressed by the
+                Forgetting Engine architecture.
               </p>
 
               <h3>Key Findings (Isolation Test)</h3>
@@ -284,7 +284,7 @@ export default function CalibrationValidationFullPage() {
               <strong>Total runs:</strong> 18 (Exp 1) + 18 (Exp 2) = 36
             </p>
 
-            <h3>1.2 What This Experiment Is — And What It Is NOT</h3>
+            <h3>1.2 Isolation-Test Design</h3>
             <p>
               This is an <strong>isolation test</strong> of the ECP calibration
               prompt&apos;s effect on raw LLM behavior. It is deliberately
@@ -551,9 +551,8 @@ export default function CalibrationValidationFullPage() {
             </p>
             <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4 my-6">
               <p className="mb-0">
-                <strong>This is not a test of the CONEXUS product.</strong> It
-                is a test of one component (the calibration prompt) in
-                isolation, to determine whether it produces a measurable
+                <strong>This is an isolation test of one component.</strong> It
+                tests whether the calibration prompt produces a measurable
                 behavioral signal in the LLM.
               </p>
             </div>
@@ -566,7 +565,8 @@ export default function CalibrationValidationFullPage() {
                 </strong>{" "}
                 Calibrated and uncalibrated AI produce different route
                 structures, different convergence patterns, and different final
-                distances on identical problems. The calibration is not placebo.
+                distances on identical problems, producing a measurable
+                calibration signal.
               </li>
               <li>
                 <strong>
@@ -603,11 +603,10 @@ export default function CalibrationValidationFullPage() {
               </li>
               <li>
                 <strong>
-                  A raw LLM cannot solve VRP competitively on its own.
+                  The raw LLM remained behind the Clarke-Wright baseline at n=200.
                 </strong>{" "}
-                Neither calibrated nor uncalibrated AI approaches the
-                Clarke-Wright baseline at n=200. This is expected — the CONEXUS
-                architecture was always ECP + FE together, not ECP alone.
+                Both calibrated and uncalibrated runs remained behind that
+                baseline, reinforcing the ECP + FE two-layer architecture.
               </li>
             </ol>
 
@@ -669,29 +668,29 @@ export default function CalibrationValidationFullPage() {
               </tbody>
             </table>
 
-            <h3>8.4 Limitations</h3>
+            <h3>8.4 Study Design and Next Tests</h3>
             <ol>
               <li>
-                <strong>Sample size:</strong> 3 seeds per condition is
-                insufficient for statistical significance. Minimum 10 seeds
-                recommended, 30+ for publication.
+                <strong>Sample size:</strong> 3 seeds per condition were used.
+                The next study calls for a minimum of 10 seeds and 30+ for
+                publication-level analysis.
               </li>
               <li>
-                <strong>Execution order:</strong> Conditions always run in the
-                same order (baseline → uncalibrated → calibrated). Should be
-                randomized.
+                <strong>Execution order:</strong> Conditions ran in the same
+                order (baseline → uncalibrated → calibrated). The next study
+                randomizes that order.
               </li>
               <li>
-                <strong>Single calibration prompt:</strong> Only
-                CONEXUS-STEEL-04 was tested. No ablation study.
+                <strong>Calibration prompt:</strong> CONEXUS-STEEL-04 was the
+                prompt tested; an ablation study is the next comparison.
               </li>
               <li>
-                <strong>Two scales only:</strong> n=100 and n=200. The
-                transition point is not precisely identified.
+                <strong>Tested scales:</strong> n=100 and n=200. Additional
+                scales can map the transition point more precisely.
               </li>
               <li>
-                <strong>No anti-calibration control:</strong> No deliberately
-                unhelpful prompt was tested.
+                <strong>Control design:</strong> A deliberately unhelpful prompt
+                is available as an additional control for the next study.
               </li>
             </ol>
 
@@ -747,14 +746,14 @@ export default function CalibrationValidationFullPage() {
             </p>
             <ol>
               <li>
-                <strong>ECP is not placebo.</strong> Even in isolation — without
-                the Forgetting Engine — the calibration prompt produces
-                measurably different AI behavior across two model architectures.
+                <strong>ECP produced a measurable behavioral signal.</strong> In
+                isolation, the calibration prompt produced measurably different AI
+                behavior across two model architectures.
               </li>
               <li>
-                <strong>The FE is essential, not optional.</strong> A raw LLM
-                cannot solve VRP competitively, calibrated or not. This
-                validates the two-layer architecture.
+                <strong>The FE provides the optimization layer.</strong> Raw LLM
+                runs remained behind the VRP baseline, reinforcing the two-layer
+                architecture tested by CONEXUS.
               </li>
               <li>
                 <strong>The n=200 thrashing explains why the FE exists.</strong>{" "}

@@ -57,8 +57,8 @@ function SceneChevron({ direction, onClick }: { direction: SceneDirection; onCli
   );
 }
 
-export default function SceneController() {
-  const [scene, setScene] = useState(0);
+export default function SceneController({ initialScene = 0 }: { initialScene?: number }) {
+  const [scene, setScene] = useState(initialScene);
   const [direction, setDirection] = useState<MotionDirection>(1);
   const [scene2Progress, setScene2Progress] = useState(0);
   const transitionLock = useRef(false);
