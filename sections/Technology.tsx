@@ -11,7 +11,7 @@ const pillars = [
   },
   {
     title: "Intellectual Property",
-    body: "Patent filings concerning calibration, symbolic compression, strategic forgetting, provenance, and collaborative authorship.",
+    body: "Eight U.S. patent applications spanning calibrated AI, symbolic calibration, provenance, human-AI collaboration, authorship systems, and strategic optimization.",
   },
   {
     title: "Optimization",

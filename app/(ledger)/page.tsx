@@ -4,6 +4,7 @@ import Echoagent from "@/sections/Echoagent";
 import Validation from "@/sections/Validation";
 import Cyndicate from "@/sections/Cyndicate";
 import Technology from "@/sections/Technology";
+import PatentPortfolio from "@/sections/PatentPortfolio";
 import Products from "@/sections/Products";
 import Nairthex from "@/sections/Nairthex";
 import Echoform from "@/sections/Echoform";
@@ -21,6 +22,7 @@ export default function Home() {
       <Validation />
       <Cyndicate />
       <Technology />
+      <PatentPortfolio />
       <Products />
       <Nairthex />
       <Echoform />
