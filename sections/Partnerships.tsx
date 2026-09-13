@@ -18,7 +18,7 @@ export default function Partnerships() {
             <p className="mt-4 flex-1 text-xs leading-relaxed text-data/60">{body}</p>
             <a
               href={href}
-              className="mt-8 text-[0.65rem] uppercase tracking-[0.22em] text-ember underline-offset-4 hover:underline"
+              className="mt-8 inline-flex min-h-11 w-full items-center justify-center border border-ember px-5 py-3 text-center text-[0.75rem] uppercase tracking-[0.18em] text-ember transition-colors hover:bg-ember hover:text-void focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-void"
             >
               {label} →
             </a>

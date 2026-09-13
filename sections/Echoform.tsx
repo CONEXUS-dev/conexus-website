@@ -23,10 +23,10 @@ export default function Echoform() {
             </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-4">
-            <a href={product.demo.href} className="border border-ember px-5 py-3 text-[0.65rem] uppercase tracking-[0.25em] text-ember transition-colors hover:bg-ember hover:text-void">
+            <a href={product.demo.href} className="inline-flex min-h-11 w-full items-center justify-center border border-ember px-5 py-3 text-center text-[0.75rem] uppercase tracking-[0.18em] text-ember transition-colors hover:bg-ember hover:text-void focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-void sm:w-auto">
               {product.demo.label} →
             </a>
-            <a href={product.howItWorks.href} className="border border-white/20 px-5 py-3 text-[0.65rem] uppercase tracking-[0.25em] text-data/70 transition-colors hover:border-data">
+            <a href={product.howItWorks.href} className="inline-flex min-h-11 w-full items-center justify-center border border-white/20 px-5 py-3 text-center text-[0.75rem] uppercase tracking-[0.18em] text-data/70 transition-colors hover:border-ember hover:text-ember focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-void sm:w-auto">
               {product.howItWorks.label}
             </a>
             <a href="/cinematic?scene=6" className="self-center text-[0.6rem] uppercase tracking-[0.2em] text-data/50 underline-offset-4 transition-colors hover:text-ember hover:underline">

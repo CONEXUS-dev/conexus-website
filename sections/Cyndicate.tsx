@@ -43,7 +43,7 @@ export default function Cyndicate() {
         href="/materials/CONEXUS_Cyndicate__The_Proof_of_Swarm.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-block text-[0.65rem] uppercase tracking-[0.25em] text-ember underline-offset-4 hover:underline"
+        className="mt-6 inline-flex min-h-11 w-full items-center justify-center border border-ember px-5 py-3 text-center text-[0.75rem] uppercase tracking-[0.18em] text-ember transition-colors hover:bg-ember hover:text-void focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-void sm:w-auto"
       >
         VIEW PROOF OF SWARM →
       </a>

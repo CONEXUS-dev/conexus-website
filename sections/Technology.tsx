@@ -46,7 +46,7 @@ export default function Technology() {
       </div>
       <a
         href="/cinematic?scene=4"
-        className="mt-8 inline-block text-[0.65rem] uppercase tracking-[0.25em] text-data/60 underline-offset-4 transition-colors hover:text-ember hover:underline"
+        className="mt-8 inline-flex min-h-11 w-full items-center justify-center border border-white/20 px-5 py-3 text-center text-[0.75rem] uppercase tracking-[0.18em] text-data/70 transition-colors hover:border-ember hover:text-ember focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-void sm:w-auto"
       >
         Explore the Benchmark Program →
       </a>
