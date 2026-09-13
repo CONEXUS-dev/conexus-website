@@ -7,15 +7,19 @@ Repository: `C:\Users\Derek Angell\Desktop\CONEXUS Website Integration Workspace
 
 Mission 028E strengthened the visual hierarchy and usability of important homepage destination links without adding content, changing destinations, redesigning sections, or changing dependencies.
 
+This handoff was updated by a **Mission 028E continuation / supplemental implementation** after the initial Mission 028E documentation completion. The continuation aligns the two previously protected Evidence CTAs with the approved hierarchy without rewriting the original release history.
+
 - Modified: `sections/Echoagent.tsx`
 - Modified: `sections/Cyndicate.tsx`
 - Modified: `sections/Technology.tsx`
 - Modified: `sections/Nairthex.tsx`
 - Modified: `sections/Echoform.tsx`
 - Modified: `sections/Partnerships.tsx`
+- Supplemental modification: `sections/Validation.tsx`
 - Shared CTA component created: NO
-- Primary CTA instances strengthened: 7 — ECHOagent deck, Cyndicate deck, Enter NAiRTHEX, Open the Guided Demo, Start a Pilot Conversation, Discuss a Partnership, Investor Overview
-- Secondary CTA instances strengthened: 3 — Explore the Benchmark Program, NAiRTHEX How It Works, ECHOform See How It Works
+- Primary CTA instances strengthened: 8 — ECHOagent deck, Cyndicate deck, Enter NAiRTHEX, Open the Guided Demo, Start a Pilot Conversation, Discuss a Partnership, Investor Overview, View the Full Validation
+- Secondary CTA instances strengthened: 4 — Explore the Benchmark Program, NAiRTHEX How It Works, ECHOform See How It Works, See the Study Visualized
+- Total strengthened rendered CTA instances: 12
 - Tertiary links changed: NO
 - CTA labels changed: NO
 - CTA destinations changed: NO
@@ -23,7 +27,7 @@ Mission 028E strengthened the visual hierarchy and usability of important homepa
 - Dependencies changed: NO
 - Mission 029 begun or modified: NO
 
-The Refiner Thesis CTA, Validation links, thematic-experience links, and footer navigation/utility links were intentionally unchanged. The canonical application implementation was released separately before this documentation-only handoff.
+The Refiner Thesis CTA, thematic-experience links, and footer navigation/utility links remain intentionally unchanged. Validation links were intentionally protected during the initial implementation, then approved and aligned in the supplemental implementation. The original canonical application implementation and supplemental implementation were each released separately before their corresponding handoff commits.
 
 ## 2. Architecture Decisions & Citations
 
@@ -35,9 +39,9 @@ NAiRTHEX and ECHOform already had correct primary/secondary ordering. Their exis
 
 Each Partnership card has one destination and therefore one card-level primary action. The mapped anchor at `sections/Partnerships.tsx:15-24` renders three equally prominent actions while preserving each card’s distinct label and destination.
 
-The existing Refiner CTA remained the visual precedent and was not modified. Validation remained protected because it contains Four-Arm evidence. Footer links remained utility/navigation links. This preserves hierarchy rather than making every anchor visually identical.
+The existing Refiner CTA remained the visual precedent and was not modified. Validation remained protected during the initial implementation because it contains Four-Arm evidence. The approved continuation released only its two CTA class values from protection: `View the Full Validation →` now uses the primary treatment and `See the Study Visualized →` uses the secondary treatment at `sections/Validation.tsx:58-65`. All Evidence copy, statistics, values, layout, and destinations remain unchanged. Footer links remain utility/navigation links. This preserves hierarchy rather than making every anchor visually identical.
 
-The implementation uses local Tailwind class patterns instead of a shared component. Only eight source anchor patterns across six small files required changes, contextual spacing differs, and no shared behavior or state exists. A new abstraction would have expanded architecture without reducing meaningful complexity.
+The implementation uses local Tailwind class patterns instead of a shared component. The initial implementation changed eight source anchor patterns across six small files; the continuation changed two additional anchor patterns in Validation. Contextual spacing differs, and no shared behavior or state exists. A new abstraction would have expanded architecture without reducing meaningful complexity.
 
 The visual language remains restrained: square borders, void background, ember/data colors, mono uppercase labels, no gradients, no icons, no pills, and no animation beyond color transitions.
 
@@ -67,6 +71,8 @@ Exact preserved labels:
 - `Start a Pilot Conversation →`
 - `Discuss a Partnership →`
 - `Investor Overview →`
+- `View the Full Validation →`
+- `See the Study Visualized →`
 
 Exact preserved hrefs:
 
@@ -80,6 +86,8 @@ Exact preserved hrefs:
 - `mailto:DAngell@CONEXUSGlobalArts.Media?subject=CONEXUS%20Pilot%20Inquiry`
 - `mailto:DAngell@CONEXUSGlobalArts.Media?subject=CONEXUS%20Partnership%20Inquiry`
 - `/investors`
+- `/evidence`
+- `/cinematic?scene=3`
 
 ## 4. Verbatim Verification Evidence
 
@@ -133,6 +141,26 @@ rendered strengthened CTA instances: 10
 
 The source diff contained exactly eight class-line replacements and no non-class changes. The mapped Partnership anchor accounts for three rendered primary CTA instances.
 
+### Mission 028E continuation / supplemental Evidence CTA assertions
+
+```text
+CONTINUATION_BASELINE=4a56bf5a5175c29a430331da208ba14d47bbb065
+LOCAL_HEAD=4a56bf5a5175c29a430331da208ba14d47bbb065
+FETCHED_ORIGIN_MAIN=4a56bf5a5175c29a430331da208ba14d47bbb065
+BRANCH=main
+STAGED_INDEX=empty
+WORKTREE=clean
+REPOSITORY_RUNTIME_COUNT=0
+
+CHANGED_FILE=sections/Validation.tsx
+SCOPE_MATCH=True
+NON_CLASS_BYTE_EQUAL=True
+View the Full Validation →|before=True|after=True
+/evidence|before=True|after=True
+See the Study Visualized →|before=True|after=True
+/cinematic?scene=3|before=True|after=True
+```
+
 ### Typecheck, build, static generation, and diff integrity
 
 ```text
@@ -144,6 +172,27 @@ TYPECHECK_EXIT=0
 npm run build
 ▲ Next.js 15.5.23
 ✓ Compiled successfully in 24.8s
+✓ Linting and checking validity of types
+✓ Collecting page data
+✓ Generating static pages (34/34)
+✓ Collecting build traces
+✓ Finalizing page optimization
+BUILD_EXIT=0
+
+git diff --check
+DIFF_CHECK_EXIT=0
+```
+
+The continuation independently repeated these checks:
+
+```text
+npm run typecheck
+> tsc --noEmit
+TYPECHECK_EXIT=0
+
+npm run build
+▲ Next.js 15.5.23
+✓ Compiled successfully in 13.8s
 ✓ Linting and checking validity of types
 ✓ Collecting page data
 ✓ Generating static pages (34/34)
@@ -200,6 +249,27 @@ POST_RUNTIME_COUNT=0
 TEMP_EXISTS=False
 ```
 
+Continuation local Evidence CTA verification:
+
+```text
+ROOT_HTTP=200
+/evidence|200|text/html; charset=utf-8
+/cinematic?scene=3|200|text/html; charset=utf-8
+
+VIEWPORT_390x844:
+overflow=false
+View the Full Validation →=352x44 focusVisible=true clipped=false
+See the Study Visualized →=352x44 focusVisible=true clipped=false
+
+VIEWPORT_1440x900:
+overflow=false
+View the Full Validation →=294.31x44 left=1098.69 right=1393 focusVisible=true clipped=false
+See the Study Visualized →=294.31x44 left=1098.69 right=1393 focusVisible=true clipped=false
+
+POST_RUNTIME_COUNT=0
+TEMP_EXISTS=False
+```
+
 ### Canonical implementation commit, push, and equality
 
 ```text
@@ -240,12 +310,44 @@ PRODUCTION_1440x900=status complete; overflow=false; 10/10 CTAs present; all min
 
 The separately attached `Vercel – conexus-echoform-demo` status failed for the same repository SHA. It is not the canonical website deployment and was not modified, repaired, or redeployed.
 
+### Supplemental implementation commit, deployment, and production
+
+```text
+git commit -m "Improve: align evidence CTAs with CTA hierarchy"
+[main 0950a82] Improve: align evidence CTAs with CTA hierarchy
+1 file changed, 2 insertions(+), 2 deletions(-)
+
+SUPPLEMENTAL_IMPLEMENTATION_COMMIT=0950a823557f501f85c8d00a47cceb460bb45839
+SUPPLEMENTAL_IMPLEMENTATION_TREE=909896ea9f74ef16fde1c63b31fc58b033829d01
+SUPPLEMENTAL_IMPLEMENTATION_PARENT=4a56bf5a5175c29a430331da208ba14d47bbb065
+PRE_PUSH_ORIGIN_MAIN=4a56bf5a5175c29a430331da208ba14d47bbb065
+git push origin main
+4a56bf5..0950a82  main -> main
+LOCAL=0950a823557f501f85c8d00a47cceb460bb45839
+REMOTE=0950a823557f501f85c8d00a47cceb460bb45839
+LOCAL_TREE=909896ea9f74ef16fde1c63b31fc58b033829d01
+REMOTE_TREE=909896ea9f74ef16fde1c63b31fc58b033829d01
+REMOTE_DIFF_COUNT=0
+
+STATUS|Vercel – conexus-website|success
+TARGET=https://vercel.com/dangell-5898s-projects/conexus-website/2Hc6YAwjjekBXV6AsvZ1iEwgSFnV
+DESCRIPTION=Deployment has completed
+
+https://conexus-website.vercel.app/|200|text/html; charset=utf-8
+https://conexus-website.vercel.app/evidence|200|text/html; charset=utf-8
+https://conexus-website.vercel.app/cinematic?scene=3|200|text/html; charset=utf-8
+PRODUCTION_390x844=overflow false; both CTAs 352x44; focusVisible true; clipped false
+PRODUCTION_1440x900=overflow false; both CTAs 294.31x44; right edge 1393; focusVisible true; clipped false
+```
+
+The separately attached `Vercel – conexus-echoform-demo` deployment failed for the supplemental SHA and was intentionally not modified or repaired.
+
 ## 5. Protected Baseline Provenance Table
 
 | Protected file | Lines | SHA-256 | Result |
 |---|---:|---|---|
 | `sections/PatentPortfolio.tsx` | 166 | `af3840ecc64cd2e1e61784c3b7780de2c00d265384b4b4222ccf54315410d55b` | Unchanged |
-| `sections/Validation.tsx` | 70 | `b955f8703a5ceb33b8d6a40b1f04ef494217c5038d2c7a3e735ef965d59896e8` | Unchanged |
+| `sections/Validation.tsx` continuation baseline | 70 | `b955f8703a5ceb33b8d6a40b1f04ef494217c5038d2c7a3e735ef965d59896e8` | Released only for two approved CTA class changes |
 | `components/scenes/Scene3.tsx` | 149 | `99e137b1d8a93c5e850b40a55fd3581492cec4899003aefbf36ee240e4e209c9` | Unchanged |
 | `package.json` | 33 | `4b1790ab4743b29994724f85a0022cc5aa9293b20b586bfcdd6f5db313f37cf9` | Unchanged |
 | `package-lock.json` | 2848 | `584e9f5aaf4ecd6a69874abed1175580db446ae228c1b977dc843635705f80a1` | Unchanged |
@@ -260,17 +362,22 @@ The separately attached `Vercel – conexus-echoform-demo` status failed for the
 | `sections/Nairthex.tsx` | 48 | `9882a0ef72bcfb40d573510f99fe3f9ddeddac451f20f409d7fe1fe11e70797f` | 48 | `dfabe93d32eb88f738920593748c3dc43fa5a6e8ef908e0f20072a5502f384df` |
 | `sections/Echoform.tsx` | 40 | `096b9f321a425e363bbb186994d35da0abbfacc44df14b3eb1cd5b829ea0f592` | 40 | `9dc975785aad6b2512fdd6dac37cc24d2fbe76632c69ebdf6fe8da75421c0f28` |
 | `sections/Partnerships.tsx` | 30 | `87f96ab4e0b5440759e4a8abb880fd67e219ef1ea0e2aafefe3e68805b1f5d39` | 30 | `0f815925faa0027ccc415c05c60c53a0a4a0d7c600926c90ac7e8673866c42f5` |
+| `sections/Validation.tsx` (supplemental) | 70 | `b955f8703a5ceb33b8d6a40b1f04ef494217c5038d2c7a3e735ef965d59896e8` | 70 | `1b2546245c46b1e61345c70a6cb579e74ce236cee48ed46e718f360fc395343a` |
 
 - Canonical implementation SHA: `2792876850562b11a3f4a87bd941a76d51bf25e7`
 - Canonical implementation tree: `4b8a62c190024ca644d6927a7a84a179d425c125`
 - Canonical implementation parent: `7f6e4c1cf9fae92be0b1a0d82d1bbb4d053e420b`
-- Handoff line count: `315`
+- Original documentation completion SHA: `4a56bf5a5175c29a430331da208ba14d47bbb065`
+- Supplemental implementation SHA: `0950a823557f501f85c8d00a47cceb460bb45839`
+- Supplemental implementation tree: `909896ea9f74ef16fde1c63b31fc58b033829d01`
+- Supplemental implementation parent: `4a56bf5a5175c29a430331da208ba14d47bbb065`
+- Updated handoff line count: `440`
 
 This handoff does not record its own future documentation commit identity and is not self-hashed.
 
 ## 7. Repository State & Worktree Status
 
-After the canonical implementation release and before documentation-only completion:
+Original state after the canonical implementation release and before the original documentation-only completion:
 
 ```text
 HEAD=2792876850562b11a3f4a87bd941a76d51bf25e7
@@ -286,6 +393,22 @@ SOLE_PENDING_DOCUMENTATION_FILE=HANDOFF_028E_CTA_PROMINENCE_AND_LINK_HIERARCHY.m
 
 Final post-documentation equality, clean status, empty index, runtime state, and artifact state are verified after the documentation-only commit and reported in the completion response.
 
+Continuation state after the supplemental implementation release and before this handoff update:
+
+```text
+HEAD=0950a823557f501f85c8d00a47cceb460bb45839
+origin/main=0950a823557f501f85c8d00a47cceb460bb45839
+LOCAL_TREE=909896ea9f74ef16fde1c63b31fc58b033829d01
+REMOTE_TREE=909896ea9f74ef16fde1c63b31fc58b033829d01
+LOCAL_REMOTE_DIFF_COUNT=0
+STAGED_INDEX=empty
+APPLICATION_WORKTREE=clean
+REPOSITORY_RUNTIME_COUNT=0
+SOLE_PENDING_FILE=HANDOFF_028E_CTA_PROMINENCE_AND_LINK_HIERARCHY.md
+```
+
+Final post-update equality, clean status, empty index, runtime state, and artifact state are verified after the handoff-update commit and reported in the completion response.
+
 ## 8. Disclosed Limitations & Technical Debt
 
 - Headless Edge’s DevTools forced-hover command did not activate Tailwind’s pointer/hover media-query branch. Hover behavior is verified structurally by the compiled source classes; rendered keyboard-focus behavior was verified directly at both viewports.
@@ -294,6 +417,7 @@ Final post-documentation equality, clean status, empty index, runtime state, and
 - Mobile headless Edge reserved a 15px scrollbar gutter, yielding a 375px document client width inside the requested 390px viewport. The viewport itself was exactly 390×844, and no document overflow or CTA clipping occurred.
 - The unrelated `conexus-echoform-demo` repository status failed. It was explicitly outside Mission 028E deployment authority and remained untouched.
 - No application technical debt or dependency change was introduced.
+- The continuation changed only the two approved Validation CTA class values; all Evidence data and copy remained byte-equivalent after class normalization.
 
 ## 9. Next-Session Startup Context
 
@@ -313,3 +437,4 @@ Do not begin Mission 029 automatically. Mission 028E did not inspect or modify M
 - Production links and PDFs were requested directly after deployment; both PDFs retained `application/pdf`, and cinematic scenes 2 and 4 returned HTTP 200.
 - Deployment authority is `Vercel – conexus-website`. The unrelated demo status was observed but intentionally not acted upon.
 - Runtime and browser cleanup completed with zero repository-owned processes and no retained temporary verification directory.
+- The Evidence CTA continuation preserved the original Mission 028E implementation and documentation commits as historical provenance; it did not rewrite the Evidence links as part of the first implementation.
