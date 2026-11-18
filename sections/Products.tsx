@@ -22,7 +22,7 @@ export default function Products() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ember">
-              Recovery &amp; Presence · Restricted Founder Preview
+              Recovery &amp; Presence · Open Preview
             </p>
             <h3 className="mt-3 font-serif text-[clamp(2rem,4vw,3.5rem)] leading-none tracking-tighter text-data">
               Serenity Porch
@@ -30,9 +30,6 @@ export default function Products() {
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-data/65">
               An AI companion for recovery, built for conversation, presence, and
               holding contradiction without forcing an answer.
-            </p>
-            <p className="mt-3 text-xs leading-relaxed text-data/40">
-              Preview access is currently limited to approved networks.
             </p>
           </div>
           <a
