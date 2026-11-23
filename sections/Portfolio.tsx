@@ -13,16 +13,6 @@ type PrincipalItem = {
 
 const principal: PrincipalItem[] = [
   {
-    name: "ECHOagent",
-    category: "Business Relationship Intelligence",
-    status: "Public Prototype",
-    description:
-      "Explore how an AI service agent handles business conversations where customers need clear answers, factual restraint, and reasons to trust the response.",
-    action: "Try the Prototype",
-    href: "https://echoagent-phase1.mangostone-fdb49bae.westus2.azurecontainerapps.io",
-    external: true,
-  },
-  {
     name: "ECHOform / Dream Mirror",
     category: "Dream Journal & Symbolic Reflection",
     status: "Journal and Visual Walkthrough",
@@ -32,6 +22,16 @@ const principal: PrincipalItem[] = [
     href: "https://conexus-echoform-demo.vercel.app/",
     external: true,
     media: "echoform",
+  },
+  {
+    name: "ECHOagent",
+    category: "Business Relationship Intelligence",
+    status: "Public Prototype",
+    description:
+      "Explore how an AI service agent handles business conversations where customers need clear answers, factual restraint, and reasons to trust the response.",
+    action: "Try the Prototype",
+    href: "https://echoagent-phase1.mangostone-fdb49bae.westus2.azurecontainerapps.io",
+    external: true,
   },
   {
     name: "CONEXUS Canvas",
