@@ -1,4 +1,5 @@
 import ScrollRunway from "@/components/hero/ScrollRunway";
+import Portfolio from "@/sections/Portfolio";
 import Builds from "@/sections/Builds";
 import Echoagent from "@/sections/Echoagent";
 import Validation from "@/sections/Validation";
@@ -17,9 +18,10 @@ export default function Home() {
   return (
     <div className="overflow-x-clip">
       <ScrollRunway />
+      <Portfolio />
+      <Validation />
       <Builds />
       <Echoagent />
-      <Validation />
       <Cyndicate />
       <Technology />
       <PatentPortfolio />
