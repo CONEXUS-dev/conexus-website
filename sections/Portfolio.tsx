@@ -23,6 +23,17 @@ const principal: PrincipalItem[] = [
     external: true,
   },
   {
+    name: "ECHOform / Dream Mirror",
+    category: "Dream Journal & Symbolic Reflection",
+    status: "Journal and Visual Walkthrough",
+    description:
+      "Record a dream, return to it, and explore symbolic perspectives and visual reflections. You decide what the dream means.",
+    action: "Open Dream Mirror",
+    href: "https://conexus-echoform-demo.vercel.app/",
+    external: true,
+    media: "echoform",
+  },
+  {
     name: "CONEXUS Canvas",
     category: "Collaborative Creativity",
     status: "Recorded Demonstration",
@@ -53,17 +64,6 @@ const principal: PrincipalItem[] = [
     href: "#follow-me-storyboard",
     external: false,
     media: "follow-me",
-  },
-  {
-    name: "ECHOform / Dream Mirror",
-    category: "Dream Journal & Symbolic Reflection",
-    status: "Journal and Visual Walkthrough",
-    description:
-      "Record a dream, return to it, and explore symbolic perspectives and visual reflections. You decide what the dream means.",
-    action: "Explore Dream Mirror",
-    href: "/echoform#how-it-works",
-    external: false,
-    media: "echoform",
   },
   {
     name: "NAiRTHEX",
