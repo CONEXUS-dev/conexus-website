@@ -1,6 +1,17 @@
 import { MonoKicker, SectionShell, SerifHeading } from "@/components/primitives";
 
-const principal = [
+type PrincipalItem = {
+  name: string;
+  category: string;
+  status: string;
+  description: string;
+  action: string;
+  href: string;
+  external: boolean;
+  media?: "canvas" | "follow-me" | "echoform";
+};
+
+const principal: PrincipalItem[] = [
   {
     name: "ECHOagent",
     category: "Business Relationship Intelligence",
