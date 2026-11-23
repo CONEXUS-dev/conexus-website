@@ -199,11 +199,11 @@ export default function Portfolio() {
               ) : null}
 
               {item.media === "echoform" ? (
-                <div className="mt-6 overflow-hidden border border-white/20 bg-black">
+                <div className="mt-6 border border-white/20 bg-black p-3">
                   <img
                     src="/dream-mirror/Childhood%20Dog%20Dream.png"
                     alt="ECHOform Dream Mirror example"
-                    className="aspect-video w-full object-cover object-center"
+                    className="h-auto w-full object-contain"
                   />
                 </div>
               ) : null}
